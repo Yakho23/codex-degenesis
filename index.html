@@ -67,6 +67,8 @@ button{cursor:pointer}
 .top .roman{color:var(--red);font-size:13px;letter-spacing:.2em}
 .tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
+/* Souris (PC) : les puces passent à la ligne au lieu de défiler */
+@media (hover:hover) and (pointer:fine){.tabs{flex-wrap:wrap;overflow-x:visible}}
 .chip{flex:none;border:1px solid var(--line2);background:transparent;border-radius:3px;padding:7px 11px;font-family:var(--f-ui);font-size:15px;letter-spacing:.04em;color:var(--mute);min-height:36px;display:inline-flex;align-items:center;gap:6px}
 .chip[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff}
 .chip svg{width:16px;height:16px}

@@ -42,10 +42,11 @@ const SECTIONS=[
 const S={view:"home",layout:store.get("layout","ruche"),
  regCat:"Tous",regQ:"",
  bzGrp:"armes",bzCat:"Tout",bzCulte:"",bzQ:"",
- dice:store.get("dice",{va:6,diff:2,ego:0,mod:0}),diceMode:"simple",diceB:{va:6,ego:0,mod:0},last:null,hist:store.get("hist",[]),
+ dice:Object.assign({va:6,diff:2},store.get("dice",{}),{ego:0,mod:0}),diceMode:"simple",diceB:{va:6,ego:0,mod:0},last:null,hist:store.get("hist",[]),
  genTab:"pnj",gen:{culture:"",culte:"",sexe:""},genOut:null,
  oracle:null,loreTab:"monde",loreQ:"",
  campTab:"groupe"};
+if(!(S.dice.diff>=1&&S.dice.diff<=10))S.dice.diff=2;
 try{["fighters","round"].forEach(k=>localStorage.removeItem("codex."+k))}catch(e){} /* anciennes données de l’outil Combat retiré */
 
 /* ───────── navigation ───────── */
@@ -92,7 +93,7 @@ const glList=l=>`<dl class="gloss">${l.map(([k,x])=>`<div><dt>${esc(k)}</dt><dd>
 function lore(){
   const q=norm(S.loreQ).trim();
   const search=`<label class="search">${I.search}<input id="q" data-in="loreq" type="search" placeholder="Chercher : Brûlure, Juges, Pandora…" value="${esc(S.loreQ)}" autocomplete="off"></label>`;
-  const foot=`<p class="note">Résumés rédigés d’après <i>Primal Punk</i> (PP), <i>Katharsys</i> (K), <i>Artefacts</i> (A), <i>En Ton Sang</i> (ETS), <i>Jeu de Massacre</i> (JdM) et <i>Black Atlantic</i> (BA), avec le numéro de page. <i>Apocrypha</i> (Apo) est un ouvrage de fans. Illustrations tirées de ton dossier 07 Illustrations.</p>`;
+  const foot=`<p class="note">Sources : PP <i>Primal Punk</i> · K <i>Katharsys</i> · A <i>Artefacts</i> · ETS <i>En Ton Sang</i> · JdM <i>Jeu de Massacre</i> · BA <i>Black Atlantic</i> · Apo <i>Apocrypha</i> (ouvrage de fans).</p>`;
   if(q){
     let cards=[],tl=[],gl=[];
     LORE.tabs.forEach(tab=>{
@@ -120,8 +121,7 @@ function regles(){
   return `<div class="stack">
    <label class="search">${I.search}<input id="q" data-in="regq" type="search" placeholder="Chercher : initiative, feu, hémorragie…" value="${esc(S.regQ)}" autocomplete="off"></label>
    <div class="count">${list.length} fiche${list.length>1?"s":""}</div>
-   ${list.map(r=>`<details class="card"${q&&list.length<=3?" open":""}><summary><span class="t">${esc(r.t)}</span><span class="ref">${esc(r.ref)}</span></summary><div class="body">${S.regCat==="Tous"?`<div class="catline">${esc(r.cat)}</div>`:""}${r.h}</div></details>`).join("")||`<p class="empty">Aucune fiche ne correspond. Essayez un autre mot.</p>`}
-   <p class="note">Résumés pour la table. En cas de doute, les pages indiquées renvoient à Katharsys (K) ou au supplément Artefacts (A).</p></div>`;
+   ${list.map(r=>`<details class="card"${q&&list.length<=3?" open":""}><summary><span class="t">${esc(r.t)}</span><span class="ref">${esc(r.ref)}</span></summary><div class="body">${S.regCat==="Tous"?`<div class="catline">${esc(r.cat)}</div>`:""}${r.h}</div></details>`).join("")||`<p class="empty">Aucune fiche ne correspond. Essayez un autre mot.</p>`}</div>`;
 }
 
 /* ───────── III. BAZAR ───────── */
@@ -139,7 +139,7 @@ function bazar(){
    <div class="selrow"><select class="sel" id="bzculte" data-in="bzculte" aria-label="Filtrer par Culte"><option value="">Tous les Cultes</option>${cultes.map(c=>`<option ${c===S.bzCulte?"selected":""}>${esc(c)}</option>`).join("")}</select></div>
    <div class="count">${list.length} objet${list.length>1?"s":""}${q?" · recherche dans toutes les familles":""}</div>
    ${list.map(item).join("")||`<p class="empty">Rien dans le Bazar avec ces filtres.</p>`}
-   <p class="note">Valeurs en Lettres de Change (LC). Ress. = Ressources nécessaires dans le Culte. Données relevées dans Katharsys, chapitre Équipement : relisez les lignes douteuses.</p></div>`;
+   <p class="note">Valeurs en Lettres de Change (LC). Ress. = Ressources nécessaires dans le Culte.</p></div>`;
 }
 function stat(k,v){return v&&v!=="–"?`<span>${k} <b>${esc(v)}</b></span>`:""}
 function item(r){
@@ -164,43 +164,39 @@ function rollPool(n){
 }
 const QUAL=["","Bien","Remarquable","Excellent","Brillant","Exceptionnel","Légendaire"];
 const qual=t=>t<=0?"":QUAL[Math.min(6,t)];
-function dieSvg(v,cls){
-  const P={1:[[24,24]],2:[[15,15],[33,33]],3:[[14,14],[24,24],[34,34]],4:[[15,15],[33,15],[15,33],[33,33]],5:[[14,14],[34,14],[24,24],[14,34],[34,34]],6:[[15,13],[33,13],[15,24],[33,24],[15,35],[33,35]]}[v];
-  return `<svg class="die ${cls}" viewBox="0 0 48 48" role="img" aria-label="${v}"><rect x="2" y="2" width="44" height="44" rx="7" stroke-width="2"/>${P.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="4.2"/>`).join("")}</svg>`;
-}
+function dieSvg(v,cls){return `<span class="die ${cls}" role="img" aria-label="${v}"><img src="assets/dice/d${v}.png" alt=""></span>`}
 function diceView(r,mark){return `<div class="dice">${r.dice.map(v=>dieSvg(v,v===6?"t":v>=4?"s":v===1?"o":"f")).join("")}</div>${r.auto?`<div class="note">+${r.auto} succès automatique${r.auto>1?"s":""} (au-delà de 12 dés)</div>`:""}`}
 function stepper(id,val,min,max,sm){return `<div class="stepper${sm?" sm":""}"><button data-act="step" data-k="${id}" data-d="-1" aria-label="Moins">−</button><output aria-live="polite">${val}</output><button data-act="step" data-k="${id}" data-d="1" aria-label="Plus">+</button></div>`}
 function des(){
   const d=S.dice,conf=S.diceMode==="conf";
-  const pool=d.va+d.ego+d.mod;
+  const pool=d.va;
   let res="";
   if(S.last){
     const L=S.last;
     if(L.mode==="simple"){
       const r=L.a,dif=L.diff;let verdict,cls;
       if(r.n<=0){verdict="Échec automatique";cls="ko"}
-      else if(dif>0){const ok=r.succ>=dif;verdict=ok?("Réussite"+(r.trig?" · "+qual(r.trig):"")):(r.ones>r.succ?"Échec critique":"Échec");cls=ok?"ok":"ko"}
+      else if(dif>0){const ok=r.succ>=dif;verdict=ok?("Réussite"+(r.trig?" · "+qual(r.trig):"")):(r.ones>r.trig?"Échec critique":"Échec");cls=ok?"ok":"ko"}
       else {verdict=r.succ?("Succès"+(r.trig?" · "+qual(r.trig):"")):(r.ones>0?"Aucun succès · "+r.ones+"×1":"Aucun succès");cls=r.succ?"ok":"ko"}
       res=`<div class="dice-panel result" aria-live="polite"><div class="verdict"><span class="big ${cls}">${DG(verdict)}</span>${dif>0?`<span class="note">difficulté ${dif}</span>`:""}</div>
+        ${dif>0&&r.succ<dif&&r.ones>r.trig?`<div class="crit">Plus de 1 (${r.ones}) que de 6 (${r.trig}) : échec critique.</div>`:""}
         <div class="tally"><span><b>${r.succ}</b>succès</span><span><b>${r.trig}</b>déclencheurs</span><span><b>${r.ones}</b>× 1</span></div>${diceView(r)}
         ${dif>0&&r.succ>=dif&&r.trig?`<div class="note">Actions en combat (Initiative) : ${1+Math.floor(r.trig/2)} · Dégâts +${r.trig} DC</div>`:""}</div>`;
     } else {
       const A=L.a,B=L.b;let w;
       if(A.succ!==B.succ)w=A.succ>B.succ?"A":"B";else if(A.trig!==B.trig)w=A.trig>B.trig?"A":"B";else w="=";
       res=`<div class="dice-panel result" aria-live="polite"><div class="verdict"><span class="big ${w==="="?"ko":"ok"}">${w==="="?"EGALITE":"VICTOIRE "+w}</span>${w==="="?`<span class="note">S’il faut un vainqueur, celui qui a pris l’initiative perd.</span>`:""}</div>
-        <div class="lbl">A · ${A.succ} succès · ${A.trig} DC</div>${diceView(A)}<div class="lbl">B · ${B.succ} succès · ${B.trig} DC</div>${diceView(B)}</div>`;
+        <div class="lbl">A · ${A.succ} succès · ${A.trig} DC${w==="B"&&A.ones>A.trig?` · <span class="critx">échec critique</span>`:""}</div>${diceView(A)}<div class="lbl">B · ${B.succ} succès · ${B.trig} DC${w==="A"&&B.ones>B.trig?` · <span class="critx">échec critique</span>`:""}</div>${diceView(B)}</div>`;
     }
   }
   return `<div class="stack">
    ${chips([["simple","Jet simple"],["conf","Confrontation"]],S.diceMode,"dmode","Mode")}
    <div class="dice-panel">
-     <div class="lbl">${conf?"Camp A · ":""}Valeur d’action (attribut + compétence)</div>${stepper("va",d.va,0,30)}
-     <div class="row2"><div><div class="lbl">Ego dépensé</div>${stepper("ego",d.ego,0,3,true)}</div><div><div class="lbl">Modificateur</div>${stepper("mod",(d.mod>0?"+":"")+d.mod+"D",-12,12,true)}</div></div>
-     ${conf?`<div class="lbl">Camp B · Valeur d’action</div>${stepper("vb",S.diceB.va,0,30)}`:`<div><div class="lbl">Difficulté</div><div class="diffs" role="toolbar" aria-label="Difficulté">${[[0,"—"],[1,"1"],[2,"2"],[4,"4"],[6,"6"],[8,"8"],[10,"10"]].map(([v,l])=>`<button class="chip" data-act="diff" data-v="${v}" aria-pressed="${d.diff===v}">${l}</button>`).join("")}</div></div>`}
+     <div class="lbl">${conf?"Camp A · ":""}Valeur d’action (attribut + compétence + ego + modificateurs)</div>${stepper("va",d.va,0,30)}
+     ${conf?`<div class="lbl">Camp B · Valeur d’action (attribut + compétence + ego + modificateurs)</div>${stepper("vb",S.diceB.va,0,30)}`:`<div><div class="lbl">Difficulté</div><div class="diffs" role="toolbar" aria-label="Difficulté">${[1,2,3,4,5,6,7,8,9,10].map(v=>[v,String(v)]).map(([v,l])=>`<button class="chip" data-act="diff" data-v="${v}" aria-pressed="${d.diff===v}">${l}</button>`).join("")}</div></div>`}
      <button class="roll" data-act="roll">LANCER ${conf?"":pool+"D"}</button>
    </div>
    ${res}
-   <div class="btnrow"><button class="btn" data-act="quick" data-v="1">1D6</button><button class="btn" data-act="quick" data-v="2">2D6</button><button class="btn" data-act="quick" data-v="init">Initiative</button></div>
    ${S.hist.length?`<div><div class="sec-title dg">HISTORIQUE</div><div class="hist">${S.hist.map(h=>`<div><span>${esc(h.t)}</span><span>${esc(h.r)}</span></div>`).join("")}</div></div>`:""}
   </div>`;
 }
@@ -233,8 +229,7 @@ function generateurs(){
       <p><span class="k">Trouvaille</span>${esc(f.obj)}, ${esc(f.etat)}</p><p><span class="k">Niveau technologique</span>Tech ${f.tech} · ${f.kg} kg de débris</p><p><span class="k">Valeur estimée</span>achat ~${f.buy} LC · revente ~${f.sell} LC aux Chroniqueurs</p><p class="note">Règle complète : Règles › Progression › Chasse aux rebuts.</p></article>`}}
   if(t==="nom"){form=`<div class="selrow">${selC}<select class="sel" data-in="gsexe" aria-label="Sexe"><option value="">Mélangé</option><option value="h" ${S.gen.sexe==="h"?"selected":""}>Hommes</option><option value="f" ${S.gen.sexe==="f"?"selected":""}>Femmes</option></select></div>`;if(o)out=`<article class="gen-card"><span class="cult">${icon(o.v.c)}${esc(o.v.c)}</span>${o.v.l.map(n=>`<h2 style="font-size:21px">${esc(n)}</h2>`).join("")}</article>`}
   if(t==="meteo"){if(o)out=`<article class="gen-card"><span class="k">Météo</span><h2>${esc(o.v)}</h2></article>`}
-  return `<div class="stack">${form}<button class="roll" data-act="gen">GENERER</button>${out||`<p class="empty">Choisissez vos filtres puis touchez Générer.</p>`}
-   <p class="note">Noms, accroches et rencontres : tables maison dans l’esprit des cultures du jeu. À enrichir ensemble.</p></div>`;
+  return `<div class="stack">${form}<button class="roll" data-act="gen">GENERER</button>${out||`<p class="empty">Choisissez vos filtres puis touchez Générer.</p>`}</div>`;
 }
 const TECH_PRICE={I:[1,0],II:[15,5],III:[80,25],IV:[200,80],V:[600,200],VI:[2000,600]};
 const DIF_CULT={Borca:2,Franka:5,Pollen:4,Balkhans:4,Hybrispanie:5,Purgare:3,Afrika:5};
@@ -293,11 +288,9 @@ app.addEventListener("click",e=>{
       else{const lim={va:[0,30],ego:[0,3],mod:[-12,12]}[k];S.dice[k]=Math.max(lim[0],Math.min(lim[1],S.dice[k]+d));store.set("dice",S.dice)}
       render();break;}
     case "roll":{const d=S.dice;
-      if(S.diceMode==="simple"){const r=rollPool(d.va+d.ego+d.mod);S.last={mode:"simple",a:r,diff:d.diff};pushHist(`${r.n}D${d.diff?" (diff. "+d.diff+")":""}`,`${r.succ} S · ${r.trig} DC${d.diff?(r.succ>=d.diff?" · réussite":r.ones>r.succ?" · critique":" · échec"):""}`)}
-      else{const A=rollPool(d.va+d.ego+d.mod),B=rollPool(S.diceB.va);S.last={mode:"conf",a:A,b:B};pushHist(`Confrontation ${A.n}D / ${B.n}D`,`${A.succ}-${B.succ} S · ${A.trig}-${B.trig} DC`)}
+      if(S.diceMode==="simple"){const r=rollPool(d.va);S.last={mode:"simple",a:r,diff:d.diff};pushHist(`${r.n}D${d.diff?" (diff. "+d.diff+")":""}`,`${r.succ} S · ${r.trig} DC${d.diff?(r.succ>=d.diff?" · réussite":r.ones>r.trig?" · échec critique":" · échec"):""}`)}
+      else{const A=rollPool(d.va),B=rollPool(S.diceB.va);S.last={mode:"conf",a:A,b:B};pushHist(`Confrontation ${A.n}D / ${B.n}D`,`${A.succ}-${B.succ} S · ${A.trig}-${B.trig} DC`)}
       render();break;}
-    case "quick":{if(v==="init"){S.diceMode="simple";S.dice.diff=0;store.set("dice",S.dice);toast("Mettez la VA de PSY+Réactivité puis lancez");render();break}
-      const r=Array.from({length:+v},()=>1+rnd(6));pushHist(`${v}D6`,r.join(" + ")+(r.length>1?" = "+r.reduce((x,y)=>x+y,0):""));render();break;}
     case "gentab":S.genTab=v;render();break;
     case "gen":doGen();break;
     case "copynpc":{const p=S.genOut.v;copy(`${p.nom} — ${p.c}, ${p.culte}, ${p.con.n}\nMotivation : ${p.con.m}\nApparence : ${p.phys}\nAttitude : ${p.att}\nSecret : ${p.sec}\nNiveau ${p.rg.n} : VA ${p.rg.va}, Blessures ${p.rg.bs}, Traumatismes ${p.rg.tr}`);break;}

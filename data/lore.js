@@ -504,8 +504,10 @@ tabs:[
 <p>Toits reliés en marché suspendu, chants en chœur dans les tavernes. Le <b>Capitole</b> des Savants (gouvernés par le Grand Savant <b>Pélat</b>) restaure les livres de la Grande Nation. Le <b>Camp Étienne</b> forme cadets et officiers. Maréchal : <b>Armand Malpierre</b>. Le <b>Camp Fierté</b>, à l'est, forme les recrues en trois mois.</p>`},
  {t:"La Route de la Résistance", ref:"JdM p.32-33", h:`
 <p>Relie Perpignan, Toulouse et Montpellier au pied de collines empoisonnées par les pesticides. Tranchées, donjons, havres secrets ; drapeaux et feux signalent les essaims, puis on déverse eau et pétro dans les canaux. Une étincelle étouffe la terre pour des jours.</p>`},
- {t:"Bayonne", img:"assets/lore/l-bayonne.jpg", ref:"JdM", h:`
-<p>Tenue par l'<b>autobastion Mbogo</b> des Néolibyens, porte vers l'Atlantique et l'Hybrispanie.</p>`},
+ {t:"Bayonne", sub:"Cité parasite de la Nuée du Rhône", img:"assets/lore/l-bayonne.jpg", ref:"JdM p.20", h:`
+<p>Il y a plus de vingt ans, l'<b>autobastion Mbogo</b>, géant néolibyen de trente mètres, s'est embourbé dans une mangrove des marais. Démonté en partie, puis abandonné sous un filet de camouflage, son responsable rayé des archives de la Banque du Commerce.</p>
+<p>La <b>Nuée du Rhône</b> l'a retrouvé près du port en ruine de Bayonne. Sa Corneille, <b>Sacrocant</b>, l'a fait réparer par ses Vautours : électricité, radio, un camp est né. Aujourd'hui, une cinquantaine de huttes servent de plaque tournante aux Nuées du Rhône : nourriture, armes, cigogneaux et Brûlure s'échangent dans la boue. Radeaux et bacs relient la baie à <b>Montpellier</b> pour le pétro et l'EX.</p>
+<p>Sacrocant garde les bonnes grâces des Spitaliers : ses cotres leur livrent des <b>faux-bourdons capturés</b>, cobayes pour le bastion. À Toulon, le faussaire <b>Clavion</b> de la Zonmé lui a prêté allégeance. Bayonne et Ducal ont la réputation de hameaux malfamés.</p>`},
  {t:"Les cultes en Franka du Sud", ref:"JdM p.67-68", h:`
 <ul><li><b>Spitaliers</b> : Montpellier, Famulanciers venus par le Passage bernois ; recrutent des Grenouilles.</li>
 <li><b>Juges</b> : des Juges Noirs observent ; le Sénat de Justitienne voudrait mettre de l'ordre au-delà des Alpes.</li>

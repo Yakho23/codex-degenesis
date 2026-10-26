@@ -121,15 +121,13 @@ select.sel{background:var(--panel);border:1px solid var(--line2);padding:9px 10p
 .roll:active{background:var(--red-d)}
 .result{display:flex;flex-direction:column;gap:12px}
 .dice{display:flex;flex-wrap:wrap;gap:7px}
-.die{width:42px;height:42px}
-.die rect{fill:#1f1d1b;stroke:var(--line2)}
-.die circle{fill:var(--fg)}
-.die.s rect{fill:#2b2926;stroke:var(--fg)}
-.die.t rect{fill:var(--red);stroke:var(--red)}
-.die.t circle{fill:#fff}
-.die.o rect{stroke:var(--red);stroke-dasharray:3 2}
-.die.o circle{fill:var(--dim)}
-.die.f circle{fill:var(--dim)}
+.crit{border-left:3px solid var(--red);padding:6px 10px;background:rgba(236,30,38,.12);color:#fff;font-family:var(--f-ui);letter-spacing:.03em}
+.critx{color:var(--red);font-weight:700}
+.die{width:46px;height:46px;display:grid;place-items:center;background:#16140f;border:1.5px solid var(--line2);border-radius:7px}
+.die img{width:86%;height:86%;display:block}
+.die.s{border-color:#b39a62;background:#1f1b12}
+.die.t{border-color:var(--red);background:var(--red)}
+.die.o{border-color:var(--red);border-style:dashed}
 @media (prefers-reduced-motion:no-preference){.die{animation:pop .28s ease both}@keyframes pop{from{transform:scale(.6) rotate(-25deg);opacity:0}to{transform:none;opacity:1}}}
 .verdict{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 16px}
 .verdict .big{font-family:var(--f-dg);font-size:24px;letter-spacing:.1em}
@@ -138,8 +136,8 @@ select.sel{background:var(--panel);border:1px solid var(--line2);padding:9px 10p
 .tally b{color:#fff;font-size:26px;margin-right:4px}
 .hist{display:flex;flex-direction:column;gap:2px;font-family:var(--f-ui);font-size:14.5px;color:var(--dim)}
 .hist div{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);padding:5px 0}
-.diffs{display:flex;gap:6px;flex-wrap:wrap}
-.diffs .chip{min-width:44px;justify-content:center}
+.diffs{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.diffs .chip{min-width:0;justify-content:center}
 
 /* GENERATEURS & OUTILS */
 .gen-card{border:1px solid var(--line);border-top:3px solid var(--red);background-color:var(--panel);background-image:linear-gradient(rgba(20,19,18,.88),rgba(20,19,18,.95)),var(--tex2);background-size:600px auto;padding:16px 14px;display:flex;flex-direction:column;gap:8px}

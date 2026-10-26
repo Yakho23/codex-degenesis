@@ -92,7 +92,7 @@ const glList=l=>`<dl class="gloss">${l.map(([k,x])=>`<div><dt>${esc(k)}</dt><dd>
 function lore(){
   const q=norm(S.loreQ).trim();
   const search=`<label class="search">${I.search}<input id="q" data-in="loreq" type="search" placeholder="Chercher : Brûlure, Juges, Pandora…" value="${esc(S.loreQ)}" autocomplete="off"></label>`;
-  const foot=`<p class="note">Résumés rédigés d’après <i>Primal Punk</i> (PP = page du livre). Illustrations tirées de ton dossier 07 Illustrations.</p>`;
+  const foot=`<p class="note">Résumés rédigés d’après <i>Primal Punk</i> (PP), <i>Katharsys</i> (K), <i>Artefacts</i> (A), <i>En Ton Sang</i> (ETS), <i>Jeu de Massacre</i> (JdM) et <i>Black Atlantic</i> (BA), avec le numéro de page. <i>Apocrypha</i> (Apo) est un ouvrage de fans. Illustrations tirées de ton dossier 07 Illustrations.</p>`;
   if(q){
     let cards=[],tl=[],gl=[];
     LORE.tabs.forEach(tab=>{
@@ -108,8 +108,7 @@ function lore(){
   if(tab.items)b=tab.items.map((it,i)=>loreCard(it,tab.id==="monde"&&i===0)).join("");
   if(tab.timeline)b=tlList(tab.timeline);
   if(tab.gloss)b=glList(tab.gloss);
-  const warn=tab.mj?`<p class="mjwarn">Réservé au MJ : à ne pas montrer aux joueurs.</p>`:"";
-  return `<div class="stack">${search}${warn}${b}${foot}</div>`;
+  return `<div class="stack">${search}${b}${foot}</div>`;
 }
 
 /* ───────── II. RÈGLES ───────── */

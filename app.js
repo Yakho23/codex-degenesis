@@ -21,7 +21,7 @@ const I={ /* icônes de trait */
  bazar:'<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M24 8v32M14 40h20M10 14h28"/><path d="M10 14l-6 13h12zM38 14l-6 13h12z"/></svg>',
  des:'<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="32" height="32" rx="4"/><g fill="currentColor" stroke="none"><circle cx="16.5" cy="16" r="2.4"/><circle cx="31.5" cy="16" r="2.4"/><circle cx="16.5" cy="24" r="2.4"/><circle cx="31.5" cy="24" r="2.4"/><circle cx="16.5" cy="32" r="2.4"/><circle cx="31.5" cy="32" r="2.4"/></g></svg>',
  generateurs:'<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M24 5l16.5 9.5v19L24 43 7.5 33.5v-19z"/><path d="M17 21a8 8 0 0 1 14-3M31 27a8 8 0 0 1-14 3"/><path d="M31 13v5h-5M17 35v-5h5"/></svg>',
- outils:'<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M30 8a9 9 0 0 0-9 12L8 33a4 4 0 0 0 6 6l13-13a9 9 0 0 0 12-9l-6 6-5-1-1-5z"/></svg>',
+ lore:'<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M4 24c6-9 13-13 20-13s14 4 20 13c-6 9-13 13-20 13S10 33 4 24z"/><circle cx="24" cy="24" r="6"/><path d="M24 4v4M24 40v4"/></svg>',
  campagne:'<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M6 11l11-4 14 4 11-4v30l-11 4-14-4-11 4z"/><path d="M17 7v30M31 11v30"/></svg>',
  back:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>',
  search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>',
@@ -31,11 +31,11 @@ const I={ /* icônes de trait */
 const EMBLEM='<svg viewBox="272.4 -2 54.8 54.8" width="60" height="60" fill="#0b0b0b" aria-hidden="true"><polygon points="311.1,18.6 319.8,27.3 325.2,27.3 312.7,14.8 306.6,14.8 306.6,23.5 301.7,23.5 301.7,21.3 301.7,21.3 301.7,18.6 303.7,18.6 303.7,14.8 301.7,14.8 301.7,7.6 297.9,11.4 297.9,14.8 293,14.8 293,14.1 301.7,5.4 301.7,0 289.2,12.5 289.2,18.6 297.9,18.6 297.9,23.5 295.7,23.5 295.7,23.5 293,23.5 293,21.5 289.2,21.5 289.2,23.5 282,23.5 285.8,27.3 289.2,27.3 289.2,32.2 288.5,32.2 279.8,23.5 274.4,23.5 286.9,36 293,36 293,27.3 297.9,27.3 297.9,29.5 297.9,29.5 297.9,32.1 295.9,32.1 295.9,36 297.9,36 297.9,43.1 301.7,39.3 301.7,36 306.6,36 306.6,36.7 297.9,45.4 297.9,50.8 310.4,38.3 310.4,32.1 301.7,32.1 301.7,27.3 303.9,27.3 303.9,27.3 306.6,27.3 306.6,29.3 310.4,29.3 310.4,27.3 317.6,27.3 313.8,23.5 310.4,23.5 310.4,18.6"/></svg>';
 
 const SECTIONS=[
- {id:"regles",n:"I",t:"Règles",s:"Combat, blessures, Ego",pos:[58,0]},
- {id:"bazar",n:"II",t:"Bazar",s:"Armes, armures, matériel",pos:[174,0]},
- {id:"des",n:"III",t:"Dés",s:"Réserve, déclencheurs, échecs",pos:[232,100]},
- {id:"generateurs",n:"IV",t:"Générateurs",s:"PNJ, rencontres, fouilles",pos:[174,201]},
- {id:"outils",n:"V",t:"Outils",s:"Combat, oracle, dégâts",pos:[58,201]},
+ {id:"lore",n:"I",t:"Lore",s:"Monde, régions, cultes",pos:[58,0]},
+ {id:"regles",n:"II",t:"Règles",s:"Combat, blessures, Ego",pos:[174,0]},
+ {id:"bazar",n:"III",t:"Bazar",s:"Armes, armures, matériel",pos:[232,100]},
+ {id:"des",n:"IV",t:"Dés",s:"Réserve, déclencheurs, échecs",pos:[174,201]},
+ {id:"generateurs",n:"V",t:"Générateurs",s:"PNJ, rencontres, oracle",pos:[58,201]},
  {id:"campagne",n:"VI",t:"Campagne",s:CAMPAGNE.titre,pos:[0,100]}];
 
 /* ───────── état ───────── */
@@ -44,10 +44,9 @@ const S={view:"home",layout:store.get("layout","ruche"),
  bzGrp:"armes",bzCat:"Tout",bzCulte:"",bzQ:"",
  dice:store.get("dice",{va:6,diff:2,ego:0,mod:0}),diceMode:"simple",diceB:{va:6,ego:0,mod:0},last:null,hist:store.get("hist",[]),
  genTab:"pnj",gen:{culture:"",culte:"",sexe:""},genOut:null,
- outTab:"combat",fighters:store.get("fighters",null),round:store.get("round",1),oracle:null,
- dmg:{base:"",f:"",dc:0,pot:0,arm:0},
+ oracle:null,loreTab:"monde",loreQ:"",
  campTab:"groupe"};
-if(!S.fighters){S.fighters=CAMPAGNE.groupe.map((p,i)=>({id:i+1,n:p.n,ini:0,bs:0,bsM:{Pavel:8,Octet:6}[p.n]||6,tr:0,trM:{Pavel:4,Octet:5}[p.n]||4,eg:{Octet:18}[p.n]||10,egM:{Octet:18}[p.n]||10,done:false,ex:true}));}
+try{["fighters","round"].forEach(k=>localStorage.removeItem("codex."+k))}catch(e){} /* anciennes données de l’outil Combat retiré */
 
 /* ───────── navigation ───────── */
 function go(v,push=true){S.view=v;render();window.scrollTo(0,0);if(push){try{history.replaceState(null,"",v==="home"?"#":"#"+v)}catch(e){try{location.hash=v==="home"?"":v}catch(_){}}}}
@@ -57,7 +56,7 @@ window.addEventListener("hashchange",()=>{const h=(location.hash||"").slice(1);c
 const app=$("#app");
 function render(){
   app.innerHTML=S.view==="home"?home():section();
-  if(S.view==="bazar"||S.view==="regles"){const q=$("#q");if(q&&S._focusQ){q.focus();q.setSelectionRange(q.value.length,q.value.length);S._focusQ=false}}
+  if(S.view==="bazar"||S.view==="regles"||S.view==="lore"){const q=$("#q");if(q&&S._focusQ){q.focus();q.setSelectionRange(q.value.length,q.value.length);S._focusQ=false}}
 }
 function home(){
   const ruche=S.layout==="ruche";
@@ -74,13 +73,46 @@ function home(){
 }
 function section(){
   const s=SECTIONS.find(x=>x.id===S.view);
-  const tabs={regles:regTabs,bazar:bzTabs,generateurs:genTabs,outils:outTabs,campagne:campTabs}[s.id];
+  const tabs={lore:loreTabs,regles:regTabs,bazar:bzTabs,generateurs:genTabs,campagne:campTabs}[s.id];
   return `<div class="top"><div class="wrap"><div class="bar"><button class="back" data-go="home" aria-label="Retour à l’accueil">${I.back}</button><h1 class="dg">${DG(s.t)}</h1><span class="roman dg">${s.n}</span></div>${tabs?tabs():""}</div></div>
-  <main class="wrap">${({regles:regles,bazar:bazar,des:des,generateurs:generateurs,outils:outils,campagne:campagne})[s.id]()}</main>`;
+  <main class="wrap">${({lore:lore,regles:regles,bazar:bazar,des:des,generateurs:generateurs,campagne:campagne})[s.id]()}</main>`;
 }
 const chips=(list,cur,act,label)=>`<div class="tabs" role="toolbar" aria-label="${esc(label)}">${list.map(x=>{const v=Array.isArray(x)?x[0]:x,l=Array.isArray(x)?x[1]:x;return `<button class="chip" data-act="${act}" data-v="${esc(v)}" aria-pressed="${v===cur}">${l}</button>`}).join("")}</div>`;
 
-/* ───────── I. RÈGLES ───────── */
+/* ───────── I. LORE ───────── */
+function loreTabs(){return chips(LORE.tabs.map(t=>[t.id,t.t]),S.loreTab,"loretab","Rubriques du lore")}
+const stripTags=h=>String(h).replace(/<[^>]+>/g," ");
+function loreCard(it,open){
+  const ic=it.icon?icon(it.icon):"";
+  const thumb=it.sym?`<img class="lsym" src="${it.sym}" alt="">`:it.img?`<img class="lthumb" src="${it.img}" alt="" loading="lazy">`:"";
+  return `<details class="card lore"${open?" open":""}><summary>${thumb}<span class="lt"><span class="t">${ic?`<span class="lic">${ic}</span>`:""}${esc(it.t)}</span>${it.sub?`<span class="lsub">${esc(it.sub)}</span>`:""}</span>${it.ref?`<span class="ref">${esc(it.ref)}</span>`:""}</summary><div class="body">${it.img?`<button class="lhero" data-act="zoom" data-src="${it.img}" aria-label="Agrandir l’illustration"><img src="${it.img}" alt="" loading="lazy"></button>`:""}${it.h}${it.gal?`<div class="lgal">${it.gal.map(([src,c])=>`<button data-act="zoom" data-src="${src}" aria-label="Agrandir : ${esc(c)}"><img src="${src}" alt="" loading="lazy"><span>${esc(c)}</span></button>`).join("")}</div>`:""}</div></details>`;
+}
+const tlList=l=>`<ol class="timeline">${l.map(([y,x])=>`<li><b>${esc(y)}</b><span>${esc(x)}</span></li>`).join("")}</ol>`;
+const glList=l=>`<dl class="gloss">${l.map(([k,x])=>`<div><dt>${esc(k)}</dt><dd>${esc(x)}</dd></div>`).join("")}</dl>`;
+function lore(){
+  const q=norm(S.loreQ).trim();
+  const search=`<label class="search">${I.search}<input id="q" data-in="loreq" type="search" placeholder="Chercher : Brûlure, Juges, Pandora…" value="${esc(S.loreQ)}" autocomplete="off"></label>`;
+  const foot=`<p class="note">Résumés rédigés d’après <i>Primal Punk</i> (PP = page du livre). Illustrations tirées de ton dossier 07 Illustrations.</p>`;
+  if(q){
+    let cards=[],tl=[],gl=[];
+    LORE.tabs.forEach(tab=>{
+      (tab.items||[]).forEach(it=>{if(norm(it.t+" "+(it.sub||"")+" "+stripTags(it.h)).includes(q))cards.push(loreCard(it,false))});
+      (tab.timeline||[]).forEach(r=>{if(norm(r.join(" ")).includes(q))tl.push(r)});
+      (tab.gloss||[]).forEach(r=>{if(norm(r.join(" ")).includes(q))gl.push(r)});
+    });
+    const n=cards.length+tl.length+gl.length;
+    return `<div class="stack">${search}<div class="count">${n} résultat${n>1?"s":""} dans tout le lore</div>${cards.join("")}${gl.length?`<div class="sec-title dg">GLOSSAIRE</div>`+glList(gl):""}${tl.length?`<div class="sec-title dg">CHRONOLOGIE</div>`+tlList(tl):""}${n?"":`<p class="empty">Rien trouvé.</p>`}</div>`;
+  }
+  const tab=LORE.tabs.find(t=>t.id===S.loreTab)||LORE.tabs[0];
+  let b="";
+  if(tab.items)b=tab.items.map((it,i)=>loreCard(it,tab.id==="monde"&&i===0)).join("");
+  if(tab.timeline)b=tlList(tab.timeline);
+  if(tab.gloss)b=glList(tab.gloss);
+  const warn=tab.mj?`<p class="mjwarn">Réservé au MJ : à ne pas montrer aux joueurs.</p>`:"";
+  return `<div class="stack">${search}${warn}${b}${foot}</div>`;
+}
+
+/* ───────── II. RÈGLES ───────── */
 const REG_CATS=["Tous",...new Set(REGLES.map(r=>r.cat))];
 function regTabs(){return chips(REG_CATS,S.regCat,"regcat","Catégories de règles")}
 function regles(){
@@ -93,7 +125,7 @@ function regles(){
    <p class="note">Résumés pour la table. En cas de doute, les pages indiquées renvoient à Katharsys (K) ou au supplément Artefacts (A).</p></div>`;
 }
 
-/* ───────── II. BAZAR ───────── */
+/* ───────── III. BAZAR ───────── */
 const BZ_GRP=[["armes","Armes"],["protection","Protection"],["equipement","Équipement"],["medical","Médical"],["vehicules","Véhicules"]];
 function bzTabs(){return chips(BZ_GRP,S.bzGrp,"bzgrp","Familles d’objets")}
 function bazar(){
@@ -124,7 +156,7 @@ function item(r){
   return `<details class="card item"><summary><span class="t">${esc(r.Nom)}</span>${r.Culte?`<span class="cult">${icon(r.Culte)}${esc(r.Culte)}</span>`:""}<span class="stats">${line}</span></summary><div class="body"><div class="catline">${esc(r._cat)}${r._skill?" · "+esc(r._skill):""}</div><dl class="kv">${kv}</dl></div></details>`;
 }
 
-/* ───────── III. DÉS ───────── */
+/* ───────── IV. DÉS ───────── */
 function rollPool(n){
   const dice=[],k=Math.max(0,Math.min(12,n)),auto=Math.max(0,n-12);
   for(let i=0;i<k;i++)dice.push(1+rnd(6));
@@ -175,8 +207,8 @@ function des(){
 }
 function pushHist(t,r){S.hist.unshift({t,r});S.hist=S.hist.slice(0,10);store.set("hist",S.hist)}
 
-/* ───────── IV. GÉNÉRATEURS ───────── */
-function genTabs(){return chips([["pnj","PNJ"],["rencontre","Rencontre"],["fouille","Fouille"],["nom","Noms"],["meteo","Ambiance"]],S.genTab,"gentab","Générateurs")}
+/* ───────── V. GÉNÉRATEURS ───────── */
+function genTabs(){return chips([["pnj","PNJ"],["rencontre","Rencontre"],["fouille","Fouille"],["nom","Noms"],["oracle","Oracle"],["meteo","Ambiance"]],S.genTab,"gentab","Générateurs")}
 const CULTS=Object.keys(GEN.cultures);
 function genNPC(){
   const c=S.gen.culture||pick(CULTS),C=GEN.cultures[c];
@@ -187,6 +219,7 @@ function genNPC(){
 }
 function generateurs(){
   const t=S.genTab,o=S.genOut&&S.genOut.tab===t?S.genOut:null;
+  if(t==="oracle")return oracle();
   const selC=`<select class="sel" data-in="gculture" aria-label="Culture"><option value="">Culture au hasard</option>${CULTS.map(c=>`<option ${S.gen.culture===c?"selected":""}>${c}</option>`).join("")}</select>`;
   let form="",out="";
   if(t==="pnj"){
@@ -194,7 +227,7 @@ function generateurs(){
     if(o){const p=o.v;out=`<article class="gen-card"><span class="cult">${icon(p.culte)}${esc(p.culte)}</span><h2>${esc(p.nom)}</h2><div class="meta">${esc(p.c)} · ${esc(p.con.n)}</div>
       <p><span class="k">Motivation</span>${esc(p.con.m.charAt(0).toUpperCase()+p.con.m.slice(1))}.</p><p><span class="k">Apparence</span>${esc(p.phys)}</p><p><span class="k">Attitude</span>${esc(p.att)}</p><p><span class="k">Secret</span>${esc(p.sec)}</p>
       <p><span class="k">Niveau · ${esc(p.rg.n)}</span>VA principale ${p.rg.va} · Blessures ${p.rg.bs} · Traumatismes ${p.rg.tr}</p>
-      <div class="btnrow"><button class="btn" data-act="copynpc">Copier</button><button class="btn" data-act="addfighter">Ajouter au combat</button></div></article>`;}
+      <div class="btnrow"><button class="btn" data-act="copynpc">Copier</button></div></article>`;}
   }
   if(t==="rencontre"){form=`<div class="selrow">${selC}</div>`;if(o)out=`<article class="gen-card"><span class="cult">${icon(o.v.c)}${esc(o.v.c)}</span><h2>${esc(o.v.r)}</h2><p><span class="k">Ambiance</span>${esc(o.v.m)}</p></article>`}
   if(t==="fouille"){form=`<div class="selrow">${selC}</div>`;if(o){const f=o.v;out=`<article class="gen-card"><span class="cult">${icon(f.c)}${esc(f.c)} · difficulté pour trouver le site : ${f.dif}</span><h2>${esc(f.site.charAt(0).toUpperCase()+f.site.slice(1))}</h2>
@@ -216,52 +249,20 @@ function doGen(){
   S.genOut={tab:t,v};render();
 }
 
-/* ───────── V. OUTILS ───────── */
-function outTabs(){return chips([["combat","Combat"],["oracle","Oracle"],["degats","Dégâts"],["sons","Ambiances"]],S.outTab,"outtab","Outils")}
-function outils(){
-  if(S.outTab==="combat"){
-    const F=[...S.fighters].sort((a,b)=>b.ini-a.ini);
-    const m=(f,k,lab,max)=>`<div class="meter"><span>${lab}</span><button data-act="fm" data-id="${f.id}" data-k="${k}" data-d="-1" aria-label="${lab} moins">−</button><b class="${(k==="eg"?f[k]<=0:f[k]>=max)?"warn":""}">${f[k]}${max?"/"+max:""}</b><button data-act="fm" data-id="${f.id}" data-k="${k}" data-d="1" aria-label="${lab} plus">+</button></div>`;
-    return `<div class="stack">
-      <div class="btnrow"><div class="dice-panel" style="flex:1;flex-direction:row;align-items:center;justify-content:space-between;padding:10px 14px"><span class="lbl">Round</span><b class="ui" style="font-size:30px">${S.round}</b></div></div>
-      <div class="btnrow"><button class="btn red" data-act="nextround">Round suivant</button><button class="btn" data-act="resetfight">Nouveau combat</button></div>
-      <div class="fighters">${F.map(f=>`<div class="fighter${f.done?" done":""}">
-        <div class="ini" title="Initiative">${f.ini}</div>
-        <div class="nm">${esc(f.n)}<small>Init. <button class="mini" style="display:inline-grid;width:28px;height:28px" data-act="fm" data-id="${f.id}" data-k="ini" data-d="-1" aria-label="Initiative moins">−</button> <button class="mini" style="display:inline-grid;width:28px;height:28px" data-act="fm" data-id="${f.id}" data-k="ini" data-d="1" aria-label="Initiative plus">+</button> · ${1+Math.floor((f.dc||0)/2)} action${(f.dc||0)>=2?"s":""} <button class="mini" style="display:inline-grid;width:28px;height:28px" data-act="fm" data-id="${f.id}" data-k="dc" data-d="1" aria-label="Ajouter un déclencheur d’initiative">DC</button></small></div>
-        <div style="display:flex;gap:6px"><button class="mini" data-act="done" data-id="${f.id}" aria-label="A agi">${f.done?"↺":"✓"}</button><button class="mini" data-act="delf" data-id="${f.id}" aria-label="Retirer ${esc(f.n)}">×</button></div>
-        <div class="meters">${m(f,"bs","BLESS.",f.bsM)}${m(f,"tr","TRAUMA",f.trM)}${m(f,"eg","EGO",0)}</div></div>`).join("")}</div>
-      ${F.some(f=>f.ex)?`<p class="note">Maximums des PJ repris des fiches quand ils y figurent (Pavel, Octet), sinon valeurs d’exemple à ajuster.</p>`:""}
-      <form class="form" data-form="addf"><label class="wide">Nom<input id="fn" name="n" required placeholder="Ex. Gendo, Juge, Cafard…"></label>
-        <label>Init.<input id="fi" name="ini" type="number" inputmode="numeric" value="0"></label><label>Bless.<input id="fb" name="bsM" type="number" inputmode="numeric" value="6"></label><label>Trauma<input id="ft" name="trM" type="number" inputmode="numeric" value="4"></label><label>Ego<input id="fe" name="eg" type="number" inputmode="numeric" value="8"></label>
-        <button class="btn red wide" type="submit" style="grid-column:span 4">Ajouter au combat</button></form>
-      <p class="note">Rappel : -1D par Traumatisme · Blessures pleines → Traumatismes · Ego à 0 → hors combat.</p></div>`;
-  }
-  if(S.outTab==="oracle"){
+/* ── Oracle (onglet des Générateurs) ── */
+function oracle(){
     const o=S.oracle;
-    let out=`<p class="empty">Tirez une carte pour un augure, ou deux pour une combinaison.</p>`;
+    let out=`<p class="empty">Choisissez une carte pour son concept, ou deux pour leur combinaison.</p>`;
     if(o){const A=ORACLE.archetypes[o[0]],B=o.length>1?ORACLE.archetypes[o[1]]:null;
       const txt=B?(ORACLE.combinations[A.name]||{})[B.name]:"";
       out=`<div class="tarot"><figure><img src="${A.image}" alt="${esc(A.name)}"><figcaption>${esc(A.name)}</figcaption></figure>${B?`<figure><img src="${B.image}" alt="${esc(B.name)}"><figcaption>${esc(B.name)}</figcaption></figure>`:""}</div>
-      ${txt?`<div class="gen-card oracle-txt">${(()=>{const i=txt.indexOf(".");return `<b>${esc(txt.slice(0,i+1))}</b>${esc(txt.slice(i+1))}`})()}</div>`:""}
+      ${B&&!txt?`<p class="empty">Pas de texte de combinaison pour cette paire.</p>`:""}${txt?`<div class="gen-card oracle-txt">${(()=>{const i=txt.indexOf(".");return `<b>${esc(txt.slice(0,i+1))}</b>${esc(txt.slice(i+1))}`})()}</div>`:""}
       ${!B?`<div class="gen-card"><span class="k">Concept</span><p>${esc((GEN.concepts[o[0]]||{}).m||"").replace(/^./,c=>c.toUpperCase())}.</p></div>`:""}`;}
-    return `<div class="stack"><div class="btnrow"><button class="btn" data-act="tarot" data-v="1">1 carte</button><button class="btn red" data-act="tarot" data-v="2">2 cartes</button></div>${out}
-      <p class="note">Oracle et combinaisons repris de ton outil « Tirage-tarot ».</p></div>`;
+    const ROM=n=>n?["","I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII","XIII","XIV","XV","XVI","XVII","XVIII","XIX","XX","XXI"][n]:"0";
+    const opts=(cur,none)=>(none?`<option value="">— Aucune —</option>`:`<option value="" disabled ${cur==null?"selected":""}>Choisir…</option>`)+ORACLE.archetypes.map((a,i)=>`<option value="${i}" ${cur===i?"selected":""}>${ROM(a.id)} · ${esc(a.name)}</option>`).join("");
+    const sel=`<div class="selrow"><select class="sel" data-in="ocard1" aria-label="Première carte">${opts(o?o[0]:null,false)}</select><select class="sel" data-in="ocard2" aria-label="Seconde carte">${opts(o&&o.length>1?o[1]:null,true)}</select></div>`;
+    return `<div class="stack">${sel}<button class="roll" data-act="tarot" data-v="${o&&o.length===1?1:2}">GENERER</button>${out}</div>`;
   }
-  if(S.outTab==="degats"){
-    const d=S.dmg;const weap=BAZAR.filter(r=>r._grp==="armes"&&r["Dégâts"]&&/\d|F/.test(r["Dégâts"]));
-    const base=calcBase(d.base,+d.f||0);const tot=base==null?null:base+(+d.dc||0)+(+d.pot||0);const bl=tot==null?null:Math.max(0,tot-(+d.arm||0));
-    return `<div class="stack"><div class="dice-panel">
-      <label class="lbl" for="dw">Arme</label><select class="sel" id="dw" data-in="dweap"><option value="">Choisir une arme…</option>${weap.map(w=>`<option value="${esc(w["Dégâts"])}" ${d.base===w["Dégâts"]?"selected":""}>${esc(w.Nom)} — ${esc(w["Dégâts"])}</option>`).join("")}</select>
-      <div class="form"><label>Dégâts<input id="db" data-in="dbase" value="${esc(d.base)}" placeholder="6+F/3"></label><label>PHY+Force<input id="df" data-in="df" type="number" inputmode="numeric" value="${esc(d.f)}"></label><label>DC<input id="dd" data-in="ddc" type="number" inputmode="numeric" value="${esc(d.dc)}"></label><label>Armure<input id="da" data-in="darm" type="number" inputmode="numeric" value="${esc(d.arm)}"></label><label class="wide">Bonus de Potentiels<input id="dp" data-in="dpot" type="number" inputmode="numeric" value="${esc(d.pot)}"></label></div></div>
-      <div class="dice-panel result"><div class="tally"><span><b>${tot??"–"}</b>dégâts</span><span><b>${bl??"–"}</b>blessures</span></div><p class="note">Dégâts = arme + DC + Potentiels. Blessures = dégâts − armure. F/2 et F/3 arrondis au supérieur.</p></div></div>`;
-  }
-  return `<div class="stack"><div class="gen-card"><h2>Ambiances sonores</h2><p>À venir : boucles d’ambiance (pluie sur Justitienne, vent, tension, combat) et effets ponctuels. Il faudra me fournir les fichiers son.</p></div></div>`;
-}
-function calcBase(s,F){
-  if(!s)return null;s=String(s).replace(/\s/g,"");
-  const m=s.match(/^(\d+)?\+?(F(?:\/(\d))?)?$/);if(!m)return /^\d+$/.test(s)?+s:null;
-  let v=m[1]?+m[1]:0;if(m[2])v+=m[3]?Math.ceil(F/+m[3]):F;return v;
-}
 
 /* ───────── VI. CAMPAGNE ───────── */
 function campTabs(){return chips([["groupe","Groupe"],["mission","Mission"],["pnj","PNJ"],["lieux","Lieux"],["chrono","Chronologie"],["notes","Notes"]],S.campTab,"camptab","Campagne")}
@@ -301,18 +302,9 @@ app.addEventListener("click",e=>{
     case "gentab":S.genTab=v;render();break;
     case "gen":doGen();break;
     case "copynpc":{const p=S.genOut.v;copy(`${p.nom} — ${p.c}, ${p.culte}, ${p.con.n}\nMotivation : ${p.con.m}\nApparence : ${p.phys}\nAttitude : ${p.att}\nSecret : ${p.sec}\nNiveau ${p.rg.n} : VA ${p.rg.va}, Blessures ${p.rg.bs}, Traumatismes ${p.rg.tr}`);break;}
-    case "addfighter":{const p=S.genOut.v;S.fighters.push({id:Date.now(),n:p.nom,ini:0,dc:0,bs:0,bsM:+p.rg.bs,tr:0,trM:+p.rg.tr,eg:8,egM:8,done:false});store.set("fighters",S.fighters);toast("Ajouté à Outils › Combat");break;}
-    case "outtab":S.outTab=v;render();break;
-    case "fm":{const f=S.fighters.find(x=>String(x.id)===a.dataset.id),k=a.dataset.k,d=+a.dataset.d;if(!f)break;
-      const max={bs:f.bsM,tr:f.trM,eg:f.egM}[k];f[k]=Math.max(k==="ini"?0:0,(f[k]||0)+d);if(max&&k!=="eg")f[k]=Math.min(max,f[k]);if(k==="dc"&&f[k]>6)f[k]=0;
-      if(k==="bs"&&d>0&&(f.bs>=f.bsM)&&f._bsfull){f.tr=Math.min(f.trM,f.tr+1)}f._bsfull=f.bs>=f.bsM;
-      store.set("fighters",S.fighters);render();break;}
-    case "done":{const f=S.fighters.find(x=>String(x.id)===a.dataset.id);f.done=!f.done;store.set("fighters",S.fighters);render();break;}
-    case "delf":S.fighters=S.fighters.filter(x=>String(x.id)!==a.dataset.id);store.set("fighters",S.fighters);render();break;
-    case "nextround":S.round++;S.fighters.forEach(f=>{f.done=false;f.ini=0;f.dc=0});store.set("round",S.round);store.set("fighters",S.fighters);toast("Nouveau round : relancez l’Initiative");render();break;
-    case "resetfight":S.round=1;S.fighters=S.fighters.filter(f=>CAMPAGNE.groupe.some(p=>p.n===f.n));S.fighters.forEach(f=>{f.done=false;f.ini=0;f.dc=0});store.set("round",1);store.set("fighters",S.fighters);render();break;
     case "tarot":{const n=+v,a1=rnd(22);let a2=rnd(21);if(a2>=a1)a2++;S.oracle=n===1?[a1]:[a1,a2];render();break;}
     case "camptab":S.campTab=v;render();break;
+    case "loretab":S.loreTab=v;S.loreQ="";render();break;
     case "zoom":{const z=document.createElement("div");z.className="zoom"+(a.dataset.wide?" wide":"");z.innerHTML=`<img src="${a.dataset.src}" alt=""><button class="x" aria-label="Fermer">×</button>`;z.addEventListener("click",ev=>{if(ev.target.closest(".x")||ev.target===z)z.remove()});document.body.appendChild(z);break;}
     case "stamp":{const ta=$("#notes");const d=new Date().toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"});ta.value=(ta.value?ta.value+"\n\n":"")+"— "+d+" —\n";store.set("notes",ta.value);ta.focus();break;}
     case "copynotes":copy($("#notes").value);break;
@@ -323,20 +315,16 @@ app.addEventListener("input",e=>{
   if(k==="regq"){S.regQ=v;S._focusQ=true;render()}
   if(k==="bzq"){S.bzQ=v;S._focusQ=true;render()}
   if(k==="notes")store.set("notes",v);
-  if(["dbase","df","ddc","darm","dpot"].includes(k)){S.dmg[{dbase:"base",df:"f",ddc:"dc",darm:"arm",dpot:"pot"}[k]]=v;const r=$(".result .tally");if(r){const base=calcBase(S.dmg.base,+S.dmg.f||0);const tot=base==null?null:base+(+S.dmg.dc||0)+(+S.dmg.pot||0);r.innerHTML=`<span><b>${tot??"–"}</b>dégâts</span><span><b>${tot==null?"–":Math.max(0,tot-(+S.dmg.arm||0))}</b>blessures</span>`}}
+  if(k==="loreq"){S.loreQ=v;S._focusQ=true;render()}
 });
 app.addEventListener("change",e=>{
   const k=e.target.dataset.in;if(!k)return;const v=e.target.value;
   if(k==="bzculte"){S.bzCulte=v;render()}
+  if(k==="ocard1"){const a=+v;S.oracle=S.oracle&&S.oracle.length>1?[a,S.oracle[1]]:[a];render()}
+  if(k==="ocard2"){const a=S.oracle?S.oracle[0]:0;S.oracle=v===""?[a]:[a,+v];render()}
   if(k==="gculture"){S.gen.culture=v}
   if(k==="gculte"){S.gen.culte=v}
   if(k==="gsexe"){S.gen.sexe=v}
-  if(k==="dweap"){S.dmg.base=v;render()}
-});
-app.addEventListener("submit",e=>{
-  if(e.target.dataset.form!=="addf")return;e.preventDefault();const f=new FormData(e.target);
-  const bsM=+f.get("bsM")||6,trM=+f.get("trM")||4,eg=+f.get("eg")||8;
-  S.fighters.push({id:Date.now(),n:String(f.get("n")).trim()||"Adversaire",ini:+f.get("ini")||0,dc:0,bs:0,bsM,tr:0,trM,eg,egM:eg,done:false});store.set("fighters",S.fighters);render();
 });
 
 /* démarrage */

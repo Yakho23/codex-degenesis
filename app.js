@@ -101,7 +101,7 @@ function gIndex(){
   POT_CULTS.forEach(c=>POTENTIELS[c].forEach(p=>add("Potentiels",p.t,c,(p.c||"")+" "+(p.e||"")+" "+(p.r||""),{v:"regles",s:{regCat:"Potentiels",potCult:c,regQ:""},k:kk(p)})));
   BAZAR.forEach(r=>add("Bazar",r.Nom,r._cat+(r.Culte?" · "+r.Culte:""),Object.values(r).join(" "),{v:"bazar",s:{bzGrp:r._grp,bzCat:r._cat,bzCulte:"",bzQ:""},k:kk(r)}));
   C.pnj.forEach(n=>add("PNJ",n.n,CAMP_NAME[n.camp]||"",JSON.stringify(n),{v:"campagne",s:{campTab:"pnj",campC:n.camp,campQ:""},k:kk(n)}));
-  Object.keys(C.lieux).forEach(c=>C.lieux[c].forEach(p=>add("Lieux",p.n,CAMP_NAME[c]||"",p.d,{v:"campagne",s:{campTab:"lieux",campC:c,campQ:""},k:kk(p)})));
+  Object.keys(C.lieux).forEach(c=>C.lieux[c].forEach(p=>add("Lieux",p.n,CAMP_NAME[c]||"",lieuText(p),{v:"campagne",s:{campTab:"lieux",campC:c,campQ:""},k:kk(p)})));
   C.best.forEach(b=>add("Bestiaire",b.n,(b.doc||BSRC_NAME[b.src]||"")+(b.grp&&b.grp!==b.n&&b.grp!==b.doc?" · "+b.grp:""),JSON.stringify(b.it),{v:"campagne",s:{campTab:"bestiaire",bestSrc:b.src,bestDoc:b.cult||"",campQ:""},k:kk(b)}));
   if(window.SURVIE)Object.keys(SURVIE.enc).forEach(n=>{const e=SURVIE.enc[n];add("Rencontres 2",n+". "+e.t,"Générateurs",e.d+" "+e.e,{v:"generateurs",s:{genTab:"rencontre2"},enc:+n})});
   return GIDX=L;
@@ -133,6 +133,17 @@ function section(){
 }
 const chips=(list,cur,act,label)=>`<div class="tabs" role="toolbar" aria-label="${esc(label)}">${list.map(x=>{const v=Array.isArray(x)?x[0]:x,l=Array.isArray(x)?x[1]:x;return `<button class="chip" data-act="${act}" data-v="${esc(v)}" aria-pressed="${v===cur}">${l}</button>`}).join("")}</div>`;
 
+/* ───────── LIEUX DE CAMPAGNE ───────── */
+const lieuText=p=>[p.sub,...(p.intro||[]),...(p.fiche||[]).flat(),...(p.secs||[]).flatMap(x=>[x.t,...(x.p||[]),...(x.it||[]).flat()])].join(" ");
+function lieuCard(p,open){
+  const P=a=>(a||[]).map(x=>`<p>${esc(x)}</p>`).join("");
+  const IT=a=>a&&a.length?`<div class="litems">${a.map(([k,v])=>`<p><b>${esc(k)}.</b> ${esc(v)}</p>`).join("")}</div>`:"";
+  const fiche=p.fiche&&p.fiche.length?`<div class="fiche"><div class="fh">Fiche d’information</div><dl class="statl">${p.fiche.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl></div>`:"";
+  const secs=(p.secs||[]).map(x=>`<h4>${esc(x.t)}</h4>${P(x.p)}${IT(x.it)}`).join("");
+  const gal=p.gal||(p.tall?[[p.img,p.n]]:[]);
+  const thumb=p.img?`<img class="lthumb" src="${p.img}" alt="" loading="lazy">`:"";
+  return `<details class="card lore lieu"${dk(p)}${open?" open":""}><summary>${thumb}<span class="lt"><span class="t">${esc(p.n)}</span>${p.sub?`<span class="lsub">${esc(p.sub)}</span>`:""}</span>${p.ref?`<span class="ref">${esc(p.ref)}</span>`:""}</summary><div class="body">${p.img&&!p.tall?`<button class="lhero" data-act="zoom" data-src="${p.img}" aria-label="Agrandir l’illustration"><img src="${p.img}" alt="" loading="lazy"></button>`:""}${fiche}${P(p.intro)}${secs}${gal.length?`<div class="lgal">${gal.map(([src,c])=>`<button data-act="zoom" data-src="${src}" aria-label="Agrandir : ${esc(c)}"><img src="${src}" alt="" loading="lazy"><span>${esc(c)}</span></button>`).join("")}</div>`:""}</div></details>`;
+}
 /* ───────── I. LORE ───────── */
 function loreTabs(){return chips(LORE.tabs.map(t=>[t.id,t.t]),S.loreTab,"loretab","Rubriques du lore")}
 const stripTags=h=>String(h).replace(/<[^>]+>/g," ");
@@ -413,9 +424,8 @@ function campagne(){
     b=search("Chercher un PNJ : Leurre, Néolibyen, Brûlure…")+(q?"":chips(C.camps,S.campC,"campc","Campagne"))+`<div class="count">${L.length} PNJ${q?" · toutes campagnes":""}</div>`+(L.map(n=>npcCard(n,!!q)).join("")||`<p class="empty">Aucun PNJ ne correspond.</p>`);
   }
   if(t==="lieux"){
-    const lt=LORE.tabs.find(x=>x.id===C.lore[S.campC]);
-    const own=(C.lieux[S.campC]||[]).map(p=>`<article class="card npc"${dk(p)}><button class="ph" data-act="zoom" data-src="${p.img}" aria-label="Agrandir ${esc(p.n)}"><img src="${p.img}" alt=""></button><div><h3>${esc(p.n)}</h3><p>${esc(p.d)}</p></div></article>`).join("");
-    b=chips(C.camps,S.campC,"campc","Campagne")+own+(lt?lt.items.map(it=>loreCard(it,false)).join(""):"");
+    const own=(C.lieux[S.campC]||[]).map(p=>lieuCard(p,false)).join("");
+    b=chips(C.camps,S.campC,"campc","Campagne")+`<div class="count">${(C.lieux[S.campC]||[]).length} lieux · fiches complètes tirées du livre de campagne</div>`+own;
   }
   if(t==="bestiaire"){
     const docs=[...new Set(C.best.filter(x=>x.src==="autres").map(x=>x.cult))].sort((a,b)=>(a==="Divers")-(b==="Divers")||a.localeCompare(b,"fr"));

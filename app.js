@@ -73,7 +73,7 @@ function render(){
   if(S.view==="home"&&S._focusQ){const q=$("#hq");if(q){q.focus();q.setSelectionRange(q.value.length,q.value.length)}S._focusQ=false}
   if(S.focus){const k=S.focus;S.focus=null;const el=app.querySelector(`[data-k="${k}"]`);if(el){if(el.tagName==="DETAILS")el.open=true;
     requestAnimationFrame(()=>{const top=$(".top"),off=(top?top.offsetHeight:0)+10;window.scrollTo(0,el.getBoundingClientRect().top+window.scrollY-off);el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),1600)})}}
-  if(S.view==="bazar"||S.view==="regles"||S.view==="lore"){const q=$("#q");if(q&&S._focusQ){q.focus();q.setSelectionRange(q.value.length,q.value.length);S._focusQ=false}}
+  if(S.view==="bazar"||S.view==="regles"||S.view==="lore"||S.view==="campagne"){const q=$("#q");if(q&&S._focusQ){q.focus();q.setSelectionRange(q.value.length,q.value.length);S._focusQ=false}}
 }
 function home(){
   const ruche=S.layout==="ruche";

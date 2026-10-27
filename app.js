@@ -54,7 +54,7 @@ const S={view:"home",layout:store.get("layout","ruche"),
  dice:Object.assign({va:6,diff:2},store.get("dice",{}),{ego:0,mod:0}),diceMode:"simple",diceB:{va:6,ego:0,mod:0},last:null,hist:store.get("hist",[]),
  genTab:"pnj",neg:{grp:"obj",item:-1,qty:1,tech:false,noir:false},negOut:null,gen:{culture:"",culte:"",sexe:""},genOut:null,
  oracle:null,loreTab:"monde",loreQ:"",
- campTab:"pnj",campC:"ets",bestSrc:"ets",bestDoc:"",campQ:"",homeQ:"",focus:null};
+ campTab:"lieux",campC:"ets",bestSrc:"ets",bestDoc:"",campQ:"",homeQ:"",focus:null};
 if(!(S.dice.diff>=1&&S.dice.diff<=10))S.dice.diff=2;
 try{["fighters","round"].forEach(k=>localStorage.removeItem("codex."+k))}catch(e){} /* anciennes données de l’outil Combat retiré */
 

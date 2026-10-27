@@ -4,7 +4,7 @@
 const $=(s,r=document)=>r.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const DG=s=>String(s).normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[’']/g," ").toUpperCase(); // police titre : A–Z sans accents
-const norm=s=>String(s??"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+const norm=s=>String(s??"").normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[’‘`´ʼ]/g,"'").replace(/[«»“”]/g,'"').replace(/[‐-―]/g,"-").replace(/\u00a0|\u202f/g," ").toLowerCase();
 const rnd=n=>Math.floor(Math.random()*n);
 const pick=a=>a[rnd(a.length)];
 const store={get(k,d){try{const v=localStorage.getItem("codex."+k);return v==null?d:JSON.parse(v)}catch(e){return d}},
@@ -38,6 +38,15 @@ const SECTIONS=[
  {id:"generateurs",n:"V",t:"Générateurs",s:"PNJ, rencontres, oracle",pos:[58,201]},
  {id:"campagne",n:"VI",t:"Campagne",s:"Lieux, PNJ, bestiaire, notes",pos:[0,100]}];
 
+/* ───────── clés des fiches (recherche globale) ───────── */
+const KEY=new Map(),kk=o=>KEY.get(o)||"",dk=o=>{const k=kk(o);return k?` data-k="${k}"`:""};
+LORE.tabs.forEach(t=>{(t.items||[]).forEach((it,i)=>KEY.set(it,"lo-"+t.id+"-"+i));(t.timeline||[]).forEach((r,i)=>KEY.set(r,"lt-"+t.id+"-"+i));(t.gloss||[]).forEach((r,i)=>KEY.set(r,"lg-"+t.id+"-"+i))});
+REGLES.forEach((r,i)=>KEY.set(r,"re-"+i));
+Object.keys(POTENTIELS).forEach((c,j)=>POTENTIELS[c].forEach((p,i)=>KEY.set(p,"po-"+j+"-"+i)));
+BAZAR.forEach((r,i)=>KEY.set(r,"bz-"+i));
+CAMPAGNE.pnj.forEach((n,i)=>KEY.set(n,"pn-"+i));CAMPAGNE.best.forEach((b,i)=>KEY.set(b,"be-"+i));
+Object.keys(CAMPAGNE.lieux).forEach(c=>CAMPAGNE.lieux[c].forEach((p,i)=>KEY.set(p,"li-"+c+"-"+i)));
+
 /* ───────── état ───────── */
 const S={view:"home",layout:store.get("layout","ruche"),
  regCat:"Tous",regQ:"",potCult:"Communs",
@@ -45,7 +54,7 @@ const S={view:"home",layout:store.get("layout","ruche"),
  dice:Object.assign({va:6,diff:2},store.get("dice",{}),{ego:0,mod:0}),diceMode:"simple",diceB:{va:6,ego:0,mod:0},last:null,hist:store.get("hist",[]),
  genTab:"pnj",neg:{grp:"obj",item:-1,qty:1,tech:false,noir:false},negOut:null,gen:{culture:"",culte:"",sexe:""},genOut:null,
  oracle:null,loreTab:"monde",loreQ:"",
- campTab:"pnj",campC:"ets",bestSrc:"ets",bestDoc:"",campQ:""};
+ campTab:"pnj",campC:"ets",bestSrc:"ets",bestDoc:"",campQ:"",homeQ:"",focus:null};
 if(!(S.dice.diff>=1&&S.dice.diff<=10))S.dice.diff=2;
 try{["fighters","round"].forEach(k=>localStorage.removeItem("codex."+k))}catch(e){} /* anciennes données de l’outil Combat retiré */
 
@@ -61,6 +70,9 @@ function render(){
   app.querySelectorAll(".tabs").forEach(t=>{const k=t.getAttribute("aria-label");if(k in keep)t.scrollLeft=keep[k];
     const c=t.querySelector('[aria-pressed="true"]');if(!c)return;const l=c.offsetLeft-t.offsetLeft,r=l+c.offsetWidth;
     if(l<t.scrollLeft)t.scrollLeft=l-12;else if(r>t.scrollLeft+t.clientWidth)t.scrollLeft=r-t.clientWidth+12;});
+  if(S.view==="home"&&S._focusQ){const q=$("#hq");if(q){q.focus();q.setSelectionRange(q.value.length,q.value.length)}S._focusQ=false}
+  if(S.focus){const k=S.focus;S.focus=null;const el=app.querySelector(`[data-k="${k}"]`);if(el){if(el.tagName==="DETAILS")el.open=true;
+    requestAnimationFrame(()=>{const top=$(".top"),off=(top?top.offsetHeight:0)+10;window.scrollTo(0,el.getBoundingClientRect().top+window.scrollY-off);el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),1600)})}}
   if(S.view==="bazar"||S.view==="regles"||S.view==="lore"){const q=$("#q");if(q&&S._focusQ){q.focus();q.setSelectionRange(q.value.length,q.value.length);S._focusQ=false}}
 }
 function home(){
@@ -73,9 +85,46 @@ function home(){
   return `<section class="home wrap">
     <button class="switch" data-act="layout" aria-label="${ruche?"Affichage en grille":"Affichage en ruche"}">${ruche?I.grid:I.hive}</button>
     <header><img src="assets/logo-clean.svg" alt="Degenesis"><p class="dg">CODEX DU MJ</p></header>
-    ${ruche?hive:grid}
+    <div class="hmain${ruche?" ruche":""}"><label class="search hsearch">${I.search}<input id="hq" data-in="homeq" type="search" placeholder="Chercher dans tout le Codex…" value="${esc(S.homeQ)}" autocomplete="off">${S.homeQ?`<button class="qclr" data-act="qclear" data-v="homeQ" aria-label="Effacer la recherche">×</button>`:""}</label>
+    ${norm(S.homeQ).trim().length>=2?globalResults():(ruche?hive:grid)}</div>
     <footer><i></i><span class="dg">PRIMAL PUNK</span><i></i></footer></section>`;
 }
+/* ───────── recherche globale (accueil) ───────── */
+let GIDX=null,HITS=[];
+function gIndex(){
+  if(GIDX)return GIDX;const L=[],C=CAMPAGNE,add=(g,t,sub,txt,j)=>L.push({g,t,sub,tn:norm(t),x:norm(t+" "+sub+" "+txt),j});
+  LORE.tabs.forEach(tab=>{
+    (tab.items||[]).forEach(it=>add("Lore",it.t,tab.t+(it.sub?" · "+it.sub:""),stripTags(it.h),{v:"lore",s:{loreTab:tab.id,loreQ:""},k:kk(it)}));
+    (tab.timeline||[]).forEach(r=>add("Lore",r[0],tab.t+" · "+r[1].slice(0,70),r[1],{v:"lore",s:{loreTab:tab.id,loreQ:""},k:kk(r)}));
+    (tab.gloss||[]).forEach(r=>add("Lore",r[0],tab.t,r[1],{v:"lore",s:{loreTab:tab.id,loreQ:""},k:kk(r)}))});
+  REGLES.forEach(r=>add("Règles",r.t,r.cat,r.tags+" "+stripTags(r.h),{v:"regles",s:{regCat:r.cat,regQ:""},k:kk(r)}));
+  POT_CULTS.forEach(c=>POTENTIELS[c].forEach(p=>add("Potentiels",p.t,c,(p.c||"")+" "+(p.e||"")+" "+(p.r||""),{v:"regles",s:{regCat:"Potentiels",potCult:c,regQ:""},k:kk(p)})));
+  BAZAR.forEach(r=>add("Bazar",r.Nom,r._cat+(r.Culte?" · "+r.Culte:""),Object.values(r).join(" "),{v:"bazar",s:{bzGrp:r._grp,bzCat:r._cat,bzCulte:"",bzQ:""},k:kk(r)}));
+  C.pnj.forEach(n=>add("PNJ",n.n,CAMP_NAME[n.camp]||"",JSON.stringify(n),{v:"campagne",s:{campTab:"pnj",campC:n.camp,campQ:""},k:kk(n)}));
+  Object.keys(C.lieux).forEach(c=>C.lieux[c].forEach(p=>add("Lieux",p.n,CAMP_NAME[c]||"",p.d,{v:"campagne",s:{campTab:"lieux",campC:c,campQ:""},k:kk(p)})));
+  C.best.forEach(b=>add("Bestiaire",b.n,(b.doc||BSRC_NAME[b.src]||"")+(b.grp&&b.grp!==b.n&&b.grp!==b.doc?" · "+b.grp:""),JSON.stringify(b.it),{v:"campagne",s:{campTab:"bestiaire",bestSrc:b.src,bestDoc:b.doc||"",campQ:""},k:kk(b)}));
+  if(window.SURVIE)Object.keys(SURVIE.enc).forEach(n=>{const e=SURVIE.enc[n];add("Rencontres 2",n+". "+e.t,"Générateurs",e.d+" "+e.e,{v:"generateurs",s:{genTab:"rencontre2"},enc:+n})});
+  return GIDX=L;
+}
+const G_ORDER=["Lore","Règles","Potentiels","Bazar","PNJ","Lieux","Bestiaire","Rencontres 2","Notes"];
+function globalResults(){
+  const q=norm(S.homeQ).trim(),words=q.split(/\s+/).filter(Boolean);
+  let hits=gIndex().filter(e=>words.every(w=>e.x.includes(w)));
+  const notes=store.get("notes","");if(notes&&words.every(w=>norm(notes).includes(w)))hits.push({g:"Notes",t:"Notes de séance",sub:"Campagne",tn:"",j:{v:"campagne",s:{campTab:"notes"}}});
+  hits.forEach(h=>h.sc=h.tn.startsWith(q)?0:h.tn.includes(q)?1:words.every(w=>h.tn.includes(w))?2:3);
+  HITS=[];let out="";
+  const best=g=>Math.min(9,...hits.filter(h=>h.g===g).map(h=>h.sc));
+  [...G_ORDER].sort((a,b)=>best(a)-best(b)||G_ORDER.indexOf(a)-G_ORDER.indexOf(b)).forEach(g=>{const L=hits.filter(h=>h.g===g).sort((a,b)=>a.sc-b.sc||a.t.localeCompare(b.t,"fr"));if(!L.length)return;
+    const max=S.gAll===g?L.length:6;
+    out+=`<div class="gres"><div class="gtitle">${esc(g)} <span class="gn">${L.length}</span></div>${L.slice(0,max).map(h=>{HITS.push(h);return `<button class="hit" data-act="hit" data-v="${HITS.length-1}"><span class="ht">${esc(h.t)}</span><span class="hs">${esc(h.sub)}</span></button>`}).join("")}${L.length>max?`<button class="btn more" data-act="gall" data-v="${esc(g)}">Voir les ${L.length} résultats</button>`:""}</div>`});
+  return `<div class="gsearch">${out?`<div class="count">${hits.length} résultat${hits.length>1?"s":""}</div>${out}`:`<p class="empty">Rien trouvé dans le Codex.</p>`}</div>`;
+}
+function jump(h){
+  const j=h.j;Object.assign(S,j.s);if(j.enc)S.genOut={tab:"rencontre2",v:enc2Roll(j.enc)};
+  S.focus=j.k||null;S.view=j.v;window.scrollTo(0,0);render();
+  try{history.replaceState(null,"","#"+j.v)}catch(e){}
+}
+
 function section(){
   const s=SECTIONS.find(x=>x.id===S.view);
   const tabs={lore:loreTabs,regles:regTabs,bazar:bzTabs,generateurs:genTabs,campagne:campTabs}[s.id];
@@ -90,13 +139,13 @@ const stripTags=h=>String(h).replace(/<[^>]+>/g," ");
 function loreCard(it,open){
   const ic=it.icon?icon(it.icon):"";
   const thumb=it.sym?`<img class="lsym" src="${it.sym}" alt="">`:it.img?`<img class="lthumb" src="${it.img}" alt="" loading="lazy">`:"";
-  return `<details class="card lore"${open?" open":""}><summary>${thumb}<span class="lt"><span class="t">${ic?`<span class="lic">${ic}</span>`:""}${esc(it.t)}</span>${it.sub?`<span class="lsub">${esc(it.sub)}</span>`:""}</span>${it.ref?`<span class="ref">${esc(it.ref)}</span>`:""}</summary><div class="body">${it.img?`<button class="lhero" data-act="zoom" data-src="${it.img}" aria-label="Agrandir l’illustration"><img src="${it.img}" alt="" loading="lazy"></button>`:""}${it.h}${it.gal?`<div class="lgal">${it.gal.map(([src,c])=>`<button data-act="zoom" data-src="${src}" aria-label="Agrandir : ${esc(c)}"><img src="${src}" alt="" loading="lazy"><span>${esc(c)}</span></button>`).join("")}</div>`:""}</div></details>`;
+  return `<details class="card lore"${dk(it)}${open?" open":""}><summary>${thumb}<span class="lt"><span class="t">${ic?`<span class="lic">${ic}</span>`:""}${esc(it.t)}</span>${it.sub?`<span class="lsub">${esc(it.sub)}</span>`:""}</span>${it.ref?`<span class="ref">${esc(it.ref)}</span>`:""}</summary><div class="body">${it.img?`<button class="lhero" data-act="zoom" data-src="${it.img}" aria-label="Agrandir l’illustration"><img src="${it.img}" alt="" loading="lazy"></button>`:""}${it.h}${it.gal?`<div class="lgal">${it.gal.map(([src,c])=>`<button data-act="zoom" data-src="${src}" aria-label="Agrandir : ${esc(c)}"><img src="${src}" alt="" loading="lazy"><span>${esc(c)}</span></button>`).join("")}</div>`:""}</div></details>`;
 }
-const tlList=l=>`<ol class="timeline">${l.map(([y,x])=>`<li><b>${esc(y)}</b><span>${esc(x)}</span></li>`).join("")}</ol>`;
-const glList=l=>`<dl class="gloss">${l.map(([k,x])=>`<div><dt>${esc(k)}</dt><dd>${esc(x)}</dd></div>`).join("")}</dl>`;
+const tlList=l=>`<ol class="timeline">${l.map(r=>{const [y,x]=r;return `<li${dk(r)}><b>${esc(y)}</b><span>${esc(x)}</span></li>`}).join("")}</ol>`;
+const glList=l=>`<dl class="gloss">${l.map(r=>{const [k,x]=r;return `<div${dk(r)}><dt>${esc(k)}</dt><dd>${esc(x)}</dd></div>`}).join("")}</dl>`;
 function lore(){
   const q=norm(S.loreQ).trim();
-  const search=`<label class="search">${I.search}<input id="q" data-in="loreq" type="search" placeholder="Chercher : Brûlure, Juges, Pandora…" value="${esc(S.loreQ)}" autocomplete="off"></label>`;
+  const search=`<label class="search">${I.search}<input id="q" data-in="loreq" type="search" placeholder="Chercher : Brûlure, Juges, Pandora…" value="${esc(S.loreQ)}" autocomplete="off">${S.loreQ?`<button class="qclr" data-act="qclear" data-v="loreQ" aria-label="Effacer la recherche">×</button>`:""}</label>`;
   const foot=`<p class="note">Sources : PP <i>Primal Punk</i> · K <i>Katharsys</i> · A <i>Artefacts</i> · ETS <i>En Ton Sang</i> · JdM <i>Jeu de Massacre</i> · BA <i>Black Atlantic</i> · Apo <i>Apocrypha</i> (ouvrage de fans).</p>`;
   if(q){
     let cards=[],tl=[],gl=[];
@@ -121,12 +170,12 @@ const REG_CATS=(()=>{const S3=["Poisons","Maladies","Troubles mentaux"],c=[...ne
 const POT_CULTS=Object.keys(POTENTIELS);
 function potCard(p,cult,open,showCult){
   const f=(k,l)=>p[k]?`<p><span class="k">${l}</span>${esc(p[k])}</p>`:"";
-  return `<details class="card pot"${open?" open":""}><summary><span class="t"><span class="pn">${esc(p.n)}.</span> ${esc(p.t)}<span class="pc">Condition : ${esc(p.c||"—")}</span></span>${showCult?`<span class="cult">${icon(cult)}${esc(cult)}</span>`:""}</summary><div class="body">${f("e","Effet")}${f("r","Règles")}</div></details>`;
+  return `<details class="card pot"${dk(p)}${open?" open":""}><summary><span class="t"><span class="pn">${esc(p.n)}.</span> ${esc(p.t)}<span class="pc">Condition : ${esc(p.c||"—")}</span></span>${showCult?`<span class="cult">${icon(cult)}${esc(cult)}</span>`:""}</summary><div class="body">${f("e","Effet")}${f("r","Règles")}</div></details>`;
 }
 function regTabs(){return chips(REG_CATS,S.regCat,"regcat","Catégories de règles")}
 function regles(){
   const q=norm(S.regQ).trim();
-  const search=`<label class="search">${I.search}<input id="q" data-in="regq" type="search" placeholder="Chercher : initiative, feu, hémorragie…" value="${esc(S.regQ)}" autocomplete="off"></label>`;
+  const search=`<label class="search">${I.search}<input id="q" data-in="regq" type="search" placeholder="Chercher : initiative, feu, hémorragie…" value="${esc(S.regQ)}" autocomplete="off">${S.regQ?`<button class="qclr" data-act="qclear" data-v="regQ" aria-label="Effacer la recherche">×</button>`:""}</label>`;
   if(S.regCat==="Potentiels"&&!q){
     const L=POTENTIELS[S.potCult]||[];
     return `<div class="stack">${search}${chips(POT_CULTS,S.potCult,"potcult","Cultes")}<div class="count">${L.length} Potentiels · ${esc(S.potCult)}</div>${L.map(p=>potCard(p,S.potCult,false,false)).join("")}</div>`;
@@ -134,11 +183,11 @@ function regles(){
   const list=S.regCat==="Potentiels"?[]:REGLES.filter(r=>(S.regCat==="Tous"||r.cat===S.regCat)&&(!q||norm(r.t+" "+r.tags+" "+r.h.replace(/<[^>]+>/g," ")).includes(q)));
   const pots=q&&(S.regCat==="Tous"||S.regCat==="Potentiels")?POT_CULTS.flatMap(c=>POTENTIELS[c].filter(p=>norm(p.t+" "+(p.c||"")+" "+(p.e||"")+" "+(p.r||"")).includes(q)).map(p=>[p,c])):[];
   if(q&&pots.length){const n=list.length+pots.length;
-    return `<div class="stack">${search}<div class="count">${n} résultat${n>1?"s":""}</div>${list.map(r=>`<details class="card"><summary><span class="t">${esc(r.t)}</span><span class="ref">${esc(r.ref)}</span></summary><div class="body"><div class="catline">${esc(r.cat)}</div>${r.h}</div></details>`).join("")}<div class="sec-title dg">POTENTIELS</div>${pots.slice(0,60).map(([p,c])=>potCard(p,c,false,true)).join("")}</div>`;}
+    return `<div class="stack">${search}<div class="count">${n} résultat${n>1?"s":""}</div>${list.map(r=>`<details class="card"${dk(r)}><summary><span class="t">${esc(r.t)}</span><span class="ref">${esc(r.ref)}</span></summary><div class="body"><div class="catline">${esc(r.cat)}</div>${r.h}</div></details>`).join("")}<div class="sec-title dg">POTENTIELS</div>${pots.slice(0,60).map(([p,c])=>potCard(p,c,false,true)).join("")}</div>`;}
   return `<div class="stack">
    ${search}
    <div class="count">${list.length} fiche${list.length>1?"s":""}</div>
-   ${list.map(r=>`<details class="card"${q&&list.length<=3?" open":""}><summary><span class="t">${esc(r.t)}</span><span class="ref">${esc(r.ref)}</span></summary><div class="body">${S.regCat==="Tous"?`<div class="catline">${esc(r.cat)}</div>`:""}${r.h}</div></details>`).join("")||`<p class="empty">Aucune fiche ne correspond. Essayez un autre mot.</p>`}</div>`;
+   ${list.map(r=>`<details class="card"${dk(r)}${q&&list.length<=3?" open":""}><summary><span class="t">${esc(r.t)}</span><span class="ref">${esc(r.ref)}</span></summary><div class="body">${S.regCat==="Tous"?`<div class="catline">${esc(r.cat)}</div>`:""}${r.h}</div></details>`).join("")||`<p class="empty">Aucune fiche ne correspond. Essayez un autre mot.</p>`}</div>`;
 }
 
 /* ───────── III. BAZAR ───────── */
@@ -151,7 +200,7 @@ function bazar(){
   const q=norm(S.bzQ).trim();
   const list=(q?BAZAR:inGrp).filter(r=>(q||S.bzCat==="Tout"||r._cat===S.bzCat)&&(!S.bzCulte||r.Culte===S.bzCulte)&&(!q||norm(Object.values(r).join(" ")).includes(q)));
   return `<div class="stack">
-   <label class="search">${I.search}<input id="q" data-in="bzq" type="search" placeholder="Chercher dans tout le Bazar…" value="${esc(S.bzQ)}" autocomplete="off"></label>
+   <label class="search">${I.search}<input id="q" data-in="bzq" type="search" placeholder="Chercher dans tout le Bazar…" value="${esc(S.bzQ)}" autocomplete="off">${S.bzQ?`<button class="qclr" data-act="qclear" data-v="bzQ" aria-label="Effacer la recherche">×</button>`:""}</label>
    ${q?"":chips(cats,S.bzCat,"bzcat","Catégories")}
    <div class="selrow"><select class="sel" id="bzculte" data-in="bzculte" aria-label="Filtrer par Culte"><option value="">Tous les Cultes</option>${cultes.map(c=>`<option ${c===S.bzCulte?"selected":""}>${esc(c)}</option>`).join("")}</select></div>
    <div class="count">${list.length} objet${list.length>1?"s":""}${q?" · recherche dans toutes les familles":""}</div>
@@ -169,7 +218,7 @@ function item(r){
   else line=r.Effet?`<span>${esc(r.Effet)}</span>`:r["Propriétés"]&&g==="artefacts"?`<span>${esc(r["Propriétés"])}</span>`:"";
   const skip=new Set(["Nom","_cat","_grp","_skill","Culte","_desc"]);
   const kv=Object.entries(r).filter(([k,v])=>!skip.has(k)&&v&&v!=="–").map(([k,v])=>`<dt>${esc(k.replace("Man.","Maniabilité").replace("Charg.","Chargeur").replace("Enc.","Encombrement").replace("Empl.","Emplacements").replace("Ress.","Ressources").replace("Cal.","Calibre"))}</dt><dd>${esc(k==="Valeur"?v+" LC":v)}</dd>`).join("");
-  return `<details class="card item"><summary><span class="t">${esc(r.Nom)}</span>${r.Culte?`<span class="cult">${icon(r.Culte)}${esc(r.Culte)}</span>`:""}<span class="stats">${line}</span></summary><div class="body"><div class="catline">${esc(r._cat)}${r._skill?" · "+esc(r._skill):""}</div><dl class="kv">${kv}</dl>${r._desc?`<div class="desc">${r._desc.map(x=>`<p>${esc(x)}</p>`).join("")}</div>`:""}</div></details>`;
+  return `<details class="card item"${dk(r)}><summary><span class="t">${esc(r.Nom)}</span>${r.Culte?`<span class="cult">${icon(r.Culte)}${esc(r.Culte)}</span>`:""}<span class="stats">${line}</span></summary><div class="body"><div class="catline">${esc(r._cat)}${r._skill?" · "+esc(r._skill):""}</div><dl class="kv">${kv}</dl>${r._desc?`<div class="desc">${r._desc.map(x=>`<p>${esc(x)}</p>`).join("")}</div>`:""}</div></details>`;
 }
 
 /* ───────── IV. DÉS ───────── */
@@ -347,17 +396,17 @@ function field(n,k){for(const s of n.sec||[])for(const x of s.it)if(x[0]==="f"&&
 function npcCard(n,showCamp){
   const arch=field(n,"ARCHÉTYPE");
   const sub=[n.sub,arch].filter(Boolean).join(" · ");
-  return `<details class="card sheet"><summary>${n.img?`<img class="av" src="${n.img}" alt="" loading="lazy">`:`<span class="av noimg">${DG(n.n.charAt(0))}</span>`}<span class="t">${esc(n.n)}<span class="st">${esc(sub)}</span>${showCamp?`<span class="cmp">${esc(CAMP_NAME[n.camp]||"")}</span>`:""}</span></summary><div class="body">${n.img?`<button class="ph big" data-act="zoom" data-src="${n.img}" aria-label="Agrandir le portrait"><img src="${n.img}" alt="" loading="lazy"></button>`:""}${n.intro.map(x=>x[0]==="p"?`<p>${esc(x[1])}</p>`:"").join("")}${n.sec.map(s=>`<h3 class="sh">${esc(s.t)}</h3>${sheetItems(s.it)}`).join("")}</div></details>`;
+  return `<details class="card sheet"${dk(n)}><summary>${n.img?`<img class="av" src="${n.img}" alt="" loading="lazy">`:`<span class="av noimg">${DG(n.n.charAt(0))}</span>`}<span class="t">${esc(n.n)}<span class="st">${esc(sub)}</span>${showCamp?`<span class="cmp">${esc(CAMP_NAME[n.camp]||"")}</span>`:""}</span></summary><div class="body">${n.img?`<button class="ph big" data-act="zoom" data-src="${n.img}" aria-label="Agrandir le portrait"><img src="${n.img}" alt="" loading="lazy"></button>`:""}${n.intro.map(x=>x[0]==="p"?`<p>${esc(x[1])}</p>`:"").join("")}${n.sec.map(s=>`<h3 class="sh">${esc(s.t)}</h3>${sheetItems(s.it)}`).join("")}</div></details>`;
 }
 function bestCard(b,showSrc){
   const stats=b.it.some(x=>x[0]==="f");
-  return `<details class="card sheet${stats?"":" grpintro"}"${stats?"":" open"}><summary><span class="t">${esc(b.n)}${b.grp&&b.grp!==b.n&&b.grp!==b.doc?`<span class="st">${esc(b.grp)}</span>`:""}${showSrc?`<span class="cmp">${esc(b.doc||BSRC_NAME[b.src]||"")}</span>`:""}</span></summary><div class="body">${sheetItems(b.it)}</div></details>`;
+  return `<details class="card sheet${stats?"":" grpintro"}"${dk(b)}${stats?"":" open"}><summary><span class="t">${esc(b.n)}${b.grp&&b.grp!==b.n&&b.grp!==b.doc?`<span class="st">${esc(b.grp)}</span>`:""}${showSrc?`<span class="cmp">${esc(b.doc||BSRC_NAME[b.src]||"")}</span>`:""}</span></summary><div class="body">${sheetItems(b.it)}</div></details>`;
 }
 const CAMP_NAME=Object.fromEntries(CAMPAGNE.camps),BSRC_NAME=Object.fromEntries(CAMPAGNE.bsrc);
 function campagne(){
   const C=CAMPAGNE,t=S.campTab;let b="";
   const q=norm(S.campQ).trim();
-  const search=ph=>`<label class="search">${I.search}<input id="q" data-in="campq" type="search" placeholder="${ph}" value="${esc(S.campQ)}" autocomplete="off"></label>`;
+  const search=ph=>`<label class="search">${I.search}<input id="q" data-in="campq" type="search" placeholder="${ph}" value="${esc(S.campQ)}" autocomplete="off">${S.campQ?`<button class="qclr" data-act="qclear" data-v="campQ" aria-label="Effacer la recherche">×</button>`:""}</label>`;
   const txt=o=>norm(JSON.stringify(o));
   if(t==="pnj"){
     const L=q?C.pnj.filter(n=>txt(n).includes(q)):C.pnj.filter(n=>n.camp===S.campC);
@@ -365,7 +414,7 @@ function campagne(){
   }
   if(t==="lieux"){
     const lt=LORE.tabs.find(x=>x.id===C.lore[S.campC]);
-    const own=(C.lieux[S.campC]||[]).map(p=>`<article class="card npc"><button class="ph" data-act="zoom" data-src="${p.img}" aria-label="Agrandir ${esc(p.n)}"><img src="${p.img}" alt=""></button><div><h3>${esc(p.n)}</h3><p>${esc(p.d)}</p></div></article>`).join("");
+    const own=(C.lieux[S.campC]||[]).map(p=>`<article class="card npc"${dk(p)}><button class="ph" data-act="zoom" data-src="${p.img}" aria-label="Agrandir ${esc(p.n)}"><img src="${p.img}" alt=""></button><div><h3>${esc(p.n)}</h3><p>${esc(p.d)}</p></div></article>`).join("");
     b=chips(C.camps,S.campC,"campc","Campagne")+own+(lt?lt.items.map(it=>loreCard(it,false)).join(""):"");
   }
   if(t==="bestiaire"){
@@ -408,6 +457,9 @@ app.addEventListener("click",e=>{
     case "neg":negRoll();render();break;
     case "negdice":S.diceMode="simple";S.dice.diff=S.negOut.dif;store.set("dice",S.dice);S.last=null;go("des");break;
     case "gen":doGen();break;
+    case "hit":{const h=HITS[+v];if(h)jump(h);break}
+    case "gall":S.gAll=v;render();break;
+    case "qclear":S[v]="";if(v==="homeQ")S.gAll=null;S._focusQ=true;render();if(v!=="homeQ"){const q=$("#q");if(q)q.focus()}break;
     case "enc2":enc2Gen();break;
     case "copynpc":{const p=S.genOut.v;copy(`${p.nom} — ${p.c}, ${p.culte}, ${p.con.n}\nMotivation : ${p.con.m}\nApparence : ${p.phys}\nAttitude : ${p.att}\nSecret : ${p.sec}\nNiveau ${p.rg.n} : VA ${p.rg.va}, Blessures ${p.rg.bs}, Traumatismes ${p.rg.tr}`);break;}
     case "tarot":{const n=+v,a1=rnd(22);let a2=rnd(21);if(a2>=a1)a2++;S.oracle=n===1?[a1]:[a1,a2];render();break;}
@@ -422,6 +474,7 @@ app.addEventListener("click",e=>{
 });
 app.addEventListener("input",e=>{
   const k=e.target.dataset.in;if(!k)return;const v=e.target.value;
+  if(k==="homeq"){S.homeQ=v;S.gAll=null;S._focusQ=true;render()}
   if(k==="regq"){S.regQ=v;S._focusQ=true;render()}
   if(k==="bzq"){S.bzQ=v;S._focusQ=true;render()}
   if(k==="notes")store.set("notes",v);

@@ -238,6 +238,18 @@ textarea.notes{width:100%;box-sizing:border-box;min-height:220px;background:var(
 .toast{position:fixed;left:50%;bottom:max(20px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--red);color:#fff;font-family:var(--f-ui);padding:10px 16px;z-index:60;letter-spacing:.05em}
 @media (max-width:380px){.hive{transform:scale(.9)}.hex .lab{font-size:12px}}
 .rulebox h3{font-family:var(--f-ui);font-weight:600;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:#fff;margin:12px 0 6px}.rulebox h3 small{font-size:12px;color:var(--dim);letter-spacing:0;text-transform:none;margin-left:6px}.rulebox .body{padding:0;overflow-x:auto}.rulebox .body p{margin:0 0 8px}.rulebox table{width:100%;border-collapse:collapse;font-size:13px;margin:0 0 10px}.rulebox th,.rulebox td{border:1px solid var(--line);padding:4px 6px;text-align:left}
+.hmain{width:100%;display:flex;flex-direction:column;align-items:center;gap:16px}.hsearch{box-sizing:border-box;width:100%;margin:0}.hmain.ruche .hsearch{max-width:340px}
+.gsearch{max-width:640px;margin:0 auto 30px;width:100%;text-align:left}
+.gres{margin:0 0 16px}.gres .sec-title{display:flex;align-items:center;gap:8px}.gres .gn{font-family:var(--f-ui);font-size:12px;color:var(--dim);letter-spacing:0}
+.hit{display:flex;flex-direction:column;gap:2px;width:100%;text-align:left;background:var(--panel);border:1px solid var(--line);padding:10px 12px;margin:0 0 6px;color:var(--fg);cursor:pointer;font:inherit}
+.hit:hover,.hit:focus-visible{border-color:var(--red)}
+.hit .ht{font-size:16px}.hit .hs{font-family:var(--f-ui);font-size:13px;color:var(--dim)}
+.gres .more{width:100%}
+.flash{outline:2px solid var(--red);outline-offset:2px;transition:outline-color 1.4s}
+.qclr{flex:none;width:32px;height:32px;margin-right:-6px;border:0;border-radius:50%;background:var(--line);color:var(--fg);font-size:20px;line-height:1;display:grid;place-items:center;cursor:pointer;padding:0}
+.qclr:hover{background:var(--red);color:#fff}
+.search input::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none;display:none}
+.gtitle{display:flex;align-items:baseline;gap:8px;font-family:var(--f-ui);font-weight:700;font-size:17px;letter-spacing:.06em;text-transform:uppercase;color:var(--red);margin:0 0 8px}.gtitle .gn{font-weight:400;font-size:13px;color:var(--dim);letter-spacing:0}
 </style>
 <meta name="theme-color" content="#0b0b0b">
 <meta name="mobile-web-app-capable" content="yes">

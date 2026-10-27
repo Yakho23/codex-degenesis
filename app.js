@@ -56,7 +56,11 @@ window.addEventListener("hashchange",()=>{const h=(location.hash||"").slice(1);c
 /* ───────── rendu ───────── */
 const app=$("#app");
 function render(){
+  const keep={};app.querySelectorAll(".tabs").forEach(t=>keep[t.getAttribute("aria-label")]=t.scrollLeft);
   app.innerHTML=S.view==="home"?home():section();
+  app.querySelectorAll(".tabs").forEach(t=>{const k=t.getAttribute("aria-label");if(k in keep)t.scrollLeft=keep[k];
+    const c=t.querySelector('[aria-pressed="true"]');if(!c)return;const l=c.offsetLeft-t.offsetLeft,r=l+c.offsetWidth;
+    if(l<t.scrollLeft)t.scrollLeft=l-12;else if(r>t.scrollLeft+t.clientWidth)t.scrollLeft=r-t.clientWidth+12;});
   if(S.view==="bazar"||S.view==="regles"||S.view==="lore"){const q=$("#q");if(q&&S._focusQ){q.focus();q.setSelectionRange(q.value.length,q.value.length);S._focusQ=false}}
 }
 function home(){

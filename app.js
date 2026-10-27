@@ -170,7 +170,7 @@ function lore(){
   }
   const tab=LORE.tabs.find(t=>t.id===S.loreTab)||LORE.tabs[0];
   let b="";
-  if(tab.items)b=tab.items.map((it,i)=>(it.sec?`<div class="sec-title dg">${esc(it.sec.toUpperCase())}</div>`:"")+loreCard(it,tab.id==="monde"&&i===0)).join("");
+  if(tab.items)b=tab.items.map((it,i)=>(it.sec?`<div class="sec-title dg">${esc(it.sec.toUpperCase())}</div>`:"")+loreCard(it,tab.id==="monde"&&it.t==="Primal Punk en bref")).join("");
   if(tab.timeline)b=tlList(tab.timeline);
   if(tab.gloss)b=glList(tab.gloss);
   return `<div class="stack">${search}${b}${foot}</div>`;

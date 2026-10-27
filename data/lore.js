@@ -259,19 +259,19 @@ tabs:[
 <p>Le corps est un outil : excroissances osseuses, crâne sans point faible, côtes soudées en carapace, blessures qui guérissent vite, organes remplacés en quelques jours.</p>
 <p>Ils protègent les champs de spores et fusionnent avec eux. Variantes : le <b>Migrant</b>, qui emporte la Sepsie au loin, et le <b>Résident</b>, colosse enraciné. Le plus grand d'entre eux est le <b>Tsar</b>.</p>
 <p><b>Vermine</b> : araignées, scorpions, scolopendres. <b>Pandora</b> : le plus grand cratère, un abîme d'anomalies génétiques.</p>`},
- {t:"Phéromancie", sub:"Franka · chakra : Souffrance", sym:"assets/lore/s-pheromancie.png", img:"assets/lore/p-pheromanciens.jpg", ref:"PP p.33 · K p.296 · BA p.20", h:`
+ {t:"Phéromancie", sub:"Franka · chakra : Souffrance", sym:"assets/lore/s-pheromancie.png", img:"assets/lore/p-pheromanciens-hero.jpg", gal:[["assets/lore/p-pheromanciens.jpg","Phéromancien"]], ref:"PP p.33 · K p.296 · BA p.20", h:`
 <p>Rois des hôtes. Leur peau est tendue sur des glandes à phéromones ; ils tissent un filet qui capture humains et animaux et les intègre à l'essaim dans une sérénité factice. Les captifs deviennent des <b>faux-bourdons</b>.</p>
 <p>Variantes : la <b>Sage-femme</b>, qui vole les enfants pour les Adoptants, et la <b>Reine</b> : corps colossal, visage couvert de glandes. Qui la regarde tombe sous son contrôle. Reines connues : <b>Markurant</b> (Bassham, tué en 2579), <b>Machiawen</b>, <b>Ganaress</b> (tué en 2585), <b>Iomèdes</b>, <b>Balkirk</b>, <b>Vulmikon</b>. Chacune bâtit une <b>ziggourat</b>.</p>
 <p><b>Vermine</b> : fourmis, guêpes, termites.</p>`},
- {t:"Dushan", sub:"Balkhans · chakra : Usud", sym:"assets/lore/s-dushan.png", img:"assets/lore/p-dushani.jpg", ref:"PP p.33 · K p.290", h:`
+ {t:"Dushan", sub:"Balkhans · chakra : Usud", sym:"assets/lore/s-dushan.png", img:"assets/lore/p-dushani-hero.jpg", gal:[["assets/lore/p-dushani.jpg","Dushani"]], ref:"PP p.33 · K p.290", h:`
 <p>Le chant des <b>Dushani</b> résonne dans les montagnes, les forêts et les grottes. Ils accordent la nature comme un instrument ; leurs accords s'immiscent dans les pensées jusqu'à abolir le libre arbitre.</p>
 <p>Variantes : le <b>Mokoch</b>, dont le vrombissement fait mal aux dents, et l'<b>Eidolon</b>.</p>
 <p><b>Vermine</b> : krakens, méduses, écrevisses. <b>Usud</b> : lac-cratère noir.</p>`},
- {t:"Prégnosticisme", sub:"Hybrispanie · chakra : Mirar", sym:"assets/lore/s-pregnosticisme.png", img:"assets/lore/p-pregnostiques.jpg", ref:"PP p.32 · K p.302", h:`
+ {t:"Prégnosticisme", sub:"Hybrispanie · chakra : Mirar", sym:"assets/lore/s-pregnosticisme.png", img:"assets/lore/p-pregnostiques-hero.jpg", gal:[["assets/lore/p-pregnostiques.jpg","Prégnostique"]], ref:"PP p.32 · K p.302", h:`
 <p>Les <b>Prégnostiques</b> existent à la fois dans le passé et le futur : une âme dans mille corps.</p>
 <p>Variantes : l'<b>Énigmat</b>, le <b>Mnémonide</b> (qui sèmerait les palourdes du désert) et la <b>Node</b>, vaste comme une grotte. La plus célèbre : la <b>Femme de la Montagne</b>. Autour d'eux, la <b>Distorsion</b> fait couler le temps à rebours.</p>
 <p><b>Vermine</b> : coquillages, étoiles de mer, oursins, ammonites, trilobites.</p>`},
- {t:"Psychokinèse", sub:"Purgare · chakra : Nox", sym:"assets/lore/s-psychokinese.png", img:"assets/lore/p-psychokinesie.jpg", ref:"PP p.33 · K p.308", h:`
+ {t:"Psychokinèse", sub:"Purgare · chakra : Nox", sym:"assets/lore/s-psychokinese.png", img:"assets/lore/p-psychokinesie-hero.jpg", gal:[["assets/lore/p-psychokinesie.jpg","Psychokinésiste"]], ref:"PP p.33 · K p.308", h:`
 <p>Parasites qui se nourrissent des villages en les infestant de vermine. Champs de force, lumière déformée, pierres en lévitation, filaments d'obscurité tranchants.</p>
 <p>Variantes : l'<b>Hylikoi</b>, qui contemple les nappes d'électrons, et l'<b>Archon</b>, dont la <b>Korona</b> brûle tout.</p>
 <p><b>Vermine</b> : sangsues, moustiques, tiques, puces, ténias. <b>Nox</b> : une nuit éternelle.</p>`},

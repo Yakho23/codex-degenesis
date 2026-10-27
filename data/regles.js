@@ -235,7 +235,7 @@ h:`<ol><li>Choisir une <b>culture</b>, un <b>concept</b> et un <b>Culte</b> (les
 
 {cat:"Progression", t:"Chasse aux rebuts", ref:"K p.169", tags:"rebuts artefacts ferrailleur ruines",
 h:`<p><b>1. Trouver un champ de ruines</b> : INT+Légendes (+Réseau pour les Ferrailleurs). Qualité du champ = DC du jet réussi.</p>
-<table><tr><th>Culture</th><td>Borca</td><td>Franka</td><td>Pollen</td><td>Balkhans</td><td>Hybrispanie</td><td>Purgare</td><td>Afrika</td></tr><tr><th>Diff.</th><td>2</td><td>5</td><td>4</td><td>4</td><td>5</td><td>3</td><td>5</td></tr></table>
+<table><tr><th>Culture</th><th>Difficulté</th></tr><tr><td>Borca</td><td>2</td></tr><tr><td>Purgare</td><td>3</td></tr><tr><td>Pollen</td><td>4</td></tr><tr><td>Balkhans</td><td>4</td></tr><tr><td>Franka</td><td>5</td></tr><tr><td>Hybrispanie</td><td>5</td></tr><tr><td>Afrika</td><td>5</td></tr></table>
 <p><b>2. Fouiller</b> : un INS+Perception par heure. Difficulté de base 8 − qualité du champ, −1 par tranche de 20 km depuis le village le plus proche (max 4 fois). +1 de difficulté toutes les 10 trouvailles.</p>
 <p><b>3. Trouvé !</b> Qualité = Tech III + DC/2 ; quantité = 1D kg de débris.</p>
 <p><b>Récolte</b> (toutes les 6 h) : 2D kg Tech I, 1D kg Tech II.</p>`},

@@ -241,10 +241,11 @@ function generateurs(){
   }
   if(t==="rencontre"){form=`<div class="selrow">${selC}</div>`;if(o)out=`<article class="gen-card"><span class="cult">${icon(o.v.c)}${esc(o.v.c)}</span><h2>${esc(o.v.r)}</h2><p><span class="k">Ambiance</span>${esc(o.v.m)}</p></article>`}
   if(t==="fouille"){form=`<div class="selrow">${selC}</div>`;if(o){const f=o.v;out=`<article class="gen-card"><span class="cult">${icon(f.c)}${esc(f.c)} · difficulté pour trouver le site : ${f.dif}</span><h2>${esc(f.site.charAt(0).toUpperCase()+f.site.slice(1))}</h2>
-      <p><span class="k">Trouvaille</span>${esc(f.obj)}, ${esc(f.etat)}</p><p><span class="k">Niveau technologique</span>Tech ${f.tech} · ${f.kg} kg de débris</p><p><span class="k">Valeur estimée</span>achat ~${f.buy} LC · revente ~${f.sell} LC aux Chroniqueurs</p><p class="note">Règle complète : Règles › Progression › Chasse aux rebuts.</p></article>`}}
+      <p><span class="k">Trouvaille</span>${esc(f.obj)}, ${esc(f.etat)}</p><p><span class="k">Niveau technologique</span>Tech ${f.tech} · ${f.kg} kg de débris</p><p><span class="k">Valeur estimée</span>achat ~${f.buy} LC · revente ~${f.sell} LC aux Chroniqueurs</p></article>`}}
   if(t==="nom"){form=`<div class="selrow">${selC}<select class="sel" data-in="gsexe" aria-label="Sexe"><option value="">Mélangé</option><option value="h" ${S.gen.sexe==="h"?"selected":""}>Hommes</option><option value="f" ${S.gen.sexe==="f"?"selected":""}>Femmes</option></select></div>`;if(o)out=`<article class="gen-card"><span class="cult">${icon(o.v.c)}${esc(o.v.c)}</span>${o.v.l.map(n=>`<h2 style="font-size:21px">${esc(n)}</h2>`).join("")}</article>`}
   if(t==="meteo"){if(o)out=`<article class="gen-card"><span class="k">Météo</span><h2>${esc(o.v)}</h2></article>`}
-  return `<div class="stack">${form}<button class="roll" data-act="gen">GENERER</button>${out||`<p class="empty">Choisissez vos filtres puis touchez Générer.</p>`}</div>`;
+  const rule=t==="fouille"?`<article class="gen-card rulebox"><span class="k">La règle</span>${["Chasse aux rebuts","Prix des débris et artefacts"].map(n=>{const r=REGLES.find(x=>x.t===n);return r?`<h3>${esc(r.t)} <small>${esc(r.ref)}</small></h3><div class="body">${r.h}</div>`:""}).join("")}</article>`:"";
+  return `<div class="stack">${form}<button class="roll" data-act="gen">GENERER</button>${out||`<p class="empty">Choisissez vos filtres puis touchez Générer.</p>`}${rule}</div>`;
 }
 /* ── Rencontres 2 (Degenesis Survival) ── */
 function enc2Roll(n){const x=SURVIE.enc[n],v={n};if(x.x)v.sub=1+rnd(6);return v}

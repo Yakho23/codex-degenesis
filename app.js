@@ -135,14 +135,14 @@ const chips=(list,cur,act,label)=>`<div class="tabs" role="toolbar" aria-label="
 
 /* ───────── LIEUX DE CAMPAGNE ───────── */
 const lieuText=p=>[p.sub,...(p.intro||[]),...(p.fiche||[]).flat(),...(p.secs||[]).flatMap(x=>[x.t,...(x.p||[]),...(x.it||[]).flat()])].join(" ");
-function lieuCard(p,open){
+function lieuCard(p,open,camp){
   const P=a=>(a||[]).map(x=>`<p>${esc(x)}</p>`).join("");
   const IT=a=>a&&a.length?`<div class="litems">${a.map(([k,v])=>`<p><b>${esc(k)}.</b> ${esc(v)}</p>`).join("")}</div>`:"";
   const fiche=p.fiche&&p.fiche.length?`<div class="fiche"><div class="fh">Fiche d’information</div><dl class="statl">${p.fiche.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl></div>`:"";
   const secs=(p.secs||[]).map(x=>`<h4>${esc(x.t)}</h4>${P(x.p)}${IT(x.it)}`).join("");
   const gal=p.gal||(p.tall?[[p.img,p.n]]:[]);
   const thumb=p.img?`<img class="lthumb" src="${p.img}" alt="" loading="lazy">`:"";
-  return `<details class="card lore lieu"${dk(p)}${open?" open":""}><summary>${thumb}<span class="lt"><span class="t">${esc(p.n)}</span>${p.sub?`<span class="lsub">${esc(p.sub)}</span>`:""}</span>${p.ref?`<span class="ref">${esc(p.ref)}</span>`:""}</summary><div class="body">${p.img&&!p.tall?`<button class="lhero" data-act="zoom" data-src="${p.img}" aria-label="Agrandir l’illustration"><img src="${p.img}" alt="" loading="lazy"></button>`:""}${fiche}${P(p.intro)}${secs}${gal.length?`<div class="lgal">${gal.map(([src,c])=>`<button data-act="zoom" data-src="${src}" aria-label="Agrandir : ${esc(c)}"><img src="${src}" alt="" loading="lazy"><span>${esc(c)}</span></button>`).join("")}</div>`:""}</div></details>`;
+  return `<details class="card lore lieu"${dk(p)}${open?" open":""}><summary>${thumb}<span class="lt"><span class="t">${esc(p.n)}</span>${p.sub?`<span class="lsub">${esc(p.sub)}</span>`:""}</span>${camp?`<span class="ref">${esc(camp)}</span>`:""}</summary><div class="body">${p.img&&!p.tall?`<button class="lhero" data-act="zoom" data-src="${p.img}" aria-label="Agrandir l’illustration"><img src="${p.img}" alt="" loading="lazy"></button>`:""}${fiche}${P(p.intro)}${secs}${gal.length?`<div class="lgal">${gal.map(([src,c])=>`<button data-act="zoom" data-src="${src}" aria-label="Agrandir : ${esc(c)}"><img src="${src}" alt="" loading="lazy"><span>${esc(c)}</span></button>`).join("")}</div>`:""}</div></details>`;
 }
 /* ───────── I. LORE ───────── */
 function loreTabs(){return chips(LORE.tabs.map(t=>[t.id,t.t]),S.loreTab,"loretab","Rubriques du lore")}
@@ -424,8 +424,9 @@ function campagne(){
     b=search("Chercher un PNJ : Leurre, Néolibyen, Brûlure…")+(q?"":chips(C.camps,S.campC,"campc","Campagne"))+`<div class="count">${L.length} PNJ${q?" · toutes campagnes":""}</div>`+(L.map(n=>npcCard(n,!!q)).join("")||`<p class="empty">Aucun PNJ ne correspond.</p>`);
   }
   if(t==="lieux"){
-    const own=(C.lieux[S.campC]||[]).map(p=>lieuCard(p,false)).join("");
-    b=chips(C.camps,S.campC,"campc","Campagne")+`<div class="count">${(C.lieux[S.campC]||[]).length} lieux · fiches complètes tirées du livre de campagne</div>`+own;
+    const all=[];C.camps.forEach(([c,n])=>(C.lieux[c]||[]).forEach(p=>all.push([p,n])));
+    const L=q?all.filter(([p])=>norm(p.n+" "+lieuText(p)).includes(q)):(C.lieux[S.campC]||[]).map(p=>[p,""]);
+    b=search("Chercher un lieu : Toulon, Perlière, Ganaress…")+(q?"":chips(C.camps,S.campC,"campc","Campagne"))+`<div class="count">${L.length} lieu${L.length>1?"x":""}${q?" · toutes campagnes":" · fiches complètes tirées du livre de campagne"}</div>`+(L.map(([p,n])=>lieuCard(p,false,n)).join("")||`<p class="empty">Aucun lieu ne correspond.</p>`);
   }
   if(t==="bestiaire"){
     const docs=[...new Set(C.best.filter(x=>x.src==="autres").map(x=>x.cult))].sort((a,b)=>(a==="Divers")-(b==="Divers")||a.localeCompare(b,"fr"));

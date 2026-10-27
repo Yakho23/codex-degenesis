@@ -275,7 +275,7 @@ tabs:[
 <p>Parasites qui se nourrissent des villages en les infestant de vermine. Champs de force, lumière déformée, pierres en lévitation, filaments d'obscurité tranchants.</p>
 <p>Variantes : l'<b>Hylikoi</b>, qui contemple les nappes d'électrons, et l'<b>Archon</b>, dont la <b>Korona</b> brûle tout.</p>
 <p><b>Vermine</b> : sangsues, moustiques, tiques, puces, ténias. <b>Nox</b> : une nuit éternelle.</p>`},
- {t:"Léviathaniques", sub:"Atlantique · chakra : Colosse", img:"assets/lore/b-leviathaniques.jpg", gal:[["assets/lore/b-leviathan.jpg","Léviathan"]], ref:"BA p.56-57, 267-271 · A p.121", h:`
+ {t:"Léviathaniques", sub:"Atlantique · chakra : Colosse", img:"assets/lore/b-leviathan.jpg", ref:"BA p.56-57, 267-271 · A p.121", h:`
 <p>La <b>sixième Extase</b>, née d'un astéroïde tombé dans l'Atlantique en 2073 : le <b>Colosse</b>. Isolée cinq cents ans au fond de l'océan, elle a gagné la surface par la chaîne alimentaire.</p>
 <p>L'<b>Eau Noire</b> flotte comme une pellicule d'huile, grandit en absorbant krill et poissons et devient un <b>champ de spores-mères</b> flottant de plusieurs kilomètres. Elle infecte par le sang : une égratignure suffit. L'hôte devient un <b>Incube</b> ; au-delà de dix fois sa masse, un <b>Moloch</b>, amalgame de cadavres.</p>
 <p>Liés à l'eau, ils se dessèchent à terre et craignent le feu. Seules l'<b>huile de Mardouk</b> et l'<b>huile élyséenne</b> empêchent l'Eau Noire de pénétrer la peau. Vasco les avait décrits ; le Spital a caché ses notes.</p>`},

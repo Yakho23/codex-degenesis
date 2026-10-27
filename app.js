@@ -102,7 +102,7 @@ function gIndex(){
   BAZAR.forEach(r=>add("Bazar",r.Nom,r._cat+(r.Culte?" · "+r.Culte:""),Object.values(r).join(" "),{v:"bazar",s:{bzGrp:r._grp,bzCat:r._cat,bzCulte:"",bzQ:""},k:kk(r)}));
   C.pnj.forEach(n=>add("PNJ",n.n,CAMP_NAME[n.camp]||"",JSON.stringify(n),{v:"campagne",s:{campTab:"pnj",campC:n.camp,campQ:""},k:kk(n)}));
   Object.keys(C.lieux).forEach(c=>C.lieux[c].forEach(p=>add("Lieux",p.n,CAMP_NAME[c]||"",p.d,{v:"campagne",s:{campTab:"lieux",campC:c,campQ:""},k:kk(p)})));
-  C.best.forEach(b=>add("Bestiaire",b.n,(b.doc||BSRC_NAME[b.src]||"")+(b.grp&&b.grp!==b.n&&b.grp!==b.doc?" · "+b.grp:""),JSON.stringify(b.it),{v:"campagne",s:{campTab:"bestiaire",bestSrc:b.src,bestDoc:b.doc||"",campQ:""},k:kk(b)}));
+  C.best.forEach(b=>add("Bestiaire",b.n,(b.doc||BSRC_NAME[b.src]||"")+(b.grp&&b.grp!==b.n&&b.grp!==b.doc?" · "+b.grp:""),JSON.stringify(b.it),{v:"campagne",s:{campTab:"bestiaire",bestSrc:b.src,bestDoc:b.cult||"",campQ:""},k:kk(b)}));
   if(window.SURVIE)Object.keys(SURVIE.enc).forEach(n=>{const e=SURVIE.enc[n];add("Rencontres 2",n+". "+e.t,"Générateurs",e.d+" "+e.e,{v:"generateurs",s:{genTab:"rencontre2"},enc:+n})});
   return GIDX=L;
 }
@@ -400,7 +400,7 @@ function npcCard(n,showCamp){
 }
 function bestCard(b,showSrc){
   const stats=b.it.some(x=>x[0]==="f");
-  return `<details class="card sheet${stats?"":" grpintro"}"${dk(b)}${stats?"":" open"}><summary><span class="t">${esc(b.n)}${b.grp&&b.grp!==b.n&&b.grp!==b.doc?`<span class="st">${esc(b.grp)}</span>`:""}${showSrc?`<span class="cmp">${esc(b.doc||BSRC_NAME[b.src]||"")}</span>`:""}</span></summary><div class="body">${sheetItems(b.it)}</div></details>`;
+  return `<details class="card sheet${stats?"":" grpintro"}"${dk(b)}${stats?"":" open"}><summary><span class="t">${esc(b.n)}${b.src==="autres"?`<span class="st">${esc([b.doc,b.grp!==b.doc&&b.grp!==b.n?b.grp:""].filter(Boolean).join(" · "))}</span>`:b.grp&&b.grp!==b.n?`<span class="st">${esc(b.grp)}</span>`:""}${showSrc?`<span class="cmp">${esc(b.doc||BSRC_NAME[b.src]||"")}</span>`:""}</span></summary><div class="body">${sheetItems(b.it)}</div></details>`;
 }
 const CAMP_NAME=Object.fromEntries(CAMPAGNE.camps),BSRC_NAME=Object.fromEntries(CAMPAGNE.bsrc);
 function campagne(){
@@ -418,11 +418,11 @@ function campagne(){
     b=chips(C.camps,S.campC,"campc","Campagne")+own+(lt?lt.items.map(it=>loreCard(it,false)).join(""):"");
   }
   if(t==="bestiaire"){
-    const docs=[...new Set(C.best.filter(x=>x.src==="autres").map(x=>x.doc))].sort((a,b)=>a.localeCompare(b,"fr"));
+    const docs=[...new Set(C.best.filter(x=>x.src==="autres").map(x=>x.cult))].sort((a,b)=>(a==="Divers")-(b==="Divers")||a.localeCompare(b,"fr"));
     if(!docs.includes(S.bestDoc))S.bestDoc=docs[0];
     const aut=!q&&S.bestSrc==="autres";
-    const L=q?C.best.filter(x=>txt(x).includes(q)):C.best.filter(x=>x.src===S.bestSrc&&(!aut||x.doc===S.bestDoc));
-    const dsel=aut?`<div class="selrow"><select class="sel" data-in="bestdoc" aria-label="Supplément ou scénario">${docs.map(g=>`<option value="${esc(g)}" ${g===S.bestDoc?"selected":""}>${esc(g)} (${C.best.filter(x=>x.doc===g).length})</option>`).join("")}</select></div>`:"";
+    const L=q?C.best.filter(x=>txt(x).includes(q)):C.best.filter(x=>x.src===S.bestSrc&&(!aut||x.cult===S.bestDoc));
+    const dsel=aut?`<div class="selrow"><select class="sel" data-in="bestdoc" aria-label="Culte">${docs.map(g=>`<option value="${esc(g)}" ${g===S.bestDoc?"selected":""}>${esc(g)} (${C.best.filter(x=>x.cult===g).length})</option>`).join("")}</select></div>`:"";
     b=search("Chercher : Romano, Léperos, Moloch…")+(q?"":chips(C.bsrc,S.bestSrc,"bestsrc","Source"))+dsel+`<div class="count">${L.filter(x=>x.it.some(y=>y[0]==="f")).length} fiches${q?" · toutes sources":""}</div>`+(L.map(x=>bestCard(x,!!q)).join("")||`<p class="empty">Rien ne correspond.</p>`);
   }
   if(t==="notes"){const n=store.get("notes","");b=`<label class="lbl" for="notes">Notes de séance</label><textarea id="notes" class="notes" data-in="notes" placeholder="Ce qui s’est passé, les indices trouvés, les PNJ rencontrés…">${esc(n)}</textarea><div class="btnrow"><button class="btn" data-act="stamp">Insérer la date</button><button class="btn" data-act="copynotes">Copier</button></div><p class="note">Enregistrées automatiquement sur cet appareil uniquement.</p>`}

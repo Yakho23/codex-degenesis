@@ -345,7 +345,7 @@ tabs:[
  {t:"Mémétique", ref:"A p.213-219", h:`
 <p>Les Dormeurs voyagent en petits groupes menés par un <b>Sociocybernétique</b> : ils infiltrent clans et cultes, montent dans la hiérarchie, font de leurs victimes des marionnettes mémétiques et les dressent les unes contre les autres jusqu'à ce que seule reste la civilisation la plus forte. Puis la cascade suivante s'éveille.</p>
 <p>Les Chroniqueurs mènent depuis cinq siècles une guerre de l'ombre contre le <b>projet Tannhäuser</b> : chaque cascade est plus puissante que la précédente, et leur Serveur n'a pu étudier des Dormeurs que jusqu'à la cascade 600. Pour eux, les Maraudeurs ont inventé la mémétique.</p>`},
- {t:"Les Maraudeurs", img:"assets/lore/x-argyre.jpg", gal:[["assets/lore/x-aspera.jpg","Aspera"],["assets/lore/x-aries.jpg","Ariès"],["assets/lore/x-chernobog.jpg","Chernobog"],["assets/lore/x-gusev.jpg","Gusev"]], ref:"PP p.42-45 · K p.272-276", h:`
+ {t:"Les Maraudeurs", img:"assets/lore/x-argyre-hero.jpg", gal:[["assets/lore/x-argyre.jpg","Argyre"],["assets/lore/x-aries.jpg","Ariès"],["assets/lore/x-aspera.jpg","Aspera"],["assets/lore/x-chernobog.jpg","Chernobog"],["assets/lore/x-gusev.jpg","Gusev"],["assets/lore/x-triglav.jpg","Triglav"]], ref:"PP p.42-45 · K p.272-276", h:`
 <p>Entités séculaires vêtues de bandages maculés de pus, qui chassent les Dormeurs. Les machines leur obéissent. Ils survivent grâce à l'<b>Ambroisie</b>, des cartouches de RG qui renouvellent leur sang de nanites. Repères : dôme de rayons, villages en cendres, dieu en décomposition, murs d'images.</p>
 <ul><li><b>Argyre le Vautour</b> : maître de la Britannie depuis 2390 (voir Briton).</li>
 <li><b>Ariès le Bélier</b> : a mené les Jehammétans à la victoire.</li>

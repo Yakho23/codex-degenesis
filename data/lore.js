@@ -255,7 +255,7 @@ tabs:[
 <p>Il existe cinq sortes de Psychonautes, chacune liée à une région, à un chakra et à une vermine qui la protège et propage l'infection. Cinq immenses cratères, les <b>chakras terrestres</b>, sont à l'origine de chacune. Les champs de spores-mères relaient leurs « ordres » comme un réseau.</p>
 <p>Le mycélium fait partie de leur système nerveux. Quand leur sporulation s'épuise, ils remontent du collectif et entrent en <b>phase de concentration</b>, plus vulnérables. Tous maîtrisent quatre phénomènes primaires : résistance à la douleur, adaptation, appel éthéré, renforcement.</p>
 <p>Autour d'eux, insectes et nuages forment des <b>mandalas</b> : symboles dans la poussière et dans les champs de spores.</p>`},
- {t:"Biokinèse", sub:"Pollen · chakra : Pandora", sym:"assets/lore/s-biokinese.png", img:"assets/lore/p-biokinesie.jpg", gal:[["assets/lore/b-tsar.jpg","Le Tsar"]], ref:"PP p.32 · K p.284", h:`
+ {t:"Biokinèse", sub:"Pollen · chakra : Pandora", sym:"assets/lore/s-biokinese.png", img:"assets/lore/p-biokinesie-hero.jpg", gal:[["assets/lore/p-biokinesie.jpg","Biokinésiste"],["assets/lore/b-tsar.jpg","Le Tsar"]], ref:"PP p.32 · K p.284", h:`
 <p>Le corps est un outil : excroissances osseuses, crâne sans point faible, côtes soudées en carapace, blessures qui guérissent vite, organes remplacés en quelques jours.</p>
 <p>Ils protègent les champs de spores et fusionnent avec eux. Variantes : le <b>Migrant</b>, qui emporte la Sepsie au loin, et le <b>Résident</b>, colosse enraciné. Le plus grand d'entre eux est le <b>Tsar</b>.</p>
 <p><b>Vermine</b> : araignées, scorpions, scolopendres. <b>Pandora</b> : le plus grand cratère, un abîme d'anomalies génétiques.</p>`},

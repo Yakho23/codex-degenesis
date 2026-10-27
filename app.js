@@ -303,7 +303,7 @@ function generateurs(){
       <p><span class="k">Niveau · ${esc(p.rg.n)}</span>VA principale ${p.rg.va} · Blessures ${p.rg.bs} · Traumatismes ${p.rg.tr}</p>
       <div class="btnrow"><button class="btn" data-act="copynpc">Copier</button></div></article>`;}
   }
-  if(t==="rencontre"){form=`<div class="selrow">${selC}</div>`;if(o)out=`<article class="gen-card"><span class="cult">${icon(o.v.c)}${esc(o.v.c)}</span><h2>${esc(o.v.r)}</h2><p><span class="k">Combien</span>${esc(o.v.nb)} · réaction ${esc(o.v.re)}</p><p><span class="k">Complication</span>${esc(o.v.cp.charAt(0).toUpperCase()+o.v.cp.slice(1))}</p><p><span class="k">Ambiance</span>${esc(o.v.m)}</p></article>`}
+  if(t==="rencontre"){form=`<div class="selrow">${selC}</div>`;if(o)out=`<article class="gen-card"><span class="cult">${icon(o.v.c)}${esc(o.v.c)}</span><h2>${esc(o.v.r)}</h2><p><span class="k">Réaction</span>${esc(o.v.re.charAt(0).toUpperCase()+o.v.re.slice(1))}</p><p><span class="k">Complication</span>${esc(o.v.cp.charAt(0).toUpperCase()+o.v.cp.slice(1))}</p><p><span class="k">Ambiance</span>${esc(o.v.m)}</p></article>`}
   if(t==="fouille"){form=`<div class="selrow">${selC}</div>`;if(o){const f=o.v;out=`<article class="gen-card"><span class="cult">${icon(f.c)}${esc(f.c)} · difficulté pour trouver le site : ${f.dif}</span><h2>${esc(f.site.charAt(0).toUpperCase()+f.site.slice(1))}</h2>
       <p><span class="k">Ce qu’on remarque</span>${esc(f.det.charAt(0).toUpperCase()+f.det.slice(1))}</p><p><span class="k">Danger</span>${esc(f.dan.charAt(0).toUpperCase()+f.dan.slice(1))}</p><p><span class="k">Trouvaille</span>${esc(f.obj)}, ${esc(f.etat)}</p><p><span class="k">Niveau technologique</span>Tech ${f.tech} · ${f.kg} kg de débris</p><p><span class="k">Valeur estimée</span>achat ~${f.buy} LC · revente ~${f.sell} LC aux Chroniqueurs</p></article>`}}
   if(t==="nom"){form=`<div class="selrow">${selC}<select class="sel" data-in="gsexe" aria-label="Sexe"><option value="">Mélangé</option><option value="h" ${S.gen.sexe==="h"?"selected":""}>Hommes</option><option value="f" ${S.gen.sexe==="f"?"selected":""}>Femmes</option></select></div>`;if(o)out=`<article class="gen-card"><span class="cult">${icon(o.v.c)}${esc(o.v.c)}</span>${o.v.l.map(n=>`<h2 style="font-size:21px">${esc(n)}</h2>`).join("")}</article>`}
@@ -367,7 +367,7 @@ const DIF_CULT={Borca:2,Franka:5,Pollen:4,Balkhans:4,Hybrispanie:5,Purgare:3,Afr
 function doGen(){
   const t=S.genTab;let v;
   if(t==="pnj")v=genNPC();
-  if(t==="rencontre"){const c=S.gen.culture||pick(CULTS);v={c,r:pick(GEN.rencontres[c]),m:pick(GEN.meteo),nb:pick(GEN.nombre),re:pick(GEN.reaction),cp:pick(GEN.complication)}}
+  if(t==="rencontre"){const c=S.gen.culture||pick(CULTS);v={c,r:pick(GEN.rencontres[c]),m:pick(GEN.meteo),re:pick(GEN.reaction),cp:pick(GEN.complication)}}
   if(t==="fouille"){const c=S.gen.culture||pick(CULTS);const dc=Math.max(0,[1,2,3].map(()=>rnd(6)+1).filter(x=>x===6).length);const lv=Math.min(6,3+Math.floor(dc/2)+(Math.random()<.25?1:0)-(Math.random()<.35?1:0));const tech=["I","II","III","IV","V","VI"][Math.max(0,lv-1)];const kg=1+rnd(6);v={c,dif:DIF_CULT[c],site:pick(GEN.ruines),det:pick(GEN.detail),dan:pick(GEN.danger),obj:pick(GEN.trouvailles),etat:pick(GEN.etat),tech,kg,buy:TECH_PRICE[tech][0]*kg,sell:TECH_PRICE[tech][1]*kg}}
   if(t==="nom"){const c=S.gen.culture||pick(CULTS),C=GEN.cultures[c];v={c,l:Array.from({length:6},()=>pick(C[S.gen.sexe||(Math.random()<.5?"h":"f")])+" "+pick(C.n))}}
   if(t==="meteo")v=pick(GEN.meteo);

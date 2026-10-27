@@ -36,16 +36,16 @@ const SECTIONS=[
  {id:"bazar",n:"III",t:"Bazar",s:"Armes, armures, matériel",pos:[232,100]},
  {id:"des",n:"IV",t:"Dés",s:"Réserve, déclencheurs, échecs",pos:[174,201]},
  {id:"generateurs",n:"V",t:"Générateurs",s:"PNJ, rencontres, oracle",pos:[58,201]},
- {id:"campagne",n:"VI",t:"Campagne",s:CAMPAGNE.titre,pos:[0,100]}];
+ {id:"campagne",n:"VI",t:"Campagne",s:"Lieux, PNJ, bestiaire, notes",pos:[0,100]}];
 
 /* ───────── état ───────── */
 const S={view:"home",layout:store.get("layout","ruche"),
- regCat:"Tous",regQ:"",
+ regCat:"Tous",regQ:"",potCult:"Communs",
  bzGrp:"armes",bzCat:"Tout",bzCulte:"",bzQ:"",
  dice:Object.assign({va:6,diff:2},store.get("dice",{}),{ego:0,mod:0}),diceMode:"simple",diceB:{va:6,ego:0,mod:0},last:null,hist:store.get("hist",[]),
- genTab:"pnj",gen:{culture:"",culte:"",sexe:""},genOut:null,
+ genTab:"pnj",neg:{grp:"obj",item:-1,qty:1,tech:false,noir:false},negOut:null,gen:{culture:"",culte:"",sexe:""},genOut:null,
  oracle:null,loreTab:"monde",loreQ:"",
- campTab:"groupe"};
+ campTab:"pnj",campC:"ets",bestSrc:"ets",bestDoc:"",campQ:""};
 if(!(S.dice.diff>=1&&S.dice.diff<=10))S.dice.diff=2;
 try{["fighters","round"].forEach(k=>localStorage.removeItem("codex."+k))}catch(e){} /* anciennes données de l’outil Combat retiré */
 
@@ -113,19 +113,32 @@ function lore(){
 }
 
 /* ───────── II. RÈGLES ───────── */
-const REG_CATS=["Tous",...new Set(REGLES.map(r=>r.cat))];
+const REG_CATS=(()=>{const S3=["Poisons","Maladies","Troubles mentaux"],c=[...new Set(REGLES.map(r=>r.cat))].filter(x=>!S3.includes(x)),i=c.indexOf("Blessures & soins")+1;c.splice(i,0,...S3);return ["Tous",...c,"Potentiels"]})();
+const POT_CULTS=Object.keys(POTENTIELS);
+function potCard(p,cult,open,showCult){
+  const f=(k,l)=>p[k]?`<p><span class="k">${l}</span>${esc(p[k])}</p>`:"";
+  return `<details class="card pot"${open?" open":""}><summary><span class="t"><span class="pn">${esc(p.n)}.</span> ${esc(p.t)}<span class="pc">Condition : ${esc(p.c||"—")}</span></span>${showCult?`<span class="cult">${icon(cult)}${esc(cult)}</span>`:""}</summary><div class="body">${f("e","Effet")}${f("r","Règles")}</div></details>`;
+}
 function regTabs(){return chips(REG_CATS,S.regCat,"regcat","Catégories de règles")}
 function regles(){
   const q=norm(S.regQ).trim();
-  const list=REGLES.filter(r=>(S.regCat==="Tous"||r.cat===S.regCat)&&(!q||norm(r.t+" "+r.tags+" "+r.h.replace(/<[^>]+>/g," ")).includes(q)));
+  const search=`<label class="search">${I.search}<input id="q" data-in="regq" type="search" placeholder="Chercher : initiative, feu, hémorragie…" value="${esc(S.regQ)}" autocomplete="off"></label>`;
+  if(S.regCat==="Potentiels"&&!q){
+    const L=POTENTIELS[S.potCult]||[];
+    return `<div class="stack">${search}${chips(POT_CULTS,S.potCult,"potcult","Cultes")}<div class="count">${L.length} Potentiels · ${esc(S.potCult)}</div>${L.map(p=>potCard(p,S.potCult,false,false)).join("")}</div>`;
+  }
+  const list=S.regCat==="Potentiels"?[]:REGLES.filter(r=>(S.regCat==="Tous"||r.cat===S.regCat)&&(!q||norm(r.t+" "+r.tags+" "+r.h.replace(/<[^>]+>/g," ")).includes(q)));
+  const pots=q&&(S.regCat==="Tous"||S.regCat==="Potentiels")?POT_CULTS.flatMap(c=>POTENTIELS[c].filter(p=>norm(p.t+" "+(p.c||"")+" "+(p.e||"")+" "+(p.r||"")).includes(q)).map(p=>[p,c])):[];
+  if(q&&pots.length){const n=list.length+pots.length;
+    return `<div class="stack">${search}<div class="count">${n} résultat${n>1?"s":""}</div>${list.map(r=>`<details class="card"><summary><span class="t">${esc(r.t)}</span><span class="ref">${esc(r.ref)}</span></summary><div class="body"><div class="catline">${esc(r.cat)}</div>${r.h}</div></details>`).join("")}<div class="sec-title dg">POTENTIELS</div>${pots.slice(0,60).map(([p,c])=>potCard(p,c,false,true)).join("")}</div>`;}
   return `<div class="stack">
-   <label class="search">${I.search}<input id="q" data-in="regq" type="search" placeholder="Chercher : initiative, feu, hémorragie…" value="${esc(S.regQ)}" autocomplete="off"></label>
+   ${search}
    <div class="count">${list.length} fiche${list.length>1?"s":""}</div>
    ${list.map(r=>`<details class="card"${q&&list.length<=3?" open":""}><summary><span class="t">${esc(r.t)}</span><span class="ref">${esc(r.ref)}</span></summary><div class="body">${S.regCat==="Tous"?`<div class="catline">${esc(r.cat)}</div>`:""}${r.h}</div></details>`).join("")||`<p class="empty">Aucune fiche ne correspond. Essayez un autre mot.</p>`}</div>`;
 }
 
 /* ───────── III. BAZAR ───────── */
-const BZ_GRP=[["armes","Armes"],["protection","Protection"],["equipement","Équipement"],["medical","Médical"],["vehicules","Véhicules"]];
+const BZ_GRP=[["armes","Armes"],["protection","Protection"],["equipement","Équipement"],["medical","Médical"],["vehicules","Véhicules"],["artefacts","Artefacts"]];
 function bzTabs(){return chips(BZ_GRP,S.bzGrp,"bzgrp","Familles d’objets")}
 function bazar(){
   const inGrp=BAZAR.filter(r=>r._grp===S.bzGrp);
@@ -149,10 +162,10 @@ function item(r){
   else if(r["Valeur d’armure"]) line=stat("Armure",r["Valeur d’armure"])+stat("Enc.",r["Enc."]);
   else if(r["Défense"]) line=stat("Déf.",r["Défense"])+stat("Att.",r["Attaque"]);
   else if(r["Vit. Max."]) line=stat("Vit.",r["Vit. Max."])+stat("Armure",r.Armure)+stat(r.Blessures?"Bless.":"Carross.",r.Blessures||r.Carrosserie);
-  else line=r.Effet?`<span>${esc(r.Effet)}</span>`:"";
-  const skip=new Set(["Nom","_cat","_grp","_skill","Culte"]);
+  else line=r.Effet?`<span>${esc(r.Effet)}</span>`:r["Propriétés"]&&g==="artefacts"?`<span>${esc(r["Propriétés"])}</span>`:"";
+  const skip=new Set(["Nom","_cat","_grp","_skill","Culte","_desc"]);
   const kv=Object.entries(r).filter(([k,v])=>!skip.has(k)&&v&&v!=="–").map(([k,v])=>`<dt>${esc(k.replace("Man.","Maniabilité").replace("Charg.","Chargeur").replace("Enc.","Encombrement").replace("Empl.","Emplacements").replace("Ress.","Ressources").replace("Cal.","Calibre"))}</dt><dd>${esc(k==="Valeur"?v+" LC":v)}</dd>`).join("");
-  return `<details class="card item"><summary><span class="t">${esc(r.Nom)}</span>${r.Culte?`<span class="cult">${icon(r.Culte)}${esc(r.Culte)}</span>`:""}<span class="stats">${line}</span></summary><div class="body"><div class="catline">${esc(r._cat)}${r._skill?" · "+esc(r._skill):""}</div><dl class="kv">${kv}</dl></div></details>`;
+  return `<details class="card item"><summary><span class="t">${esc(r.Nom)}</span>${r.Culte?`<span class="cult">${icon(r.Culte)}${esc(r.Culte)}</span>`:""}<span class="stats">${line}</span></summary><div class="body"><div class="catline">${esc(r._cat)}${r._skill?" · "+esc(r._skill):""}</div><dl class="kv">${kv}</dl>${r._desc?`<div class="desc">${r._desc.map(x=>`<p>${esc(x)}</p>`).join("")}</div>`:""}</div></details>`;
 }
 
 /* ───────── IV. DÉS ───────── */
@@ -203,7 +216,7 @@ function des(){
 function pushHist(t,r){S.hist.unshift({t,r});S.hist=S.hist.slice(0,10);store.set("hist",S.hist)}
 
 /* ───────── V. GÉNÉRATEURS ───────── */
-function genTabs(){return chips([["pnj","PNJ"],["rencontre","Rencontre"],["fouille","Fouille"],["nom","Noms"],["oracle","Oracle"],["meteo","Ambiance"]],S.genTab,"gentab","Générateurs")}
+function genTabs(){return chips([["pnj","PNJ"],["rencontre","Rencontre"],["rencontre2","Rencontres 2"],["fouille","Fouille"],["nom","Noms"],["oracle","Oracle"],["marchandage","Marchandage"],["meteo","Ambiance"]],S.genTab,"gentab","Générateurs")}
 const CULTS=Object.keys(GEN.cultures);
 function genNPC(){
   const c=S.gen.culture||pick(CULTS),C=GEN.cultures[c];
@@ -215,6 +228,8 @@ function genNPC(){
 function generateurs(){
   const t=S.genTab,o=S.genOut&&S.genOut.tab===t?S.genOut:null;
   if(t==="oracle")return oracle();
+  if(t==="marchandage")return marchandage();
+  if(t==="rencontre2")return rencontre2();
   const selC=`<select class="sel" data-in="gculture" aria-label="Culture"><option value="">Culture au hasard</option>${CULTS.map(c=>`<option ${S.gen.culture===c?"selected":""}>${c}</option>`).join("")}</select>`;
   let form="",out="";
   if(t==="pnj"){
@@ -230,6 +245,57 @@ function generateurs(){
   if(t==="nom"){form=`<div class="selrow">${selC}<select class="sel" data-in="gsexe" aria-label="Sexe"><option value="">Mélangé</option><option value="h" ${S.gen.sexe==="h"?"selected":""}>Hommes</option><option value="f" ${S.gen.sexe==="f"?"selected":""}>Femmes</option></select></div>`;if(o)out=`<article class="gen-card"><span class="cult">${icon(o.v.c)}${esc(o.v.c)}</span>${o.v.l.map(n=>`<h2 style="font-size:21px">${esc(n)}</h2>`).join("")}</article>`}
   if(t==="meteo"){if(o)out=`<article class="gen-card"><span class="k">Météo</span><h2>${esc(o.v)}</h2></article>`}
   return `<div class="stack">${form}<button class="roll" data-act="gen">GENERER</button>${out||`<p class="empty">Choisissez vos filtres puis touchez Générer.</p>`}</div>`;
+}
+/* ── Rencontres 2 (Degenesis Survival) ── */
+function enc2Roll(n){const x=SURVIE.enc[n],v={n};if(x.x)v.sub=1+rnd(6);return v}
+function enc2Gen(){const col=1+rnd(6),d=[1,2,3].map(()=>1+rnd(6)),row=d[0]+d[1]+d[2],n=SURVIE.grid[row][col-1];S.genOut={tab:"rencontre2",v:Object.assign(enc2Roll(n),{col,d,row})};render()}
+function rencontre2(){
+  const o=S.genOut&&S.genOut.tab==="rencontre2"?S.genOut.v:null,E=SURVIE.enc;
+  const sel=`<div class="selrow"><select class="sel" data-in="enc2" aria-label="Choisir une rencontre"><option value="">Choisir une rencontre…</option>${Object.keys(E).map(k=>`<option value="${k}" ${o&&!o.d&&+k===o.n?"selected":""}>${k}. ${esc(E[k].t)}</option>`).join("")}</select></div>`;
+  let out=`<p class="empty">Touchez Générer : 1D pour la colonne, 3D pour la ligne. Ou choisissez une rencontre dans la liste.</p>`;
+  if(o){const x=E[o.n],sb=x.x?SURVIE.sub[x.x]:null;
+    out=`<article class="gen-card"><span class="cult">${o.d?`Colonne 1D : ${o.col} · ligne 3D : ${o.d.join("+")} = ${o.row}`:"Rencontre choisie"}</span><h2>${o.n}. ${esc(x.t)}</h2><p>${esc(x.d)}</p><p><span class="k">Effet</span>${esc(x.e)}</p>${sb?`<p><span class="k">${esc(sb.t)} · résultat ${o.sub}</span>${esc(sb.l[o.sub-1])}</p>${sb.n?`<p class="note">${esc(sb.n)}</p>`:""}`:""}</article>`}
+  return `<div class="stack">${sel}<button class="roll" data-act="enc2">GENERER</button>${out}<p class="note">D’après Degenesis Survival (supplément de fan), rencontres en extérieur. Le MJ a toujours le dernier mot : relancez ou adaptez si le résultat ne colle pas à la campagne.</p></div>`;
+}
+/* ── Marchandage ── */
+const priceOf=x=>{const m=String(x.Valeur||"").replace(/ | /g," ").match(/^\s*(\d[\d ]*)/);return m?+m[1].replace(/ /g,""):0};
+const NEG_ITEMS=BAZAR.map((x,i)=>({x,i,p:priceOf(x)})).filter(o=>o.p>0);
+const NEG_MOODS=[
+  {n:"Conciliant",d:"Pressé de vendre, il cède vite.",m:[10,25],dif:1},
+  {n:"Âpre",d:"Il connaît la valeur de sa marchandise et ne lâche rien sans raison.",m:[25,50],dif:2},
+  {n:"Requin",d:"Il flaire le client pressé et fait monter les enchères.",m:[50,80],dif:3}];
+const niceLC=v=>{v=Math.max(1,v);const st=v<20?1:v<200?5:v<2000?10:v<20000?50:100;return Math.round(v/st)*st};
+const fmtLC=v=>v.toLocaleString("fr-FR")+" LC";
+function negRoll(){
+  const n=S.neg,o=NEG_ITEMS.find(o=>o.i===n.item);if(!o)return;
+  const mood=pick(NEG_MOODS);let base=o.p*n.qty,mult=1,dif=mood.dif,why=[];
+  if(n.tech){mult*=2;why.push("tech supérieure au lieu ×2")}
+  if(n.noir){const k=2+Math.round(Math.random()*10)/10;mult*=k;dif+=1;why.push("marché noir ×"+k.toLocaleString("fr-FR"))}
+  const pct=mood.m[0]+rnd(mood.m[1]-mood.m[0]+1);
+  const ref=base*mult,ask=niceLC(ref*(1+pct/100)),deal=niceLC(ref*(1+pct/200));
+  S.negOut={mood,pct,why,base:niceLC(base),ref:niceLC(ref),ask,deal,dif:Math.min(dif,6),crit:niceLC(Math.max(ask,base*mult*2)),name:o.x.Nom,qty:n.qty};
+}
+function marchandage(){
+  const n=S.neg,list=NEG_ITEMS.filter(o=>n.grp==="mun"?o.x._cat==="Munitions":o.x._cat!=="Munitions");
+  if(!list.some(o=>o.i===n.item)){n.item=list[0].i;n.noir=!!list[0].x.Culte}
+  const cur=list.find(o=>o.i===n.item);
+  const cats=[...new Set(list.map(o=>o.x._cat))];
+  const sel=`<select class="sel" data-in="negitem" aria-label="Objet">${cats.map(c=>`<optgroup label="${esc(c)}">${list.filter(o=>o.x._cat===c).map(o=>`<option value="${o.i}" ${o.i===n.item?"selected":""}>${esc(o.x.Nom)} · ${o.p.toLocaleString("fr-FR")} LC</option>`).join("")}</optgroup>`).join("")}</select>`;
+  const tog=(k,l)=>`<button class="chip" data-act="negtog" data-v="${k}" aria-pressed="${!!n[k]}">${l}</button>`;
+  const r=S.negOut;
+  const out=r?`<article class="gen-card"><span class="cult">Marchand ${esc(r.mood.n.toLowerCase())}</span><h2>${esc(r.name)}${r.qty>1?" × "+r.qty:""}</h2><div class="meta">${esc(r.mood.d)}</div>
+    <p><span class="k">Prix du livre</span>${fmtLC(r.base)}${r.why.length?` · ${esc(r.why.join(" · "))} : ${fmtLC(r.ref)}`:""}</p>
+    <p><span class="k">Prix demandé</span><b class="neg-ask">${fmtLC(r.ask)}</b> (+${r.pct} %)</p>
+    <p><span class="k">Test du joueur</span>CHA+Négociation, difficulté ${r.dif}</p>
+    <div class="neg-res"><div class="ok"><span>Réussite</span><b>${fmtLC(r.deal)}</b><i>−5 % par déclencheur, jamais sous ${fmtLC(r.ref)}</i></div>
+    <div class="ko"><span>Échec</span><b>${fmtLC(r.ask)}</b><i>le marchand ne bouge pas</i></div>
+    <div class="cr"><span>Échec critique</span><b>${fmtLC(r.crit)}</b><i>le prix double, ou il refuse de vendre</i></div></div>
+    <div class="btnrow"><button class="btn" data-act="negdice">Lancer le jet (difficulté ${r.dif})</button></div></article>`:`<p class="empty">Choisissez l’objet, puis touchez Négocier.</p>`;
+  return `<div class="stack">${chips([["obj","Objets"],["mun","Munitions"]],n.grp,"neggrp","Type")}
+   <div class="selrow">${sel}</div>
+   <div class="dice-panel"><div class="lbl">Quantité</div>${stepper("nq",n.qty,1,999)}
+   <div class="lbl">Conditions</div><div class="negtog">${tog("tech","Tech supérieure au lieu")}${tog("noir","Objet de Culte : marché noir")}</div></div>
+   <button class="roll" data-act="neg">NEGOCIER</button>${out}</div>`;
 }
 const TECH_PRICE={I:[1,0],II:[15,5],III:[80,25],IV:[200,80],V:[600,200],VI:[2000,600]};
 const DIF_CULT={Borca:2,Franka:5,Pollen:4,Balkhans:4,Hybrispanie:5,Purgare:3,Afrika:5};
@@ -259,16 +325,54 @@ function oracle(){
   }
 
 /* ───────── VI. CAMPAGNE ───────── */
-function campTabs(){return chips([["groupe","Groupe"],["mission","Mission"],["pnj","PNJ"],["lieux","Lieux"],["chrono","Chronologie"],["notes","Notes"]],S.campTab,"camptab","Campagne")}
+function campTabs(){return chips([["lieux","Lieux"],["pnj","PNJ"],["bestiaire","Bestiaire"],["notes","Notes"]],S.campTab,"camptab","Campagne")}
+function sheetItems(it){
+  let h="",dl="";
+  const flush=()=>{if(dl){h+=`<dl class="statl">${dl}</dl>`;dl=""}};
+  it.forEach(x=>{
+    if(x[0]==="f"){dl+=`<dt>${esc(x[1].charAt(0)+x[1].slice(1).toLowerCase())}</dt><dd>${esc(x[2])}</dd>`;return}
+    flush();
+    if(x[0]==="h")h+=`<h4>${esc(x[1])}</h4>`;
+    else if(x[0]==="s")h+=`<h5>${esc(x[1])}</h5>`;
+    else h+=`<p>${esc(x[1])}</p>`;
+  });
+  flush();return h;
+}
+function field(n,k){for(const s of n.sec||[])for(const x of s.it)if(x[0]==="f"&&x[1]===k)return x[2];return ""}
+function npcCard(n,showCamp){
+  const arch=field(n,"ARCHÉTYPE");
+  const sub=[n.sub,arch].filter(Boolean).join(" · ");
+  return `<details class="card sheet"><summary>${n.img?`<img class="av" src="${n.img}" alt="" loading="lazy">`:`<span class="av noimg">${DG(n.n.charAt(0))}</span>`}<span class="t">${esc(n.n)}<span class="st">${esc(sub)}</span>${showCamp?`<span class="cmp">${esc(CAMP_NAME[n.camp]||"")}</span>`:""}</span></summary><div class="body">${n.img?`<button class="ph big" data-act="zoom" data-src="${n.img}" aria-label="Agrandir le portrait"><img src="${n.img}" alt="" loading="lazy"></button>`:""}${n.intro.map(x=>x[0]==="p"?`<p>${esc(x[1])}</p>`:"").join("")}${n.sec.map(s=>`<h3 class="sh">${esc(s.t)}</h3>${sheetItems(s.it)}`).join("")}</div></details>`;
+}
+function bestCard(b,showSrc){
+  const stats=b.it.some(x=>x[0]==="f");
+  return `<details class="card sheet${stats?"":" grpintro"}"${stats?"":" open"}><summary><span class="t">${esc(b.n)}${b.grp&&b.grp!==b.n&&b.grp!==b.doc?`<span class="st">${esc(b.grp)}</span>`:""}${showSrc?`<span class="cmp">${esc(b.doc||BSRC_NAME[b.src]||"")}</span>`:""}</span></summary><div class="body">${sheetItems(b.it)}</div></details>`;
+}
+const CAMP_NAME=Object.fromEntries(CAMPAGNE.camps),BSRC_NAME=Object.fromEntries(CAMPAGNE.bsrc);
 function campagne(){
   const C=CAMPAGNE,t=S.campTab;let b="";
-  if(t==="groupe")b=C.groupe.map(p=>`<article class="card pc"><img src="${p.img}" alt=""><h3>${esc(p.n)}</h3><div class="l">${esc(p.l)}</div><div class="note">${esc(p.r)}</div><p>${esc(p.d)}</p>${p.s.length?`<div class="sk">${p.s.map(([k,v])=>`<span>${esc(k)} <b>${esc(v)}</b></span>`).join("")}</div>`:""}</article>`).join("");
-  if(t==="mission")b=`<article class="card"><div class="body">${C.mission}</div></article>`;
-  if(t==="pnj")b=C.pnj.map(p=>`<article class="card npc">${p.img?`<button class="ph" data-act="zoom" data-src="${p.img}" aria-label="Agrandir le portrait de ${esc(p.n)}"><img src="${p.img}" alt=""></button>`:`<div class="noimg" aria-hidden="true">${DG(p.n.charAt(0))}</div>`}<div><h3>${esc(p.n)}</h3><div class="r">${esc(p.r)}</div><p>${esc(p.d)}</p></div></article>`).join("");
-  if(t==="lieux")b=C.lieux.map(p=>`<article class="card npc"><button class="ph" data-act="zoom" data-src="${p.img}" aria-label="Agrandir ${esc(p.n)}"><img src="${p.img}" alt=""></button><div><h3>${esc(p.n)}</h3><p>${esc(p.d)}</p></div></article>`).join("");
-  if(t==="chrono")b=`<button class="card" data-act="zoom" data-src="${C.chrono}" data-wide="1" style="padding:0;border:1px solid var(--line)"><img src="${C.chrono}" alt="Chronologie d’En Ton Sang" style="display:block;width:100%"></button><p class="note">Touchez l’image pour l’agrandir et la faire défiler.</p>`;
+  const q=norm(S.campQ).trim();
+  const search=ph=>`<label class="search">${I.search}<input id="q" data-in="campq" type="search" placeholder="${ph}" value="${esc(S.campQ)}" autocomplete="off"></label>`;
+  const txt=o=>norm(JSON.stringify(o));
+  if(t==="pnj"){
+    const L=q?C.pnj.filter(n=>txt(n).includes(q)):C.pnj.filter(n=>n.camp===S.campC);
+    b=search("Chercher un PNJ : Leurre, Néolibyen, Brûlure…")+(q?"":chips(C.camps,S.campC,"campc","Campagne"))+`<div class="count">${L.length} PNJ${q?" · toutes campagnes":""}</div>`+(L.map(n=>npcCard(n,!!q)).join("")||`<p class="empty">Aucun PNJ ne correspond.</p>`);
+  }
+  if(t==="lieux"){
+    const lt=LORE.tabs.find(x=>x.id===C.lore[S.campC]);
+    const own=(C.lieux[S.campC]||[]).map(p=>`<article class="card npc"><button class="ph" data-act="zoom" data-src="${p.img}" aria-label="Agrandir ${esc(p.n)}"><img src="${p.img}" alt=""></button><div><h3>${esc(p.n)}</h3><p>${esc(p.d)}</p></div></article>`).join("");
+    b=chips(C.camps,S.campC,"campc","Campagne")+own+(lt?lt.items.map(it=>loreCard(it,false)).join(""):"");
+  }
+  if(t==="bestiaire"){
+    const docs=[...new Set(C.best.filter(x=>x.src==="autres").map(x=>x.doc))].sort((a,b)=>a.localeCompare(b,"fr"));
+    if(!docs.includes(S.bestDoc))S.bestDoc=docs[0];
+    const aut=!q&&S.bestSrc==="autres";
+    const L=q?C.best.filter(x=>txt(x).includes(q)):C.best.filter(x=>x.src===S.bestSrc&&(!aut||x.doc===S.bestDoc));
+    const dsel=aut?`<div class="selrow"><select class="sel" data-in="bestdoc" aria-label="Supplément ou scénario">${docs.map(g=>`<option value="${esc(g)}" ${g===S.bestDoc?"selected":""}>${esc(g)} (${C.best.filter(x=>x.doc===g).length})</option>`).join("")}</select></div>`:"";
+    b=search("Chercher : Romano, Léperos, Moloch…")+(q?"":chips(C.bsrc,S.bestSrc,"bestsrc","Source"))+dsel+`<div class="count">${L.filter(x=>x.it.some(y=>y[0]==="f")).length} fiches${q?" · toutes sources":""}</div>`+(L.map(x=>bestCard(x,!!q)).join("")||`<p class="empty">Rien ne correspond.</p>`);
+  }
   if(t==="notes"){const n=store.get("notes","");b=`<label class="lbl" for="notes">Notes de séance</label><textarea id="notes" class="notes" data-in="notes" placeholder="Ce qui s’est passé, les indices trouvés, les PNJ rencontrés…">${esc(n)}</textarea><div class="btnrow"><button class="btn" data-act="stamp">Insérer la date</button><button class="btn" data-act="copynotes">Copier</button></div><p class="note">Enregistrées automatiquement sur cet appareil uniquement.</p>`}
-  return `<div class="stack"><div class="hero-c"><h2>${DG(C.titre)}</h2><p>${esc(C.sous)}</p></div>${b}</div>`;
+  return `<div class="stack">${b}</div>`;
 }
 
 /* ───────── événements ───────── */
@@ -279,12 +383,14 @@ app.addEventListener("click",e=>{
   switch(act){
     case "layout":S.layout=S.layout==="ruche"?"grille":"ruche";store.set("layout",S.layout);render();break;
     case "regcat":S.regCat=v;render();break;
+    case "potcult":S.potCult=v;render();window.scrollTo(0,0);break;
     case "bzgrp":S.bzGrp=v;S.bzCat="Tout";render();break;
     case "bzcat":S.bzCat=v;render();break;
     case "dmode":S.diceMode=v;S.last=null;render();break;
     case "diff":S.dice.diff=+v;store.set("dice",S.dice);render();break;
     case "step":{const k=a.dataset.k,d=+a.dataset.d;
-      if(k==="vb")S.diceB.va=Math.max(0,Math.min(30,S.diceB.va+d));
+      if(k==="nq"){const q=S.neg.qty;S.neg.qty=Math.max(1,Math.min(999,q+(q>=20?d*10:q>=10&&d>0?d*5:d)));if(S.neg.qty>20&&q<20)S.neg.qty=20}
+      else if(k==="vb")S.diceB.va=Math.max(0,Math.min(30,S.diceB.va+d));
       else{const lim={va:[0,30],ego:[0,3],mod:[-12,12]}[k];S.dice[k]=Math.max(lim[0],Math.min(lim[1],S.dice[k]+d));store.set("dice",S.dice)}
       render();break;}
     case "roll":{const d=S.dice;
@@ -292,10 +398,17 @@ app.addEventListener("click",e=>{
       else{const A=rollPool(d.va),B=rollPool(S.diceB.va);S.last={mode:"conf",a:A,b:B};pushHist(`Confrontation ${A.n}D / ${B.n}D`,`${A.succ}-${B.succ} S · ${A.trig}-${B.trig} DC`)}
       render();break;}
     case "gentab":S.genTab=v;render();break;
+    case "neggrp":S.neg.grp=v;S.neg.item=-1;S.neg.qty=v==="mun"?10:1;S.negOut=null;render();break;
+    case "negtog":S.neg[v]=!S.neg[v];S.negOut=null;render();break;
+    case "neg":negRoll();render();break;
+    case "negdice":S.diceMode="simple";S.dice.diff=S.negOut.dif;store.set("dice",S.dice);S.last=null;go("des");break;
     case "gen":doGen();break;
+    case "enc2":enc2Gen();break;
     case "copynpc":{const p=S.genOut.v;copy(`${p.nom} — ${p.c}, ${p.culte}, ${p.con.n}\nMotivation : ${p.con.m}\nApparence : ${p.phys}\nAttitude : ${p.att}\nSecret : ${p.sec}\nNiveau ${p.rg.n} : VA ${p.rg.va}, Blessures ${p.rg.bs}, Traumatismes ${p.rg.tr}`);break;}
     case "tarot":{const n=+v,a1=rnd(22);let a2=rnd(21);if(a2>=a1)a2++;S.oracle=n===1?[a1]:[a1,a2];render();break;}
     case "camptab":S.campTab=v;render();break;
+    case "campc":S.campC=v;render();break;
+    case "bestsrc":S.bestSrc=v;render();break;
     case "loretab":S.loreTab=v;S.loreQ="";render();break;
     case "zoom":{const z=document.createElement("div");z.className="zoom"+(a.dataset.wide?" wide":"");z.innerHTML=`<img src="${a.dataset.src}" alt=""><button class="x" aria-label="Fermer">×</button>`;z.addEventListener("click",ev=>{if(ev.target.closest(".x")||ev.target===z)z.remove()});document.body.appendChild(z);break;}
     case "stamp":{const ta=$("#notes");const d=new Date().toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"});ta.value=(ta.value?ta.value+"\n\n":"")+"— "+d+" —\n";store.set("notes",ta.value);ta.focus();break;}
@@ -308,12 +421,16 @@ app.addEventListener("input",e=>{
   if(k==="bzq"){S.bzQ=v;S._focusQ=true;render()}
   if(k==="notes")store.set("notes",v);
   if(k==="loreq"){S.loreQ=v;S._focusQ=true;render()}
+  if(k==="campq"){S.campQ=v;S._focusQ=true;render()}
 });
 app.addEventListener("change",e=>{
   const k=e.target.dataset.in;if(!k)return;const v=e.target.value;
   if(k==="bzculte"){S.bzCulte=v;render()}
+  if(k==="enc2"&&v){S.genOut={tab:"rencontre2",v:enc2Roll(+v)};render()}
+  if(k==="bestdoc"){S.bestDoc=v;render()}
   if(k==="ocard1"){const a=+v;S.oracle=S.oracle&&S.oracle.length>1?[a,S.oracle[1]]:[a];render()}
   if(k==="ocard2"){const a=S.oracle?S.oracle[0]:0;S.oracle=v===""?[a]:[a,+v];render()}
+  if(k==="negitem"){S.neg.item=+v;const o=NEG_ITEMS.find(o=>o.i===+v);S.neg.noir=!!(o&&o.x.Culte);S.negOut=null;render()}
   if(k==="gculture"){S.gen.culture=v}
   if(k==="gculte"){S.gen.culte=v}
   if(k==="gsexe"){S.gen.sexe=v}

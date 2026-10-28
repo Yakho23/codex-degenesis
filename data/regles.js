@@ -283,12 +283,16 @@ h:`<dl><dt>Encodage biométrique</dt><dd>Ne tire que pour son propriétaire (AGI
 <dt>Talisman (bonus)</dt><dd>Dés en plus en PSY+Foi/Volonté.</dd>
 <dt>Terrifiant (diff.)</dt><dd>PSY+Foi/Volonté (diff.) ou -2D à la prochaine action.</dd></dl>`},
 
-{cat:"Propriétés", t:"Propriétés d’armure", ref:"K p.162-163", tags:"massif pare-balles hermétique ignifugé camouflage cassant",
+{cat:"Propriétés", t:"Propriétés d’armure", ref:"K p.162-163", tags:"massif pare-balles hermétique ignifugé camouflage cassant instable isolant première impression respecté terrifiant",
 h:`<dl><dt>Massif (X)</dt><dd>Contre lames et armes pointues, l’armure vaut X. Les armes contondantes qui dépassent la valeur normale blessent quand même.</dd>
 <dt>Pare-balles (X)</dt><dd>Contre les armes à feu, l’armure vaut X.</dd>
 <dt>Hermétique (+XS)</dt><dd>Succès automatiques contre gaz, spores et toxines inhalés.</dd>
 <dt>Ignifugé (X)</dt><dd>Protège du feu et ne s’enflamme pas.</dd>
 <dt>Camouflage (diff.)</dt><dd>INS+Perception (diff.) pour repérer le porteur.</dd>
 <dt>Cassant (X)</dt><dd>+1 armure, mais après X dégâts les plaques perdent 1 point définitif.</dd>
-<dt>Instable, Isolant</dt><dd>Voir Katharsys p.162-163.</dd></dl>`},
+<dt>Instable (X)</dt><dd>Chaque coup qui inflige X dégâts ou plus fait perdre 1 point de valeur d’armure. Réparation : 1 point d’armure avec 1 kg de rebuts (qualité = Niveau Tech de l’armure) et un test d’AGI+Artisanat (Niveau Tech).</dd>
+<dt>Isolant</dt><dd>Protège entièrement des décharges électriques : tout dégât d’électricité est réduit à zéro.</dd>
+<dt>Première impression (+XD)</dt><dd>Bonus aux interactions sociales lors du tout premier contact avec des étrangers.</dd>
+<dt>Respecté (groupe, +XD)</dt><dd>Bonus de dés à toute interaction sociale avec le groupe indiqué.</dd>
+<dt>Terrifiant (diff.)</dt><dd>Qui attaque le porteur fait un test de PSY+Foi/Volonté (diff.) ; en cas d’échec, −2D à ses attaques contre lui. Une fois la peur vaincue, immunisé pour le reste du combat.</dd></dl>`},
 ];

@@ -251,10 +251,12 @@ h:`<table><tr><th>Tech</th><th>Disponibilité</th><th>Achat /kg</th><th>Vente /k
 <p>Objet lié à un Culte (valeur de Ressources + Culte) : pas en vente libre hors du Culte, seulement au marché noir.</p>`},
 
 /* ───────────── PROPRIÉTÉS DES ARMES ───────────── */
-{cat:"Propriétés", t:"Propriétés des armes (A–D)", ref:"K p.154-155", tags:"antiblindage camouflage choc contondant tonnerre zone déviation dispersion double canon",
+{cat:"Propriétés", t:"Propriétés des armes (A–D)", ref:"K p.154-155", tags:"antiblindage assommement chargement unique camouflage choc contondant tonnerre zone déviation dispersion double canon",
 h:`<dl><dt>Antiblindage</dt><dd>Ignore les propriétés spéciales d’armure (Massif, Pare-balles).</dd>
+<dt>Assommement (niveau)</dt><dd>Des arcs électriques, un coup de tonnerre ou un éclat qui fait vibrer le crâne : la cible subit la Complication Désorientation, à un niveau égal à celui de la propriété.</dd>
 <dt>Camouflage (diff.)</dt><dd>Arme discrète ; INS+Perception (diff.) pour la repérer.</dd>
 <dt>Chargement par la gueule</dt><dd>Recharger prend 2 actions.</dd>
+<dt>Chargement unique (nombre de balles)</dt><dd>Pas de magasin amovible, de chargeur ni de barillet : porte de chargement ou magasin tubulaire, les balles se chargent une à une. Le niveau indique combien de munitions on peut charger en une seule action.</dd>
 <dt>Choc (DC)</dt><dd>Sans ce nombre de DC, on ne peut ni attaquer ni défendre à l’action suivante (1 action pour reprendre l’arme).</dd>
 <dt>Contondant</dt><dd>Efficace contre les armures Massives.</dd>
 <dt>Coup de tonnerre</dt><dd>Le bruit fait fuir les animaux.</dd>
@@ -264,8 +266,9 @@ h:`<dl><dt>Antiblindage</dt><dd>Ignore les propriétés spéciales d’armure (M
 <dt>Dispersion</dt><dd>Pas de malus de portée, mais -4 dégâts au-delà de la portée courte.</dd>
 <dt>Double canon</dt><dd>Tirer les deux canons ensemble double les dégâts.</dd></dl>`},
 
-{cat:"Propriétés", t:"Propriétés des armes (E–Z)", ref:"K p.155-156", tags:"encodage enchevêtrement enrayement étendard étourdissement explosif fragile incendiaire incontrôlable mortel nuage pénétration rafale régularité sensible talisman terrifiant",
-h:`<dl><dt>Encodage biométrique</dt><dd>Ne tire que pour son propriétaire (AGI+Artisanat puis INT+Technologie pour le contourner).</dd>
+{cat:"Propriétés", t:"Propriétés des armes (E–Z)", ref:"K p.155-156", tags:"effroyable panique rechargement long encodage enchevêtrement enrayement étendard étourdissement explosif fragile incendiaire incontrôlable mortel nuage pénétration rafale régularité sensible talisman terrifiant",
+h:`<dl><dt>Effroyable (niveau)</dt><dd>Lames dentelées ou pointes menaçantes : une douleur cuisante persiste après le coup. Ajoute (niveau) déclencheur(s) bonus quand l’arme cause une Complication (au moins un déclencheur doit d’abord être dépensé pour infliger la Complication).</dd>
+<dt>Encodage biométrique</dt><dd>Ne tire que pour son propriétaire (AGI+Artisanat puis INT+Technologie pour le contourner).</dd>
 <dt>Enchevêtrement (malus)</dt><dd>Malus aux actions de mouvement ; les DC augmentent le malus. Se libérer : PHY+Force ou AGI+Mobilité (2).</dd>
 <dt>Enrayement</dt><dd>Plus de 1 que de 6 : l’arme s’enraye au round suivant (1 action pour désenrayer).</dd>
 <dt>Étendard (bonus)</dt><dd>Bonus aux alliés autour tant qu’il est levé.</dd>
@@ -276,12 +279,22 @@ h:`<dl><dt>Encodage biométrique</dt><dd>Ne tire que pour son propriétaire (AGI
 <dt>Incontrôlable (diff.)</dt><dd>Sur un raté, PHY+Corps à corps (diff.) ou on se touche soi-même.</dd>
 <dt>Mortel</dt><dd>Inflige directement des Traumatismes.</dd>
 <dt>Nuage (rayon, durée)</dt><dd>Zone persistante, dégâts cumulatifs.</dd>
+<dt>Panique (niveau)</dt><dd>Un simple aperçu de l’arme à l’œuvre terrifie la plupart des guerriers. Quiconque la voit exercer ses ravages fait un jet de Défense mentale dont la difficulté égale le niveau de la propriété ; en cas d’échec, la cible subit la Complication Obusite.</dd>
 <dt>Pénétration (X)</dt><dd>Ignore l’armure ≤ X.</dd>
 <dt>Rafale (X)</dt><dd>Jusqu’à X balles en 1 action : +1D et +1 dégât par balle ; dés répartis entre cibles.</dd>
+<dt>Rechargement long (durée)</dt><dd>Processus de rechargement presque impossible à parachever pendant un combat. Le temps requis est indiqué juste après le nom de la propriété.</dd>
 <dt>Régularité (DC)</dt><dd>Avec ce nombre de DC, nouvelle attaque immédiate à -2D (cumulable).</dd>
 <dt>Sensible</dt><dd>Au contact ou attaquée, 1 DC adverse = -1D de Maniabilité permanent.</dd>
 <dt>Talisman (bonus)</dt><dd>Dés en plus en PSY+Foi/Volonté.</dd>
 <dt>Terrifiant (diff.)</dt><dd>PSY+Foi/Volonté (diff.) ou -2D à la prochaine action.</dd></dl>`},
+
+{cat:"Propriétés", t:"Modifications d’armes (emplacements)", ref:"Nouveaux équipements", tags:"modification arme emplacement effroyable assommement panique dragonne désarmement sangle augmentation",
+h:`<p>Certaines propriétés peuvent être ajoutées à une arme en échange d’emplacements :</p>
+<table><tr><th>Propriété</th><th>Emplacement</th><th>Augmentation</th></tr>
+<tr><td>Effroyable (1)</td><td>1</td><td>Un emplacement pour +1</td></tr>
+<tr><td>Assommement (1)</td><td>1</td><td>Un emplacement pour +1</td></tr>
+<tr><td>Panique (3)</td><td>2</td><td>Deux emplacements pour +3</td></tr></table>
+<dl><dt>Dragonne</dt><dd>Simple sangle qui permet de ne pas lâcher un objet ou une arme en cas de tentative de désarmement (ou de simple maladresse). Difficulté +2 lors des tentatives de désarmement, ou bonus de +4D pour garder un objet en main. 1 emplacement, Tech I, 10 LC.</dd></dl>`},
 
 {cat:"Propriétés", t:"Propriétés d’armure", ref:"K p.162-163", tags:"massif pare-balles hermétique ignifugé camouflage cassant instable isolant première impression respecté terrifiant",
 h:`<dl><dt>Massif (X)</dt><dd>Contre lames et armes pointues, l’armure vaut X. Les armes contondantes qui dépassent la valeur normale blessent quand même.</dd>

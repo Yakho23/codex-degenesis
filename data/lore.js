@@ -551,9 +551,8 @@ tabs:[
  {t:"La région en 2596", img:"assets/lore/l-rhone.jpg", ref:"JdM", h:`
 <p>Les Néolibyens sont les seigneurs des villes côtières : la Banque du Commerce y vend chaque année les concessions. La <b>Résistance</b> tient l'arrière-pays, les <b>Spitaliers</b> font de Montpellier leur siège régional, et tous combattent les <b>Phéromanciens</b> des marais du Rhône.</p>
 <p>Les Chroniqueurs, chassés après l'échec de leurs Ferrailleurs dans les marais, regardent Toulon d'un très mauvais œil. Les Anabaptistes sont partis : le <b>Grand Exode</b> de 2577 les a menés en Briton.</p>`},
- {t:"Les marais du Rhône", img:"assets/lore/l-rhone.jpg", ref:"JdM", h:`
-<p>Un monde de roseaux, de canaux et d'épaves, plein d'artefacts : on parle de <b>veines de ferraille</b> intactes et de cités englouties. Les Spitaliers classent les marais de I à V selon le danger. Les faux-bourdons y sont innombrables.</p>
-<p>Les <b>champs de spores-mères</b>, le <b>champ de Jaquiera</b>, la <b>Cité des Rayons</b>, les <b>Conduits de Machiawen</b>, la <b>Confluence de Nistrelle</b>, l'<b>hôpital de campagne Mercure</b>… Les <b>Anubiens</b> y entrent seuls, avec des « sceptres-clefs », dans des installations cachées des Anciens.</p>`},
+ {t:"Les marais du Rhône", img:"assets/lore/l-rhone.jpg", ref:"JdM", h:`<p>Un monde de roseaux, de canaux et d'épaves, plein d'artefacts : on parle de <b>veines de ferraille</b> intactes et de cités englouties. Les Spitaliers classent les marais de I à V selon le danger. Les faux-bourdons y sont innombrables.</p>
+<p>Les <b>champs de spores-mères</b>, le <b>champ de Jaquiera</b>, la <b>Cité des Rayons</b>, les <b>Conduits de Machiawen</b>, la <b>Confluence de Nistrelle</b>…</p>`},
  {t:"Murnakir et la trêve", img:"assets/lore/b-murnakir.jpg", ref:"JdM p.71-72", h:`
 <p>Le Phéromancien <b>Murnakir</b> a mené des centaines de Léperos aux flèches enduites de ses sécrétions : la moindre égratignure se nécrose. Il a écrasé l'expédition <b>Wachsmann-Lacroix</b>.</p>
 <p>Hamza fit venir son demi-frère, l'Anubien <b>Nephraïm</b>, de Zillah : « seuls les dieux peuvent soumettre le Phéromancien ». Nephraïm négocia la paix ; les marais du nord sont devenus la frontière. Les <b>totems</b> marquent les royaumes : Machiawen, Iomèdes, Murnakir…</p>`},

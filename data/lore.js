@@ -3,9 +3,7 @@ window.LORE = {
 tabs:[
 /* ───────────── LE MONDE ───────────── */
 {id:"monde", t:"Le monde", items:[
- {t:"La prophétie du Chacal", ref:"PP p.4-13 · Apo p.125", h:`
-<p>Poème qui ouvre <i>Primal Punk</i>. Selon la tradition, il aurait « fuité » du <b>Caire</b> il y a des décennies. Les <b>Anubiens</b>, « gardiens de la prophétie », y voient une théorie du tout : la vérité absolue sur le passé et l’avenir. Leurs Hogons affirment que la <b>Croix Solaire</b> est la clé pour la déchiffrer.</p>
-<p>Le Chacal se manifeste aussi en visions, notamment dans le champ mégalithique de <b>Carnac</b> : un chacal à sept yeux couronné d’or, l’estomac gonflé des morts qu’il a dévorés, qui vomit les quatre fleuves du Paradis.</p>
+ {t:"La prophétie du Chacal", ref:"PP p.4-13 · Apo p.125", h:`<p>Poème qui ouvre <i>Primal Punk</i>. Selon la tradition, il aurait « fuité » du <b>Caire</b> il y a des décennies. Les <b>Anubiens</b>, « gardiens de la prophétie », y voient une théorie du tout : la vérité absolue sur le passé et l’avenir. Leurs Hogons affirment que la <b>Croix Solaire</b> est la clé pour la déchiffrer.</p>
 <div class="prophetie"><p>4 est le nombre de la vie et de la mort,<br>4 runes en infinies spirales<br>Début, destinée, sort et achèvement<br>De l’âme et du corps ainsi représentés<br>4 les directions<br>D’où le vent charrie la poussière<br>4 le nombre d’éléments<br>Qui nous ont engendrés<br>Et auxquels nous retournerons à la fin des temps.</p><p>Tel est le nombre d’origine,<br>Celui de la famille,<br>Père, mère, fils et fille.<br>C’est le nombre de saisons,<br>De l’homme et de la terre.<br>4 sont les branches de la Croix Solaire.</p><p>4 le nombre de rivières<br>Où la vie puise sa source.<br>La terre, il ne l’a point créée pour être une chose vide, mais l’a formée pour être habitée.<br>Bien des fils elle a élevés et exaltés.<br>Mais sourds à ses ordres,<br>Ils s’en sont détournés.</p><p>Alors, il dit :<br>« Hommes, vous qui êtes importunés par tous leurs conseils,<br>Qu’ils se présentent donc, et qu’ils vous sauvent,<br>Ceux qui observent les cieux, lisent dans les étoiles et font<br>Connaître à chaque nouvelle lune ce qui doit vous arriver ! »<br>Et il réveilla la terre, le soleil, la lune et les étoiles,<br>Pour châtier l’humanité.</p><p>Einstein s’écroule, Newton tombe.<br>On met leurs idoles sur des animaux, sur des bêtes,<br>Traînées dans les villes, déchiquetées et souillées.</p><p>4 est le nombre de cavaliers,<br>Annonciateurs de l’apocalypse,<br>Comme les 4 maîtres de l’immortalité,<br>Qui, si proches de la terre,<br>Attendent leur heure dans des chambres humides.<br>Mais ils se réveilleront, nourris d’intentions pures,<br>Pour bâtir la ville, dit-il,<br>De 4 côtés flanquée, telle une pyramide.<br>Et dans son ombre,<br>La vérité s’épanouira.<br>L’alpha et l’oméga,<br>Le début et la fin,<br>La vie et la mort.</p><p>8 est le nombre du Créateur,<br>Qui descend des cieux.<br>Les hommes dont le nom est absent<br>Du livre de la vie depuis la fondation du monde<br>Seront étonnés au spectacle<br>De celui qui était, qui n’est plus.<br>Le nombre de l’infini<br>De celui qui apparaît et disparaît,<br>Celui avec qui tout s’élève<br>Et avec qui tout s’effondre.</p><p>Et que la terre s’ouvre béante,<br>Que le salut vienne !<br>En huit, les feuilles du lotus se déploient<br>Partout où souffle le vent<br>Huit comme les flèches de la rose des vents,<br>Son pollen se répand<br>Projeté dans l’extase vers le ciel.</p><p>Yeux, jambes, tous par huit,<br>Elle s’élève des ténèbres,<br>Gravit les plus hautes montagnes,<br>Et obstrue les vallées les plus profondes<br>Dans sa traque des multiples de six.<br>8 est son nombre.</p><p>12 est le nombre de tribus<br>Avec qui le Chacal fraie<br>Il dort parmi eux<br>Et se repaît en leur compagnie<br>12 sont aussi les lunes<br>Qui divisent l’année<br>12 les tempéraments<br>Qui affranchissent l’esprit de la masse.<br>12 est le nombre du zodiaque<br>Dont les enfants dorment en chaque<br>Être d’un sommeil agité,<br>Attendant d’être déchaînés.</p><p>Enfouis en ce nombre<br>Les noms des deux créateurs.<br>Espoir et désespérance sont la somme de 12<br>Quand la perfection de l’unité<br>Envahit l’esprit<br>De toutes les créatures des quatre fois trois<br>Par l’air, dans la mer et sur terre.</p><p>16 est le nombre de l’étranger,<br>Le nouveau venu.<br>16 sont ses révélations<br>16 le nombre de ses hérauts<br>Qui dévastent la terre.<br>8 plus 8 est le nombre de deux créateurs<br>Qui s’affrontent pour dominer le monde,<br>Deux infinités,<br>Consumant l’éternité dans leur conflit.</p><p>La pulsion face à l’intellect,<br>La chair contre l’esprit,<br>Le chaos contre l’ordre.</p><p>1 et 6 est le nombre de peuples,<br>Qui se battront pour la Couronne.<br>1 et 6 est le nombre de plaies<br>Qui s’abattront sur eux.<br>1 et 6 sont les pointes de l’axe<br>Dessinées sur la peau de l’ennemi.<br>1 et 6 les chambres de gestation<br>Dont surgira l’enfer véritable.</p><p>4 fois 4 est le nombre<br>Qui complète la Croix Solaire,<br>Quand toutes choses retournent à leur point d’origine,<br>Et le cercle se referme pour l’éternité,<br>Le temps s’achève.</p></div>`},
  {t:"Primal Punk en bref", ref:"PP p.18", img:"assets/lore/m-eshaton.jpg", h:`
 <p>Nous sommes en <b>2595</b>. Cinq siècles après l'<b>Eshaton</b>, la pluie d'astéroïdes qui a anéanti la civilisation, l'humanité se relève sur les ruines de l'Europe et de l'Afrika.</p>
@@ -49,9 +47,8 @@ tabs:[
 <p>Les <b>Afrikains</b> se voient en lions : leur passé vit dans le souvenir des ancêtres, pas dans les ruines. Puissant et fier, le lion a déjà pris pied en Hybrispanie et dans les Balkhans, et la mémoire de la colonisation le pousse à bondir de l'autre côté de la mer.</p>`},
  {t:"Le Flux", ref:"PP p.332", h:`
 <p>Avant l'Eshaton, le <b>Flux</b> reliait tout et tout le monde : un réseau de données omniprésent, presque vivant. Des adeptes, les <b>Diffuseurs</b>, y vivaient des expériences mystiques et voyaient partout la « Signature » <b>2<sup>16</sup> = 65536</b>.</p>
-<p>Le Flux s'est tari avec l'Eshaton. Les Diffuseurs survivants sont devenus les <b>Chroniqueurs</b>, dont le but ultime est de le réveiller.</p>`}
+<p>Le Flux s'est tari avec l'Eshaton. Les Diffuseurs survivants sont devenus les <b>Chroniqueurs</b>, dont le but ultime est de le réveiller.</p>`},
 ]},
-
 /* ───────────── RÉGIONS ───────────── */
 {id:"regions", t:"Régions", items:[
  {t:"Borca", sub:"L'héritage des Anciens", icon:"Borca", ref:"PP p.52", img:"assets/lore/r-justitienne.jpg", gal:[["assets/lore/r-borca.jpg","Désolations"],["assets/lore/r-cathedrale.jpg","Cathédrale"],["assets/lore/r-hellvetica.jpg","Hellvetica"]], h:`
@@ -101,9 +98,8 @@ tabs:[
 <p><b>Mémoire</b> : colonisation, guerres, virus S1, Méditerranée fermée par l'Europe. La blessure est vive et nourrit la revanche.</p>
 <p><b>La jungle</b> : là où s'étendait le Sahara serpentent des rivières. Plus au sud, les <b>Psychovores</b> et la <b>Vorace</b> (ceinture végétale qui provoque des cancers) ; ceux qui en reviennent ont oublié leur langue. Le Caire est envahi par les Psychovores.</p>
 <p><b>Les trois cultes</b> : les Néolibyens sont le <b>cœur</b> du lion, les Fléaux ses <b>griffes</b>, les Anubiens son <b>âme</b>.</p>
-<p><b>Lieux</b> : <b>Tripol</b>, centre du monde et siège de la Banque du Commerce ; Qabis, Tunis ; en Europe, Córdoba et Istanbul.</p>`}
+<p><b>Lieux</b> : <b>Tripol</b>, centre du monde et siège de la Banque du Commerce ; Qabis, Tunis ; en Europe, Córdoba et Istanbul.</p>`},
 ]},
-
 /* ───────────── CULTES ───────────── */
 {id:"cultes", t:"Cultes", items:[
  {t:"Spitaliers", sub:"Le dernier bastion", icon:"Spitaliers", ref:"PP p.141-151", img:"assets/lore/c-spitaliers.jpg", h:`
@@ -267,10 +263,9 @@ tabs:[
 <h4>À la surface</h4>
 <p>Les réserves vidées, ils chassent : dans les Balkhans du Nord, la « peste des Blafards » saigne les villages ; les grands bunkers de <b>Thalus</b> et <b>Fermat</b> pratiquent une rotation pour ne pas épuiser leurs proies. Les marchands qui s'aventurent aux portails y gagnent une ferraille que les Chroniqueurs paient cher. Quand les 100 sont sortis en 2173, des gardiens les ont suivis ; aujourd'hui, les <b>prophètes Dormeurs</b> (Daimondal, Trice, Helios, Uriz, Enceph) sont escortés de <b>Halos</b> blafards et prennent peu à peu Exalt. Ils attendent le jour où les Dormeurs aux yeux d'or les guideront vers la lumière.</p>
 <h4>Rangs</h4>
-<ul><li><b>Spectre</b> : né dans l'obscurité, il présente sa gorge au Démagogue.</li><li><b>Solaire</b> (technicien, panneaux solaires) → <b>Aurore</b>, qui commande les systèmes du bunker.</li><li><b>Éveilleur</b> → <b>Rédempteur</b>, conquérant des installations de RG.</li><li><b>Fantôme</b> (guerrier nocturne) → <b>Cyclope</b>, qui ouvre les arsenaux des Dormeurs et voit la nuit.</li><li><b>Halo</b> (paladin d'un prophète), <b>Aspirant</b>, puis <b>Démagogue</b>.</li></ul>`}
+<ul><li><b>Spectre</b> : né dans l'obscurité, il présente sa gorge au Démagogue.</li><li><b>Solaire</b> (technicien, panneaux solaires) → <b>Aurore</b>, qui commande les systèmes du bunker.</li><li><b>Éveilleur</b> → <b>Rédempteur</b>, conquérant des installations de RG.</li><li><b>Fantôme</b> (guerrier nocturne) → <b>Cyclope</b>, qui ouvre les arsenaux des Dormeurs et voit la nuit.</li><li><b>Halo</b> (paladin d'un prophète), <b>Aspirant</b>, puis <b>Démagogue</b>.</li></ul>`},
 ]},
-
-/* ───────────── CLANS (Katharsys + campagnes) ───────────── */
+/* ───────────── CLANS ───────────── */
 {id:"clans", t:"Clans", items:[
  {t:"Les clans en bref", ref:"K p.199-243", h:`
 <p>Hors des cultes, l'Europe et l'Afrika sont peuplées de <b>clans</b> : familles, tribus, bandes et peuples entiers qui ont leurs propres totems, coutumes et ennemis. <i>Katharsys</i> en décrit vingt et un, du plus misérable au plus étrange ; les campagnes en ajoutent d'autres.</p>
@@ -354,9 +349,8 @@ tabs:[
 <p>À la nouvelle lune, certains bâtissent encore des <b>cercles de pierre</b> et sculptent des idoles de Ganaress, comme tirés par des fils invisibles.</p>`},
  {t:"Benesato et Lombardi", sub:"Purgare du Nord", ref:"ETS p.13-15", h:`
 <p><b>Benesato</b> : vieux clan de Lucatore, presque entièrement converti à la Croix Brisée. Sept générations sur la stèle du cimetière. Gouverneur : <b>Ennio Benesato</b>.</p>
-<p><b>Lombardi</b> : famille régnante de Bergamo, rétive aux missionnaires, refuge des Jehammétans et des déserteurs hellvétiques. Chef : <b>Vespaccio, le Loup Blanc</b>.</p>`}
+<p><b>Lombardi</b> : famille régnante de Bergamo, rétive aux missionnaires, refuge des Jehammétans et des déserteurs hellvétiques. Chef : <b>Vespaccio, le Loup Blanc</b>.</p>`},
 ]},
-
 /* ───────────── ABERRANTS ───────────── */
 {id:"aberrants", t:"Aberrants", items:[
  {t:"Les cinq Extases", ref:"PP p.32 · K p.279-282", h:`
@@ -406,9 +400,8 @@ tabs:[
 <ul><li><b>Pandoriens</b> : humains gonflés de Sepsie, gardiens des nids biokinétiques (voir Clans).</li>
 <li><b>Enfants-tiques</b> : stade larvaire des Biokinésistes.</li>
 <li><b>Sporuleux</b> : Biokinésistes découplés par la Discordance, nus, griffus, en essaims de cinq à cinquante.</li>
-<li><b>Ganarides</b> : faux-bourdons orphelins de Ganaress (voir Briton).</li></ul>`}
+<li><b>Ganarides</b> : faux-bourdons orphelins de Ganaress (voir Briton).</li></ul>`},
 ]},
-
 /* ───────────── BESTIAIRE ───────────── */
 {id:"bestiaire", t:"Bestiaire", items:[
  {t:"Gendos", sub:"Borca, Balkhans", ref:"K p.244", h:`
@@ -438,9 +431,8 @@ tabs:[
 <p>Morses, phoques, baleines, narvals, orques, requins, espadons ; maquereaux et harengs dans la Mer Celtique. Dans les bois : sangliers, élans, lynx, castors. Brest élève encore près de trois cents <b>chiens de chasse</b>, rares depuis que les gendos les ont détrônés.</p>
 <p>Les marins parlent de monstres des profondeurs, de sirènes et de morts qui appellent les vivants. La <b>Manche Morte</b> est empoisonnée, couverte de spores venus de la Seine.</p>`},
  {t:"Faune des marais du Rhône", ref:"JdM", h:`
-<p>Serpents (prisés en brochette), grenouilles, cailles, canards ; méduses géantes plus au sud qui vident la mer de ses poissons ; <b>limaces cuirassées</b> qui digèrent lentement les morts ; essaims de guêpes et de termites des Phéromanciens.</p>`}
+<p>Serpents (prisés en brochette), grenouilles, cailles, canards ; méduses géantes plus au sud qui vident la mer de ses poissons ; <b>limaces cuirassées</b> qui digèrent lentement les morts ; essaims de guêpes et de termites des Phéromanciens.</p>`},
 ]},
-
 /* ───────────── LES ANCIENS ───────────── */
 {id:"anciens", t:"Les Anciens", items:[
  {t:"Recombination Group et le projet Tannhäuser", ref:"PP p.335-343 · K p.266", img:"assets/lore/b-dormeur.jpg", h:`
@@ -473,10 +465,9 @@ tabs:[
 <p>Apporté en Briton en 2412, gardé au Mont-Saint-Michel, il a servi à Vicarent contre Ganaress. Depuis 2585, il est caché sur l'île d'<b>Ouessant</b>, gardé par Barringer.</p>`},
  {t:"La signature 2^16", ref:"PP p.332-338 · K p.262", h:`
 <p>65536 apparaît partout : visions des Diffuseurs dans le Flux, virus de 2072, logiciel des Paladins qui n'ont pas explosé, peut-être caveaux des 300 restés fermés, et même les AMSUMO, dont elle a pris le contrôle.</p>
-<p>En 2597, le code « <b>1616</b> » signe les réseaux internes du Serveur d'Aquitaine.</p>`}
+<p>En 2597, le code « <b>1616</b> » signe les réseaux internes du Serveur d'Aquitaine.</p>`},
 ]},
-
-/* ───────────── ÉCONOMIE & ARTEFACTS ───────────── */
+/* ───────────── ÉCONOMIE ───────────── */
 {id:"economie", t:"Économie", items:[
  {t:"Énergie : le Quantum", ref:"A p.79-85", h:`
 <p>L'électricité se mesure en <b>Quanta (Qt)</b>, unité inventée par les Chroniqueurs. Un <b>E-Cube</b> contient précisément <b>20 Qt</b> ; recharger un E-Cube coûte environ <b>120 LC</b> chez les Chroniqueurs.</p>
@@ -503,10 +494,9 @@ tabs:[
 <p><b>Huiles élyséennes</b> : Altaïr en rapporte l'idée de Franka ; <b>Abacus</b>, l'Élyséen de Lucatore, les perfectionne. Mélange d'huiles traditionnelles (<b>Perat, Hiddekel, Gehon, Pischon</b>, puis <b>Achéron</b> et <b>Styx</b>), de Brûlure broyée et d'inhibiteurs : elles <b>cachent la sporulation aux mollusks</b> des Spitaliers et coupent le Brûlé du collectif des chakras. Lucatore en exporte partout. Addictives.</p>`},
  {t:"Artefacts", ref:"A p.195", h:`
 <p>Les murmures des Anciens. Avant de s'en servir, il faut comprendre comment ils marchent puis réussir à les <b>activer</b>. Un échec critique fait griller l'objet pour de bon.</p>
-<p>Restes psychonautiques : les humains exploitent aussi les reliques d'Aberrants (A p.109). Grands gisements actuels : marais du Rhône, épaves de l'Atlantique, Britannie, Mer Celtique.</p>`}
+<p>Restes psychonautiques : les humains exploitent aussi les reliques d'Aberrants (A p.109). Grands gisements actuels : marais du Rhône, épaves de l'Atlantique, Britannie, Mer Celtique.</p>`},
 ]},
-
-/* ───────────── PURGARE DU NORD (En Ton Sang) ───────────── */
+/* ───────────── PURGARE DU NORD ───────────── */
 {id:"purgare", t:"Purgare du Nord", items:[
  {t:"La région", sub:"Contreforts de la Région Territoriale III", img:"assets/lore/l-lucatore.jpg", ref:"ETS p.13", h:`
 <p>Comparée aux champs de bataille de l'Adriatique, la région est riche et unie. Les Hellvétiques de la <b>Région Territoriale III</b> ne tolèrent aucune agitation devant leurs portes. Les clans sauvages ont disparu, les vieilles familles se sont converties à la Néognose.</p>
@@ -554,10 +544,9 @@ tabs:[
 <p>Nommé <b>Baptiste</b> à la mort de Marcellus, il fait de Lucatore sa résidence, confie l'huile à Abacus et le gouvernement à son frère <b>Ennio</b>. Il épouse <b>Neva</b>, de vingt ans sa cadette. Son meurtre menace le Cloître : Cathédrale peut remplacer un Baptiste, pas son huile.</p>`},
  {t:"Le trésor de Jehammet", ref:"ETS p.101", h:`
 <p>Des décennies de campagnes ont rempli le Cloître de reliques jehammétanes : parchemins, météorites sacrées, icônes, os d'un Fatum, dents d'or d'un Oracle, calices, caisses d'or. Neva l'a remis à <b>Papa Chico</b>.</p>
-<p>Ses Romano ont fui avec l'or… et laissé un <b>disque doré</b> d'aspect banal : un <b>récepteur</b>, gravé d'un code sur son rebord. L'une des pièces du <i>Testament de Jehammet</i>.</p>`}
+<p>Ses Romano ont fui avec l'or… et laissé un <b>disque doré</b> d'aspect banal : un <b>récepteur</b>, gravé d'un code sur son rebord. L'une des pièces du <i>Testament de Jehammet</i>.</p>`},
 ]},
-
-/* ───────────── FRANKA DU SUD (Jeu de Massacre) ───────────── */
+/* ───────────── FRANKA DU SUD ───────────── */
 {id:"franka", t:"Franka du Sud", items:[
  {t:"La région en 2596", img:"assets/lore/l-rhone.jpg", ref:"JdM", h:`
 <p>Les Néolibyens sont les seigneurs des villes côtières : la Banque du Commerce y vend chaque année les concessions. La <b>Résistance</b> tient l'arrière-pays, les <b>Spitaliers</b> font de Montpellier leur siège régional, et tous combattent les <b>Phéromanciens</b> des marais du Rhône.</p>
@@ -626,10 +615,9 @@ tabs:[
 <li><b>Anubiens</b> : sans eux, pas de front ; libres partout.</li>
 <li><b>Jehammétans</b> : patientent ; si le Lion attaque l'Hybrispanie, les Béliers se lèveront.</li>
 <li><b>Apocalyptiques</b> : des dizaines de Nuées ; les cartes annoncent un changement.</li>
-<li><b>Blafards</b> : « des dieux dorment dans les marais ».</li></ul>`}
+<li><b>Blafards</b> : « des dieux dorment dans les marais ».</li></ul>`},
 ]},
-
-/* ───────────── BRITON (Black Atlantic) ───────────── */
+/* ───────────── BRITON ───────────── */
 {id:"briton", t:"Briton", items:[
  {t:"Terre Sainte", img:"assets/lore/l-msm.jpg", ref:"BA p.12-18", h:`
 <p>Le nord-ouest de la Franka : côtes accidentées et pluvieuses, prairies, forêts de bouleaux, mégalithes couverts de mousse, brouillard sur les collines. Hivers doux, ports qui ne gèlent pas ; parfois un iceberg de la Barrière de Glace dérive au large de Brest.</p>
@@ -687,10 +675,9 @@ tabs:[
 <li><b>Juges, Hellvétiques, Néolibyens, Fléaux, Jehammétans</b> : quasi absents.</li>
 <li><b>Apocalyptiques</b> : petites Nuées ; la Brûlure y est mortelle.</li>
 <li><b>Anubiens</b> : arrivent par la Route des Léopards, attirés par Carnac.</li>
-<li><b>Blafards</b> : remontent des Pyrénées pour affronter Argyre.</li></ul>`}
+<li><b>Blafards</b> : remontent des Pyrénées pour affronter Argyre.</li></ul>`},
 ]},
-
-/* ───────────── APOCRYPHA (théories de fans) ───────────── */
+/* ───────────── APOCRYPHA ───────────── */
 {id:"apocrypha", t:"Apocrypha", items:[
  {t:"À propos de cette section", ref:"Apo", h:`
 <p class="quote"><i>Apocrypha</i> est un ouvrage de fans, non officiel. Il propose une lecture d'ensemble des mystères de Degenesis. Tout ce qui suit est <b>théorie</b>, à utiliser ou à ignorer selon les besoins de la table. Les cartes suivent l'ordre du livre : Recombination Group et ses technologies, l'avant-Eshaton, l'Amorce, les personnages d'après l'Eshaton, les Fragments, le Testament de Jehammet, des conseils pour le MJ, une liste de Secrets par culte et une FAQ. Les noms sont harmonisés sur ceux de Primal Punk : Eshaton, Jehammet, Triglav, Flux, Mère Corbeau (Apocrypha écrit Eschaton, Jehammed, Triglaw, Stream, Mère des Corbeaux).</p>`},
@@ -1128,9 +1115,8 @@ tabs:[
 <li><b>Le jugement d'Agathopoiia (3073)</b> : les Œufs de la Cascade 1000, copies de Getrell, descendent juger si l'humanité a été « fructueuse » ; autodestruction ou ère divine. Rebus aurait négocié avec « Dieu » la survie de la Terre.</li>
 <li><b>Le crépuscule des dieux</b> : avec les coordonnées du Testament, le <b>Laser Thor de Bath</b> abat Minerva ; les Maraudeurs pourrissent, l'humanité est libre mais sans avenir technologique.</li>
 <li><b>La grande réinitialisation</b> : le Testament, trempé dans le sang d'Ariès, libère l'antivirus ; le Flux redémarre. Impulse veut le faire par vagues pour que Tannhäuser ne devienne pas inarrêtable.</li>
-</ul>`}
+</ul>`},
 ]},
-
 /* ───────────── CHRONOLOGIE ───────────── */
 {id:"chrono", t:"Chronologie", timeline:[
  ["2045","Nouvel ordre mondial : l'ONU éclate en blocs (Europe unie, Afrique unie, Protectorat chinois)."],
@@ -1207,131 +1193,130 @@ tabs:[
  ["2594","Les Spitaliers débarquent à Qabis pour étudier les Psychovores."],
  ["2595","Aujourd'hui (livre de base)."],
  ["2596","Arnika libère Helios ; ils fuient vers Brest. Toulon : l'Opération Mirage tourne à la guerre civile."],
- ["2597","Ruytman se suicide, Vega prend Rennes. Jour de Ganaress : Black Atlantic."]
+ ["2597","Ruytman se suicide, Vega prend Rennes. Jour de Ganaress : Black Atlantic."],
 ]},
-
 /* ───────────── GLOSSAIRE ───────────── */
 {id:"glossaire", t:"Glossaire", gloss:[
- ["2^16", "Valeur qui submergea le Flux juste avant l'Eshaton et le fit tomber ; menace et espoir pour les Chroniqueurs."],
- ["Aberrant", "Psychonaute, enfant de l'Amorce. Aussi « Sans-âme »."],
- ["Abrami", "Père et chef de famille jehammétan."],
- ["Achéron", "Anabaptiste d'élite qui use d'huiles de Sepsie et de Brûlure (Styx, Achéron) au prix de son humanité."],
- ["Aiguilles", "Fragments chroniqueurs renégats depuis la Catastrophe de 2563 ; aussi leurs tours de verre en Borca orientale."],
- ["Alcôve", "Comptoir des Chroniqueurs où l'on échange artefacts et lettres de change, relié au Serveur."],
- ["Ambroisie", "Cartouches de RG qui maintiennent les Maraudeurs en vie."],
- ["Amorce", "Substance venue des astéroïdes qui réécrit l'ADN. Origine de la Sepsie et des Psychovores."],
- ["AMSUMO", "Hommes-machines des Anciens, contrôlés par 2^16."],
- ["Anneaux de vie", "Tatouages jehammétans étendus chaque année au Baïram, qui racontent la vie de leur porteur."],
- ["Appendix", "Quartier des malades autour du Spital, divisé par maladies."],
- ["Arianoï", "Disciples jehammétans du bélier Ariès."],
- ["Ascète", "Anabaptiste fermier qui mortifie son corps et cultive la terre."],
- ["Autobastion", "Forteresse mobile à chenilles des Néolibyens."],
- ["Baïram", "Cérémonie jehammétane de printemps (sept jours) où les Iconides étendent les anneaux de vie."],
- ["Banque du Commerce", "Cœur du culte néolibyen à Tripol ; enchères annuelles des concessions."],
- ["Baptiste", "L'un des huit dirigeants des Anabaptistes."],
- ["Bedain", "Île des Ferrailleurs et plus grand dépôt d'épaves du monde ; port de Syracuse."],
- ["Bios", "Dossier de vie d'un Chroniqueur dans le Serveur, qui calcule son score."],
- ["Blé du Rain", "Blé sauvage parti de Noret, très résistant, validé par le Spital."],
- ["Broyeuse", "Complexe souterrain d'Exalt, lié au projet Free Spirit."],
- ["Brûlé", "Consommateur de Brûlure, marqué d'un symbole régional sur la peau."],
- ["Brûlure", "Drogue tirée des bourgeons des champs de spores-mères."],
- ["Cartel", "Organisation du nain Bosch qui rackette les Ferrailleurs de Justitienne."],
- ["Cascade", "Vague de Dormeurs censée s'éveiller tous les cent ans."],
- ["Cathédrale", "Siège des Anabaptistes, l'ancienne cathédrale de Cologne."],
- ["Chakra terrestre", "Cratère-mère d'une Extase : Pandora, Souffrance, Usud, Mirar, Nox (et le Colosse)."],
- ["Champ de spores", "Anneaux de mycélium de Sepsie qui s'étendent et effondrent le sol."],
- ["Charognards", "Plus ancienne nuée apocalyptique de Borca, menée par Mère Corbeau."],
- ["Codex", "La loi justitienne des Juges."],
- ["Concept", "Archétype de personnalité ; les 22 Concepts correspondent aux lames du tarot."],
- ["Concession", "Droit d'exploitation néolibyen, vendu aux enchères par la Banque du Commerce."],
- ["Conseil des Émanations", "Comité anabaptiste qui juge l'authenticité des émanations."],
- ["Corneille", "Chef et cartomancien d'une nuée apocalyptique."],
- ["Croix brisée", "Symbole anabaptiste : croix dans une roue dont un quart manque, l'imperfection humaine."],
- ["Croix solaire", "Croix de quatre « quatre », théorie du tout des Hogons ; base de la Prophétie du Chacal."],
- ["Défricheur", "Fusil d'assaut hellvétique à trois canons, confié à vie."],
- ["Démagogue", "Blafard dont la voix mémétique provoque peur, désir ou douleur."],
- ["Démiurge", "Pour les Anabaptistes, le faux créateur dont les Psychonautes sont l'engeance."],
- ["Désolations", "Les terres sauvages hors des villes."],
- ["Dhoruba", "Gigantesque balafre creusée en Afrique par l'astéroïde ; berceau des Psychovores."],
- ["Dilacérateur", "Arme d'hast des Spitaliers, avec un mollusk dans un cylindre de verre."],
- ["Dinar", "Monnaie néolibyenne."],
- ["Discordance", "Choc entre Sepsie et Psychovores qui brouille les chakras ; Zone de Discordance."],
- ["Distorsion", "Zones où le temps se déforme autour des Prégnostiques."],
- ["Distributeur", "Bunker de Recombination Group où dorment les Dormeurs ; demeure des Blafards."],
- ["Doctrine", "Serment et code d'honneur des Hellvétiques."],
- ["Doigt d'Anubis", "Os creux rempli de bile de chacal qui révèle la marque d'Anubis chez les descendants du premier peuple."],
- ["Dormeurs", "Hommes de Recombination Group congelés avant l'Eshaton."],
- ["Douât (fruit du)", "Fruit de Psychovore que les Anubiens catalysent dans leur sang."],
- ["E-Cube", "Cellule d'énergie de 20 Quanta."],
- ["Eau Noire", "Sepsie flottante des Léviathaniques."],
- ["Électrocuteur", "Arme électrique des Chroniqueurs."],
- ["Émanation", "Vision ou révélation divine anabaptiste ; détermine le rang."],
- ["Épave (L')", "Casino-bordel dans un navire du vieux port de Justitienne."],
- ["Eshaton", "La pluie d'astéroïdes du 13 mars 2073."],
- ["Ex", "Remède spitalier contre les maladies liées aux spores."],
- ["Exsporiation", "Purification complète des Spitaliers à l'entrée du Spital."],
- ["Extase", "Type de Psychonaute : Biokinèse, Phéromancie, Dushan, Prégnosticisme, Psychokinèse."],
- ["Faucheuse (Châtiment de la)", "Faille volcanique du nord de la Borca jusqu'à l'Afrique."],
- ["Faux-bourdon", "Humain soumis à un Phéromancien."],
- ["Feu Stellaire", "Fragment d'astéroïde contenant l'Amorce pure, relique anabaptiste."],
- ["Flux", "Le réseau de données mondial d'avant l'Eshaton."],
- ["Flux statique", "Fragments du Flux d'avant l'Eshaton conservés dans les Serveurs."],
- ["Forteresse alpine", "Réseau de bunkers et de tunnels des Hellvétiques."],
- ["Fragment", "Plus haut rang des Chroniqueurs, au cœur du Serveur."],
- ["Free Spirit", "Projet de Getrell : les Libres Penseurs et la Broyeuse d'Exalt."],
- ["Fulgur", "Réacteur nucléaire de la taille d'une paume, convoité par les Aiguilles."],
- ["Fustigateur", "Fouet barbelé à impulsion électrique des Fléaux."],
- ["Gendo", "Chien sauvage des ruines de la Borca."],
- ["Glaive de Jehammet", "Guerrier jehammétan, souvent un Ismaeli."],
- ["Graine", "Pour les Anabaptistes, la connaissance divine qui germe en soi."],
- ["Hagari", "Mère des enfants d'un Abrami, ossature du culte jehammétan."],
- ["Huile de Mardouk", "Huile anubienne qui protège des essaims."],
- ["Huiles élyséennes", "Huiles anabaptistes de Lucatore : force, plus de douleur ni de peur, sporulation cachée ; addictives."],
- ["Icône", "Objet symbolique qu'un Iconide présente à Dieu pour négocier."],
- ["Iconide", "Prêtre, juge et bourreau jehammétan, ancien Isaaki."],
- ["Imiout", "Peau cousue autour d'un mourant par un Hécatéen anubien pour le faire renaître."],
- ["Isaaki", "Fils béni d'un Abrami et d'une Saraeli, agneau sacrificiel lancé au combat."],
- ["Ismaeli", "Fils d'un Abrami et d'une Hagari, chargé des basses besognes."],
- ["Kâ et bâ", "Pour les Anubiens, le fil de vie originel et ce qui le corrompt."],
- ["Kifo", "Fléau sans masque, banni pour avoir déçu les ancêtres."],
- ["Kom", "Buggy des Fléaux et des Néolibyens."],
- ["Léperos", "Brûlé chez qui la Sepsie continue de croître ; contagieux."],
- ["Lettres de change (LC)", "Monnaie des Chroniqueurs, échangée auprès de leurs Serveurs."],
- ["Libre Penseur", "Dormeur qui a rompu son conditionnement."],
- ["Libyen (le)", "Marchand fondateur de Tripol et ancêtre spirituel des Néolibyens."],
- ["Maraudeur", "Ancien maintenu en vie par l'Ambroisie, chasseur de Dormeurs."],
- ["Mère Corbeau", "Cheffe légendaire des Apocalyptiques et des Charognards."],
- ["Minerva", "Station orbitale de Getrell."],
- ["Mollusk", "Détecteur de spores vivant des Spitaliers."],
- ["Néognose", "Doctrine anabaptiste de Rebus : Pneuma contre matière du Démiurge."],
- ["Noumenon", "Vocalisateur spitalier qui traduit en sons les appels éthériques."],
- ["Nuée", "Bande apocalyptique ; chaque membre porte un nom d'oiseau."],
- ["Orgiastique", "Anabaptiste guerrier qui purge ses pulsions par la violence et l'excès."],
- ["Pneuma", "Le souffle divin, prisonnier de la matière selon la Néognose."],
- ["Poumon Noir", "Région en ruine où s'élève Justitienne (ancienne Ruhr)."],
- ["Préserviste", "Spitalier cavalier à l'épée Preservalis, aux ordres de Kranzler."],
- ["Prophète Dormeur", "Dormeur messianique : Daimondal, Trice, Helios, Uriz, Enceph."],
- ["Protectorat", "Les colonies sous la protection de Justitienne et des Juges."],
- ["Psychonaute", "Homo Degenesis doté de pouvoirs liés à un chakra."],
- ["Psychovores", "Plantes de l'Amorce en Afrika, hostiles à la Sepsie."],
- ["Quantum (Qt)", "Unité d'électricité des Chroniqueurs."],
- ["Recombination Group (RG)", "Méga-corporation d'avant l'Eshaton, à l'origine des Dormeurs."],
- ["Rune", "Signe gravé par un Ferrailleur pour marquer son passage, un danger ou de l'eau."],
- ["Saraeli", "Épouse vierge et bénie d'un Abrami, réceptacle du futur Messie."],
- ["Score", "Valeur d'un Chroniqueur, calculée par le Serveur."],
- ["Sepsie", "Le champignon de l'Amorce qui couvre l'Europe."],
- ["Serveur central", "Siège des Chroniqueurs à Justitienne."],
- ["Souche pure", "Patrimoine génétique originel resté lié à l'Amorce."],
- ["Spital", "Forteresse-hôpital des Spitaliers près de Justitienne."],
- ["Tannhäuser (projet)", "Plan de RG : les cascades de Dormeurs."],
- ["Tarot apocalyptique", "Jeu de cartes des Apocalyptiques, issu de Getrell, qui mute sans cesse."],
- ["Technocentre", "Quartier des Ferrailleurs à Justitienne."],
- ["Testament", "Carnet de voyage du Premier Juge, base du Codex ; ou le Testament de Jehammet (disque, étoile, lance)."],
- ["Triszyklikon", "Disque lunaire noir vénéré par les Blafards."],
- ["Vase canope", "Vase anubien à tête de chacal dont le contenu efface un cercle."],
- ["Vorace", "Mort cellulaire foudroyante causée par les épines et fruits des Psychovores."],
- ["Warui", "Langue rudimentaire « venue de la rivière » des Fléaux, née près des Psychovores."],
- ["Ziggourat", "Tour bâtie par une reine phéromancienne et ses faux-bourdons."],
- ["Zigzag", "Marque des traîtres chez les Apocalyptiques."]
-]}
+ ["2^16","Valeur qui submergea le Flux juste avant l'Eshaton et le fit tomber ; menace et espoir pour les Chroniqueurs."],
+ ["Aberrant","Psychonaute, enfant de l'Amorce. Aussi « Sans-âme »."],
+ ["Abrami","Père et chef de famille jehammétan."],
+ ["Achéron","Anabaptiste d'élite qui use d'huiles de Sepsie et de Brûlure (Styx, Achéron) au prix de son humanité."],
+ ["Aiguilles","Fragments chroniqueurs renégats depuis la Catastrophe de 2563 ; aussi leurs tours de verre en Borca orientale."],
+ ["Alcôve","Comptoir des Chroniqueurs où l'on échange artefacts et lettres de change, relié au Serveur."],
+ ["Ambroisie","Cartouches de RG qui maintiennent les Maraudeurs en vie."],
+ ["Amorce","Substance venue des astéroïdes qui réécrit l'ADN. Origine de la Sepsie et des Psychovores."],
+ ["AMSUMO","Hommes-machines des Anciens, contrôlés par 2^16."],
+ ["Anneaux de vie","Tatouages jehammétans étendus chaque année au Baïram, qui racontent la vie de leur porteur."],
+ ["Appendix","Quartier des malades autour du Spital, divisé par maladies."],
+ ["Arianoï","Disciples jehammétans du bélier Ariès."],
+ ["Ascète","Anabaptiste fermier qui mortifie son corps et cultive la terre."],
+ ["Autobastion","Forteresse mobile à chenilles des Néolibyens."],
+ ["Baïram","Cérémonie jehammétane de printemps (sept jours) où les Iconides étendent les anneaux de vie."],
+ ["Banque du Commerce","Cœur du culte néolibyen à Tripol ; enchères annuelles des concessions."],
+ ["Baptiste","L'un des huit dirigeants des Anabaptistes."],
+ ["Bedain","Île des Ferrailleurs et plus grand dépôt d'épaves du monde ; port de Syracuse."],
+ ["Bios","Dossier de vie d'un Chroniqueur dans le Serveur, qui calcule son score."],
+ ["Blé du Rain","Blé sauvage parti de Noret, très résistant, validé par le Spital."],
+ ["Broyeuse","Complexe souterrain d'Exalt, lié au projet Free Spirit."],
+ ["Brûlé","Consommateur de Brûlure, marqué d'un symbole régional sur la peau."],
+ ["Brûlure","Drogue tirée des bourgeons des champs de spores-mères."],
+ ["Cartel","Organisation du nain Bosch qui rackette les Ferrailleurs de Justitienne."],
+ ["Cascade","Vague de Dormeurs censée s'éveiller tous les cent ans."],
+ ["Cathédrale","Siège des Anabaptistes, l'ancienne cathédrale de Cologne."],
+ ["Chakra terrestre","Cratère-mère d'une Extase : Pandora, Souffrance, Usud, Mirar, Nox (et le Colosse)."],
+ ["Champ de spores","Anneaux de mycélium de Sepsie qui s'étendent et effondrent le sol."],
+ ["Charognards","Plus ancienne nuée apocalyptique de Borca, menée par Mère Corbeau."],
+ ["Codex","La loi justitienne des Juges."],
+ ["Concept","Archétype de personnalité ; les 22 Concepts correspondent aux lames du tarot."],
+ ["Concession","Droit d'exploitation néolibyen, vendu aux enchères par la Banque du Commerce."],
+ ["Conseil des Émanations","Comité anabaptiste qui juge l'authenticité des émanations."],
+ ["Corneille","Chef et cartomancien d'une nuée apocalyptique."],
+ ["Croix brisée","Symbole anabaptiste : croix dans une roue dont un quart manque, l'imperfection humaine."],
+ ["Croix solaire","Croix de quatre « quatre », théorie du tout des Hogons ; base de la Prophétie du Chacal."],
+ ["Défricheur","Fusil d'assaut hellvétique à trois canons, confié à vie."],
+ ["Démagogue","Blafard dont la voix mémétique provoque peur, désir ou douleur."],
+ ["Démiurge","Pour les Anabaptistes, le faux créateur dont les Psychonautes sont l'engeance."],
+ ["Désolations","Les terres sauvages hors des villes."],
+ ["Dhoruba","Gigantesque balafre creusée en Afrique par l'astéroïde ; berceau des Psychovores."],
+ ["Dilacérateur","Arme d'hast des Spitaliers, avec un mollusk dans un cylindre de verre."],
+ ["Dinar","Monnaie néolibyenne."],
+ ["Discordance","Choc entre Sepsie et Psychovores qui brouille les chakras ; Zone de Discordance."],
+ ["Distorsion","Zones où le temps se déforme autour des Prégnostiques."],
+ ["Distributeur","Bunker de Recombination Group où dorment les Dormeurs ; demeure des Blafards."],
+ ["Doctrine","Serment et code d'honneur des Hellvétiques."],
+ ["Doigt d'Anubis","Os creux rempli de bile de chacal qui révèle la marque d'Anubis chez les descendants du premier peuple."],
+ ["Dormeurs","Hommes de Recombination Group congelés avant l'Eshaton."],
+ ["Douât (fruit du)","Fruit de Psychovore que les Anubiens catalysent dans leur sang."],
+ ["E-Cube","Cellule d'énergie de 20 Quanta."],
+ ["Eau Noire","Sepsie flottante des Léviathaniques."],
+ ["Électrocuteur","Arme électrique des Chroniqueurs."],
+ ["Émanation","Vision ou révélation divine anabaptiste ; détermine le rang."],
+ ["Épave (L')","Casino-bordel dans un navire du vieux port de Justitienne."],
+ ["Eshaton","La pluie d'astéroïdes du 13 mars 2073."],
+ ["Ex","Remède spitalier contre les maladies liées aux spores."],
+ ["Exsporiation","Purification complète des Spitaliers à l'entrée du Spital."],
+ ["Extase","Type de Psychonaute : Biokinèse, Phéromancie, Dushan, Prégnosticisme, Psychokinèse."],
+ ["Faucheuse (Châtiment de la)","Faille volcanique du nord de la Borca jusqu'à l'Afrique."],
+ ["Faux-bourdon","Humain soumis à un Phéromancien."],
+ ["Feu Stellaire","Fragment d'astéroïde contenant l'Amorce pure, relique anabaptiste."],
+ ["Flux","Le réseau de données mondial d'avant l'Eshaton."],
+ ["Flux statique","Fragments du Flux d'avant l'Eshaton conservés dans les Serveurs."],
+ ["Forteresse alpine","Réseau de bunkers et de tunnels des Hellvétiques."],
+ ["Fragment","Plus haut rang des Chroniqueurs, au cœur du Serveur."],
+ ["Free Spirit","Projet de Getrell : les Libres Penseurs et la Broyeuse d'Exalt."],
+ ["Fulgur","Réacteur nucléaire de la taille d'une paume, convoité par les Aiguilles."],
+ ["Fustigateur","Fouet barbelé à impulsion électrique des Fléaux."],
+ ["Gendo","Chien sauvage des ruines de la Borca."],
+ ["Glaive de Jehammet","Guerrier jehammétan, souvent un Ismaeli."],
+ ["Graine","Pour les Anabaptistes, la connaissance divine qui germe en soi."],
+ ["Hagari","Mère des enfants d'un Abrami, ossature du culte jehammétan."],
+ ["Huile de Mardouk","Huile anubienne qui protège des essaims."],
+ ["Huiles élyséennes","Huiles anabaptistes de Lucatore : force, plus de douleur ni de peur, sporulation cachée ; addictives."],
+ ["Icône","Objet symbolique qu'un Iconide présente à Dieu pour négocier."],
+ ["Iconide","Prêtre, juge et bourreau jehammétan, ancien Isaaki."],
+ ["Imiout","Peau cousue autour d'un mourant par un Hécatéen anubien pour le faire renaître."],
+ ["Isaaki","Fils béni d'un Abrami et d'une Saraeli, agneau sacrificiel lancé au combat."],
+ ["Ismaeli","Fils d'un Abrami et d'une Hagari, chargé des basses besognes."],
+ ["Kâ et bâ","Pour les Anubiens, le fil de vie originel et ce qui le corrompt."],
+ ["Kifo","Fléau sans masque, banni pour avoir déçu les ancêtres."],
+ ["Kom","Buggy des Fléaux et des Néolibyens."],
+ ["Léperos","Brûlé chez qui la Sepsie continue de croître ; contagieux."],
+ ["Lettres de change (LC)","Monnaie des Chroniqueurs, échangée auprès de leurs Serveurs."],
+ ["Libre Penseur","Dormeur qui a rompu son conditionnement."],
+ ["Libyen (le)","Marchand fondateur de Tripol et ancêtre spirituel des Néolibyens."],
+ ["Maraudeur","Ancien maintenu en vie par l'Ambroisie, chasseur de Dormeurs."],
+ ["Mère Corbeau","Cheffe légendaire des Apocalyptiques et des Charognards."],
+ ["Minerva","Station orbitale de Getrell."],
+ ["Mollusk","Détecteur de spores vivant des Spitaliers."],
+ ["Néognose","Doctrine anabaptiste de Rebus : Pneuma contre matière du Démiurge."],
+ ["Noumenon","Vocalisateur spitalier qui traduit en sons les appels éthériques."],
+ ["Nuée","Bande apocalyptique ; chaque membre porte un nom d'oiseau."],
+ ["Orgiastique","Anabaptiste guerrier qui purge ses pulsions par la violence et l'excès."],
+ ["Pneuma","Le souffle divin, prisonnier de la matière selon la Néognose."],
+ ["Poumon Noir","Région en ruine où s'élève Justitienne (ancienne Ruhr)."],
+ ["Préserviste","Spitalier cavalier à l'épée Preservalis, aux ordres de Kranzler."],
+ ["Prophète Dormeur","Dormeur messianique : Daimondal, Trice, Helios, Uriz, Enceph."],
+ ["Protectorat","Les colonies sous la protection de Justitienne et des Juges."],
+ ["Psychonaute","Homo Degenesis doté de pouvoirs liés à un chakra."],
+ ["Psychovores","Plantes de l'Amorce en Afrika, hostiles à la Sepsie."],
+ ["Quantum (Qt)","Unité d'électricité des Chroniqueurs."],
+ ["Recombination Group (RG)","Méga-corporation d'avant l'Eshaton, à l'origine des Dormeurs."],
+ ["Rune","Signe gravé par un Ferrailleur pour marquer son passage, un danger ou de l'eau."],
+ ["Saraeli","Épouse vierge et bénie d'un Abrami, réceptacle du futur Messie."],
+ ["Score","Valeur d'un Chroniqueur, calculée par le Serveur."],
+ ["Sepsie","Le champignon de l'Amorce qui couvre l'Europe."],
+ ["Serveur central","Siège des Chroniqueurs à Justitienne."],
+ ["Souche pure","Patrimoine génétique originel resté lié à l'Amorce."],
+ ["Spital","Forteresse-hôpital des Spitaliers près de Justitienne."],
+ ["Tannhäuser (projet)","Plan de RG : les cascades de Dormeurs."],
+ ["Tarot apocalyptique","Jeu de cartes des Apocalyptiques, issu de Getrell, qui mute sans cesse."],
+ ["Technocentre","Quartier des Ferrailleurs à Justitienne."],
+ ["Testament","Carnet de voyage du Premier Juge, base du Codex ; ou le Testament de Jehammet (disque, étoile, lance)."],
+ ["Triszyklikon","Disque lunaire noir vénéré par les Blafards."],
+ ["Vase canope","Vase anubien à tête de chacal dont le contenu efface un cercle."],
+ ["Vorace","Mort cellulaire foudroyante causée par les épines et fruits des Psychovores."],
+ ["Warui","Langue rudimentaire « venue de la rivière » des Fléaux, née près des Psychovores."],
+ ["Ziggourat","Tour bâtie par une reine phéromancienne et ses faux-bourdons."],
+ ["Zigzag","Marque des traîtres chez les Apocalyptiques."],
+]},
 ]};

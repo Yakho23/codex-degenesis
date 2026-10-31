@@ -447,7 +447,7 @@ app.addEventListener("click",e=>{
   const act=a.dataset.act,v=a.dataset.v;
   switch(act){
     case "layout":S.layout=S.layout==="ruche"?"grille":"ruche";store.set("layout2",S.layout);render();break;
-    case "regcat":S.regCat=v;render();break;
+    case "regcat":S.regCat=v;render();window.scrollTo(0,0);break;
     case "potcult":S.potCult=v;render();window.scrollTo(0,0);break;
     case "bzgrp":S.bzGrp=v;S.bzCat="Tout";render();break;
     case "bzcat":S.bzCat=v;render();break;
@@ -477,7 +477,7 @@ app.addEventListener("click",e=>{
     case "camptab":S.campTab=v;render();break;
     case "campc":S.campC=v;render();break;
     case "bestsrc":S.bestSrc=v;render();break;
-    case "loretab":S.loreTab=v;S.loreQ="";render();break;
+    case "loretab":S.loreTab=v;S.loreQ="";render();window.scrollTo(0,0);break;
     case "zoom":{const z=document.createElement("div");z.className="zoom"+(a.dataset.wide?" wide":"");z.innerHTML=`<img src="${a.dataset.src}" alt=""><button class="x" aria-label="Fermer">×</button>`;z.addEventListener("click",ev=>{if(ev.target.closest(".x")||ev.target===z)z.remove()});document.body.appendChild(z);break;}
     case "stamp":{const ta=$("#notes");const d=new Date().toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"});ta.value=(ta.value?ta.value+"\n\n":"")+"— "+d+" —\n";store.set("notes",ta.value);ta.focus();break;}
     case "copynotes":copy($("#notes").value);break;

@@ -48,7 +48,7 @@ CAMPAGNE.pnj.forEach((n,i)=>KEY.set(n,"pn-"+i));CAMPAGNE.best.forEach((b,i)=>KEY
 Object.keys(CAMPAGNE.lieux).forEach(c=>CAMPAGNE.lieux[c].forEach((p,i)=>KEY.set(p,"li-"+c+"-"+i)));
 
 /* ───────── état ───────── */
-const S={view:"home",layout:store.get("layout","ruche"),
+const S={view:"home",layout:store.get("layout2","grille"),
  regCat:"Tous",regQ:"",potCult:"Communs",
  bzGrp:"armes",bzCat:"Tout",bzCulte:"",bzQ:"",
  dice:Object.assign({va:6,diff:2},store.get("dice",{}),{ego:0,mod:0}),diceMode:"simple",diceB:{va:6,ego:0,mod:0},last:null,hist:store.get("hist",[]),
@@ -446,7 +446,7 @@ app.addEventListener("click",e=>{
   const a=e.target.closest("[data-act]");if(!a)return;
   const act=a.dataset.act,v=a.dataset.v;
   switch(act){
-    case "layout":S.layout=S.layout==="ruche"?"grille":"ruche";store.set("layout",S.layout);render();break;
+    case "layout":S.layout=S.layout==="ruche"?"grille":"ruche";store.set("layout2",S.layout);render();break;
     case "regcat":S.regCat=v;render();break;
     case "potcult":S.potCult=v;render();window.scrollTo(0,0);break;
     case "bzgrp":S.bzGrp=v;S.bzCat="Tout";render();break;

@@ -449,8 +449,8 @@ app.addEventListener("click",e=>{
     case "layout":S.layout=S.layout==="ruche"?"grille":"ruche";store.set("layout2",S.layout);render();break;
     case "regcat":S.regCat=v;render();window.scrollTo(0,0);break;
     case "potcult":S.potCult=v;render();window.scrollTo(0,0);break;
-    case "bzgrp":S.bzGrp=v;S.bzCat="Tout";render();break;
-    case "bzcat":S.bzCat=v;render();break;
+    case "bzgrp":S.bzGrp=v;S.bzCat="Tout";render();window.scrollTo(0,0);break;
+    case "bzcat":S.bzCat=v;render();window.scrollTo(0,0);break;
     case "dmode":S.diceMode=v;S.last=null;render();break;
     case "diff":S.dice.diff=+v;store.set("dice",S.dice);render();break;
     case "step":{const k=a.dataset.k,d=+a.dataset.d;

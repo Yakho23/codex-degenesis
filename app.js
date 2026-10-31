@@ -59,8 +59,8 @@ if(!(S.dice.diff>=1&&S.dice.diff<=10))S.dice.diff=2;
 try{["fighters","round"].forEach(k=>localStorage.removeItem("codex."+k))}catch(e){} /* anciennes données de l’outil Combat retiré */
 
 /* ───────── navigation ───────── */
-function go(v,push=true){S.view=v;render();window.scrollTo(0,0);if(push){try{history.replaceState(null,"",v==="home"?"#":"#"+v)}catch(e){try{location.hash=v==="home"?"":v}catch(_){}}}}
-window.addEventListener("hashchange",()=>{const h=(location.hash||"").slice(1);const v=SECTIONS.some(s=>s.id===h)?h:"home";if(v!==S.view)go(v,false)});
+function go(v){S.view=v;render();window.scrollTo(0,0)}
+window.addEventListener("hashchange",()=>{const h=(location.hash||"").slice(1);const v=SECTIONS.some(s=>s.id===h)?h:"home";if(v!==S.view)go(v)});
 
 /* ───────── rendu ───────── */
 const app=$("#app");
@@ -74,6 +74,7 @@ function render(){
   if(S.focus){const k=S.focus;S.focus=null;const el=app.querySelector(`[data-k="${k}"]`);if(el){if(el.tagName==="DETAILS")el.open=true;
     requestAnimationFrame(()=>{const top=$(".top"),off=(top?top.offsetHeight:0)+10;window.scrollTo(0,el.getBoundingClientRect().top+window.scrollY-off);el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),1600)})}}
   if(S.view==="bazar"||S.view==="regles"||S.view==="lore"||S.view==="campagne"){const q=$("#q");if(q&&S._focusQ){q.focus();q.setSelectionRange(q.value.length,q.value.length);S._focusQ=false}}
+  navSync();
 }
 function home(){
   const ruche=S.layout==="ruche";
@@ -122,7 +123,6 @@ function globalResults(){
 function jump(h){
   const j=h.j;Object.assign(S,j.s);if(j.enc)S.genOut={tab:"rencontre2",v:enc2Roll(j.enc)};
   S.focus=j.k||null;S.view=j.v;window.scrollTo(0,0);render();
-  try{history.replaceState(null,"","#"+j.v)}catch(e){}
 }
 
 function section(){
@@ -505,8 +505,23 @@ app.addEventListener("change",e=>{
   if(k==="gsexe"){S.gen.sexe=v}
 });
 
+/* bouton retour du téléphone : accueil → section → fiche d’un personnage = autant d’entrées d’historique ; revenir d’un écran en arrière reste un vrai retour */
+const navKey=()=>JSON.stringify({v:S.view,pid:S.view==="personnage"?S.pid||null:null});
+const navUrl=v=>v==="home"?"#":"#"+v;
+let navStack=[],navI=0;
+function navSync(){const k=navKey();if(k===navStack[navI])return;
+  if(navI>0&&k===navStack[navI-1]){navI--;try{history.back()}catch(e){}return}
+  navStack=navStack.slice(0,navI+1);navStack.push(k);navI++;try{history.pushState(Object.assign(JSON.parse(k),{i:navI}),"",navUrl(S.view))}catch(e){}}
+window.addEventListener("popstate",e=>{const n=e.state;if(!n||typeof n.v!=="string"||typeof n.i!=="number")return;
+  navI=n.i;if(JSON.stringify({v:n.v,pid:n.pid||null})===navKey()){navStack[navI]=navKey();return}
+  S.view=n.v;S.pid=n.pid||null;S.pEdit=false;S.pRoll=null;S.pConf=null;S.pBz=null;S.pOther=false;S.focus=null;
+  navStack[navI]=navKey();render();window.scrollTo(0,0)});
 /* démarrage */
 const h=(location.hash||"").slice(1);
 S.view=SECTIONS.some(s=>s.id===h)?h:"home";
+{const st=history.state;
+  if(st&&typeof st.i==="number"){navI=st.i;navStack[navI]=navKey()}
+  else if(S.view!=="home"){const home=JSON.stringify({v:"home",pid:null});navStack=[home,navKey()];navI=1;try{history.replaceState({v:"home",pid:null,i:0},"","#");history.pushState({v:S.view,pid:null,i:1},"",navUrl(S.view))}catch(e){}}
+  else{navStack=[navKey()];navI=0;try{history.replaceState({v:"home",pid:null,i:0},"","#")}catch(e){}}}
 render();
 })();

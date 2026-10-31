@@ -34,7 +34,7 @@ const SECTIONS=[
  {id:"lore",n:"I",t:"Lore",s:"Monde, régions, cultes",pos:[58,0]},
  {id:"regles",n:"II",t:"Règles",s:"Combat, blessures, Ego",pos:[174,0]},
  {id:"bazar",n:"III",t:"Bazar",s:"Armes, armures, matériel",pos:[232,100]},
- {id:"des",n:"IV",t:"Dés",s:"Réserve, déclencheurs, échecs",pos:[174,201]},
+ {id:"des",n:"IV",t:"Dés",s:"Jet simple, confrontation",pos:[174,201]},
  {id:"generateurs",n:"V",t:"Générateurs",s:"PNJ, rencontres, oracle",pos:[58,201]},
  {id:"campagne",n:"VI",t:"Campagne",s:"Lieux, PNJ, bestiaire, notes",pos:[0,100]}];
 

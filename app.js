@@ -129,7 +129,7 @@ function section(){
   const s=SECTIONS.find(x=>x.id===S.view);
   const tabs={lore:loreTabs,regles:regTabs,bazar:bzTabs,generateurs:genTabs,campagne:campTabs}[s.id];
   return `<div class="top"><div class="wrap"><div class="bar"><button class="back" data-go="home" aria-label="Retour à l’accueil">${I.back}</button><h1 class="dg">${DG(s.t)}</h1><span class="roman dg">${s.n}</span></div>${tabs?tabs():""}</div></div>
-  <main class="wrap">${({lore:lore,regles:regles,bazar:bazar,des:des,generateurs:generateurs,campagne:campagne})[s.id]()}</main>`;
+  <main class="wrap">${({lore:lore,regles:regles,bazar:bazar,des:des,generateurs:generateurs,campagne:campagne})[s.id]()}</main><footer class="appfoot"><img src="assets/footer.png" alt="" width="921" height="97"></footer>`;
 }
 const chips=(list,cur,act,label)=>`<div class="tabs" role="toolbar" aria-label="${esc(label)}">${list.map(x=>{const v=Array.isArray(x)?x[0]:x,l=Array.isArray(x)?x[1]:x;return `<button class="chip" data-act="${act}" data-v="${esc(v)}" aria-pressed="${v===cur}">${l}</button>`}).join("")}</div>`;
 
@@ -163,10 +163,10 @@ const LORE_IC={
 const LORE_SV=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
 function loreTabs(){return `<div class="tabs ltabs" role="toolbar" aria-label="Rubriques du lore">${LORE.tabs.map(t=>`<button class="chip lchip" data-act="loretab" data-v="${esc(t.id)}" aria-pressed="${t.id===S.loreTab}">${LORE_SV(LORE_IC[t.id]||"")}${esc(t.t)}</button>`).join("")}</div>`}
 const stripTags=h=>String(h).replace(/<[^>]+>/g," ");
-function loreCard(it,open,feat){
+function loreCard(it,open){
   const ic=it.icon?icon(it.icon):"";
-  const thumb=it.sym?`<img class="lsym" src="${it.sym}" alt="">`:"";
-  return `<details class="card lore${feat?" feat":""}"${dk(it)}${open?" open":""}><summary>${thumb}<span class="lt"><span class="t">${ic?`<span class="lic">${ic}</span>`:""}${esc(it.t)}</span>${it.sub?`<span class="lsub">${esc(it.sub)}</span>`:""}</span>${it.ref?`<span class="ref">${esc(it.ref)}</span>`:""}<span class="lchev" aria-hidden="true">${LORE_SV('<path d="M9 5l7 7-7 7"/>')}</span></summary><div class="body">${it.img?`<button class="lhero" data-act="zoom" data-src="${it.img}" aria-label="Agrandir l’illustration"><img src="${it.img}" alt="" loading="lazy"></button>`:""}${it.h}${it.gal?`<div class="lgal">${it.gal.map(([src,c])=>`<button data-act="zoom" data-src="${src}" aria-label="Agrandir : ${esc(c)}"><img src="${src}" alt="" loading="lazy"><span>${esc(c)}</span></button>`).join("")}</div>`:""}</div></details>`;
+  const thumb=it.sym?`<img class="lsym" src="${it.sym}" alt="">`:it.img?`<img class="lthumb" src="${it.img}" alt="" loading="lazy">`:"";
+  return `<details class="card lore"${dk(it)}${open?" open":""}><summary>${thumb}<span class="lt"><span class="t">${ic?`<span class="lic">${ic}</span>`:""}${esc(it.t)}</span>${it.sub?`<span class="lsub">${esc(it.sub)}</span>`:""}</span>${it.ref?`<span class="ref">${esc(it.ref)}</span>`:""}<span class="lchev" aria-hidden="true">${LORE_SV('<path d="M9 5l7 7-7 7"/>')}</span></summary><div class="body">${it.img?`<button class="lhero" data-act="zoom" data-src="${it.img}" aria-label="Agrandir l’illustration"><img src="${it.img}" alt="" loading="lazy"></button>`:""}${it.h}${it.gal?`<div class="lgal">${it.gal.map(([src,c])=>`<button data-act="zoom" data-src="${src}" aria-label="Agrandir : ${esc(c)}"><img src="${src}" alt="" loading="lazy"><span>${esc(c)}</span></button>`).join("")}</div>`:""}</div></details>`;
 }
 const tlList=l=>`<ol class="timeline">${l.map(r=>{const [y,x]=r;return `<li${dk(r)}><b>${esc(y)}</b><span>${esc(x)}</span></li>`}).join("")}</ol>`;
 const glList=l=>`<dl class="gloss">${l.map(r=>{const [k,x]=r;return `<div${dk(r)}><dt>${esc(k)}</dt><dd>${esc(x)}</dd></div>`}).join("")}</dl>`;
@@ -186,7 +186,7 @@ function lore(){
   }
   const tab=LORE.tabs.find(t=>t.id===S.loreTab)||LORE.tabs[0];
   let b="";
-  if(tab.items)b=tab.items.map((it,i)=>(it.sec?`<div class="sec-title dg">${esc(it.sec.toUpperCase())}</div>`:"")+loreCard(it,false,tab.id==="monde"&&i===0)).join("");
+  if(tab.items)b=tab.items.map((it,i)=>(it.sec?`<div class="sec-title dg">${esc(it.sec.toUpperCase())}</div>`:"")+loreCard(it,false)).join("");
   if(tab.timeline)b=tlList(tab.timeline);
   if(tab.gloss)b=glList(tab.gloss);
   return `<div class="stack lorep">${search}${b}${foot}</div>`;

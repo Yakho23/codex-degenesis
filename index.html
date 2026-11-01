@@ -211,7 +211,12 @@ details.card.lore>summary{align-items:center;padding:10px 12px}
 .lchev{display:inline-flex;flex:none;color:var(--mute)}
 .lchev svg{width:18px;height:18px;transition:transform .15s}
 details[open]>summary .lchev svg{transform:rotate(90deg)}
-.lorep details.card.feat{border-left:4px solid var(--red);background:#1a0d10;box-shadow:0 0 14px rgba(236,30,38,.22)}
+.lorep details.card[open]{border-left:4px solid var(--red)}
+.lorep .lthumb{width:68px;height:auto;min-height:56px;contain:size;align-self:stretch;margin:-14px 0 -14px -18px;border:0;border-radius:0;object-fit:cover}
+.lorep details.card[open] .lthumb{margin-left:-14px}
+.top:has(.ltabs){position:relative}
+.appfoot{margin:-14px 0 0;padding-bottom:env(safe-area-inset-bottom,0px);pointer-events:none}
+.appfoot img{display:block;width:100%;max-width:640px;height:auto;margin:0 auto}
 @media (max-width:420px){.ltabs{gap:6px 5px}.lchip{padding:4px 9px 4px 8px;font-size:13.5px;gap:5px;min-height:32px}.lchip svg{width:16px;height:16px}}
 @media (max-width:340px){.lchip{padding:4px 9px 4px 8px;font-size:13.5px;gap:5px}.lchip svg{width:15px;height:15px}.lorep details.card>summary .t{font-size:17px}}
 .lhero{display:block;width:calc(100% + 28px);margin:-12px -14px 12px;padding:0;border:0;background:#000;cursor:zoom-in}

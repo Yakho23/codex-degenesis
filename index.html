@@ -198,27 +198,17 @@ details.card.lore>summary{align-items:center;padding:10px 12px}
 .lic{display:inline-flex;color:var(--red);flex:none}.lic svg{width:20px;height:20px}
 .lthumb{width:52px;height:52px;object-fit:cover;flex:none;border:1px solid var(--line);filter:saturate(.85)}
 .lsym{width:40px;height:40px;object-fit:contain;flex:none;border-radius:4px;background:#000}
-/* Lore : rubriques toujours visibles (pas de défilement), liste en cartes arrondies. Ancienne version : étiquette git avant-lore et _outils/avant-lore */
-.ltabs{flex-wrap:wrap;overflow:visible;gap:7px 6px;padding-bottom:6px}
-.lchip{border-radius:999px;padding:5px 12px 5px 10px;min-height:34px;font-size:14.5px;letter-spacing:.02em;background:var(--panel);color:var(--fg);gap:6px}
-.lchip svg{width:17px;height:17px;flex:none}
-.lchip[aria-pressed="true"]{box-shadow:0 0 12px rgba(236,30,38,.45)}
-.lorep .lsearch{border-radius:999px;padding:0 18px;min-height:48px}
-.lorep details.card{border-radius:14px;overflow:hidden;border-color:var(--line2)}
-.lorep details.card.lore>summary{padding:14px 12px 14px 18px;gap:8px}
-.lorep details.card>summary .t{font-size:18.5px;color:#fff}
-.lorep details.card[open]>summary{border-bottom:1px solid var(--line)}
-.lchev{display:inline-flex;flex:none;color:var(--mute)}
-.lchev svg{width:18px;height:18px;transition:transform .15s}
-details[open]>summary .lchev svg{transform:rotate(90deg)}
+/* Lore : affichage d'origine, avec icônes sur les rubriques (toutes visibles, sans défilement) et liseré rouge sur l'article ouvert. Version arrondie : étiquette git avant-lore-origine ; version d'avant : avant-lore */
+.ltabs{flex-wrap:wrap;overflow:visible;gap:6px;padding-bottom:8px}
+.lchip{gap:6px}
+.lchip svg{width:16px;height:16px;flex:none}
 .lorep details.card{position:relative}
 .lorep details.card[open]::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--red);z-index:2;pointer-events:none}
-.lorep .lthumb{width:68px;height:auto;min-height:56px;contain:size;align-self:stretch;margin:-14px 0 -14px -18px;border:0;border-radius:0;object-fit:cover}
 .top:has(.ltabs){position:relative}
 .appfoot{margin:-14px 0 0;padding-bottom:env(safe-area-inset-bottom,0px);pointer-events:none}
 .appfoot img{display:block;width:100%;max-width:640px;height:auto;margin:0 auto}
-@media (max-width:420px){.ltabs{gap:6px 5px}.lchip{padding:4px 9px 4px 8px;font-size:13.5px;gap:5px;min-height:32px}.lchip svg{width:16px;height:16px}}
-@media (max-width:340px){.lchip{padding:4px 9px 4px 8px;font-size:13.5px;gap:5px}.lchip svg{width:15px;height:15px}.lorep details.card>summary .t{font-size:17px}}
+@media (max-width:420px){.ltabs{gap:6px 5px}.lchip{padding:5px 9px;font-size:13.5px;gap:5px;min-height:32px}.lchip svg{width:15px;height:15px}}
+@media (max-width:340px){.lchip{padding:4px 8px;font-size:13px}.lchip svg{width:14px;height:14px}}
 .lhero{display:block;width:calc(100% + 28px);margin:-12px -14px 12px;padding:0;border:0;background:#000;cursor:zoom-in}
 .lhero img{display:block;width:100%;max-height:260px;object-fit:cover}
 .body .quote{font-style:italic;color:var(--mute);border-left:2px solid var(--red);padding-left:10px}

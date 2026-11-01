@@ -166,13 +166,13 @@ const stripTags=h=>String(h).replace(/<[^>]+>/g," ");
 function loreCard(it,open){
   const ic=it.icon?icon(it.icon):"";
   const thumb=it.sym?`<img class="lsym" src="${it.sym}" alt="">`:it.img?`<img class="lthumb" src="${it.img}" alt="" loading="lazy">`:"";
-  return `<details class="card lore"${dk(it)}${open?" open":""}><summary>${thumb}<span class="lt"><span class="t">${ic?`<span class="lic">${ic}</span>`:""}${esc(it.t)}</span>${it.sub?`<span class="lsub">${esc(it.sub)}</span>`:""}</span>${it.ref?`<span class="ref">${esc(it.ref)}</span>`:""}<span class="lchev" aria-hidden="true">${LORE_SV('<path d="M9 5l7 7-7 7"/>')}</span></summary><div class="body">${it.img?`<button class="lhero" data-act="zoom" data-src="${it.img}" aria-label="Agrandir l’illustration"><img src="${it.img}" alt="" loading="lazy"></button>`:""}${it.h}${it.gal?`<div class="lgal">${it.gal.map(([src,c])=>`<button data-act="zoom" data-src="${src}" aria-label="Agrandir : ${esc(c)}"><img src="${src}" alt="" loading="lazy"><span>${esc(c)}</span></button>`).join("")}</div>`:""}</div></details>`;
+  return `<details class="card lore"${dk(it)}${open?" open":""}><summary>${thumb}<span class="lt"><span class="t">${ic?`<span class="lic">${ic}</span>`:""}${esc(it.t)}</span>${it.sub?`<span class="lsub">${esc(it.sub)}</span>`:""}</span>${it.ref?`<span class="ref">${esc(it.ref)}</span>`:""}</summary><div class="body">${it.img?`<button class="lhero" data-act="zoom" data-src="${it.img}" aria-label="Agrandir l’illustration"><img src="${it.img}" alt="" loading="lazy"></button>`:""}${it.h}${it.gal?`<div class="lgal">${it.gal.map(([src,c])=>`<button data-act="zoom" data-src="${src}" aria-label="Agrandir : ${esc(c)}"><img src="${src}" alt="" loading="lazy"><span>${esc(c)}</span></button>`).join("")}</div>`:""}</div></details>`;
 }
 const tlList=l=>`<ol class="timeline">${l.map(r=>{const [y,x]=r;return `<li${dk(r)}><b>${esc(y)}</b><span>${esc(x)}</span></li>`}).join("")}</ol>`;
 const glList=l=>`<dl class="gloss">${l.map(r=>{const [k,x]=r;return `<div${dk(r)}><dt>${esc(k)}</dt><dd>${esc(x)}</dd></div>`}).join("")}</dl>`;
 function lore(){
   const q=norm(S.loreQ).trim();
-  const search=`<label class="search lsearch">${I.search}<input id="q" data-in="loreq" type="search" placeholder="Chercher : Brûlure, Juges, Pandora…" value="${esc(S.loreQ)}" autocomplete="off">${S.loreQ?`<button class="qclr" data-act="qclear" data-v="loreQ" aria-label="Effacer la recherche">×</button>`:""}</label>`;
+  const search=`<label class="search">${I.search}<input id="q" data-in="loreq" type="search" placeholder="Chercher : Brûlure, Juges, Pandora…" value="${esc(S.loreQ)}" autocomplete="off">${S.loreQ?`<button class="qclr" data-act="qclear" data-v="loreQ" aria-label="Effacer la recherche">×</button>`:""}</label>`;
   const foot=`<p class="note">Sources : PP <i>Primal Punk</i> · K <i>Katharsys</i> · A <i>Artefacts</i> · ETS <i>En Ton Sang</i> · JdM <i>Jeu de Massacre</i> · BA <i>Black Atlantic</i> · Apo <i>Apocrypha</i> (ouvrage de fans).</p>`;
   if(q){
     let cards=[],tl=[],gl=[];
@@ -186,7 +186,7 @@ function lore(){
   }
   const tab=LORE.tabs.find(t=>t.id===S.loreTab)||LORE.tabs[0];
   let b="";
-  if(tab.items)b=tab.items.map((it,i)=>(it.sec?`<div class="sec-title dg">${esc(it.sec.toUpperCase())}</div>`:"")+loreCard(it,false)).join("");
+  if(tab.items)b=tab.items.map((it,i)=>(it.sec?`<div class="sec-title dg">${esc(it.sec.toUpperCase())}</div>`:"")+loreCard(it,tab.id==="monde"&&it.t==="Primal Punk en bref")).join("");
   if(tab.timeline)b=tlList(tab.timeline);
   if(tab.gloss)b=glList(tab.gloss);
   return `<div class="stack lorep">${search}${b}${foot}</div>`;

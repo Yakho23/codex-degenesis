@@ -145,18 +145,34 @@ function lieuCard(p,open,camp){
   return `<details class="card lore lieu"${dk(p)}${open?" open":""}><summary>${thumb}<span class="lt"><span class="t">${esc(p.n)}</span>${p.sub?`<span class="lsub">${esc(p.sub)}</span>`:""}</span>${camp?`<span class="ref">${esc(camp)}</span>`:""}</summary><div class="body">${p.img&&!p.tall?`<button class="lhero" data-act="zoom" data-src="${p.img}" aria-label="Agrandir l’illustration"><img src="${p.img}" alt="" loading="lazy"></button>`:""}${fiche}${P(p.intro)}${secs}${gal.length?`<div class="lgal">${gal.map(([src,c])=>`<button data-act="zoom" data-src="${src}" aria-label="Agrandir : ${esc(c)}"><img src="${src}" alt="" loading="lazy"><span>${esc(c)}</span></button>`).join("")}</div>`:""}</div></details>`;
 }
 /* ───────── I. LORE ───────── */
-function loreTabs(){return chips(LORE.tabs.map(t=>[t.id,t.t]),S.loreTab,"loretab","Rubriques du lore")}
+const LORE_IC={
+ monde:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 2.7 2.8 15.3 0 18M12 3c-2.8 2.7-2.8 15.3 0 18"/>',
+ regions:'<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0113 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/>',
+ cultes:'<path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9L3.5 9.7l5.9-.8z"/>',
+ clans:'<circle cx="12" cy="7" r="2.6"/><circle cx="5.5" cy="9.5" r="2"/><circle cx="18.5" cy="9.5" r="2"/><path d="M7.5 19v-3.2a4.5 4.5 0 019 0V19M2.5 17.5v-2a3 3 0 013-3M21.5 17.5v-2a3 3 0 00-3-3"/>',
+ aberrants:'<path d="M12 4L2.8 19.5h18.4z"/><path d="M12 10v4.5M12 17v.2"/>',
+ bestiaire:'<circle cx="12" cy="12" r="3"/><circle cx="12" cy="3.8" r="1.5"/><circle cx="12" cy="20.2" r="1.5"/><circle cx="4.9" cy="7.9" r="1.5"/><circle cx="19.1" cy="7.9" r="1.5"/><circle cx="4.9" cy="16.1" r="1.5"/><circle cx="19.1" cy="16.1" r="1.5"/><path d="M12 9V5.3M12 15v3.7M9.4 10.5L6.2 8.6M14.6 10.5l3.2-1.9M9.4 13.5l-3.2 1.9M14.6 13.5l3.2 1.9"/>',
+ economie:'<path d="M4 20V4M4 20h16"/><path d="M7.5 15l3-4 3 2.5 4.5-6"/>',
+ purgare:'<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
+ franka:'<path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"/><path d="M9.5 4.8L12 7l2.5-2.2M9.5 19.2L12 17l2.5 2.2"/>',
+ chrono:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/>',
+ anciens:'<path d="M6 3h12M6 21h12M7 3c0 5 5 6 5 9s-5 4-5 9M17 3c0 5-5 6-5 9s5 4 5 9"/>',
+ briton:'<path d="M12 3l7.5 3v5.5c0 4.5-3.2 8-7.5 9.5-4.3-1.5-7.5-5-7.5-9.5V6z"/>',
+ apocrypha:'<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/>',
+ glossaire:'<path d="M3.5 5.5C6.5 4.5 9.5 4.7 12 6.5c2.5-1.8 5.5-2 8.5-1v13c-3-1-6-.8-8.5 1-2.5-1.8-5.5-2-8.5-1z"/><path d="M12 6.5v13"/>'};
+const LORE_SV=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+function loreTabs(){return `<div class="tabs ltabs" role="toolbar" aria-label="Rubriques du lore">${LORE.tabs.map(t=>`<button class="chip lchip" data-act="loretab" data-v="${esc(t.id)}" aria-pressed="${t.id===S.loreTab}">${LORE_SV(LORE_IC[t.id]||"")}${esc(t.t)}</button>`).join("")}</div>`}
 const stripTags=h=>String(h).replace(/<[^>]+>/g," ");
-function loreCard(it,open){
+function loreCard(it,open,feat){
   const ic=it.icon?icon(it.icon):"";
-  const thumb=it.sym?`<img class="lsym" src="${it.sym}" alt="">`:it.img?`<img class="lthumb" src="${it.img}" alt="" loading="lazy">`:"";
-  return `<details class="card lore"${dk(it)}${open?" open":""}><summary>${thumb}<span class="lt"><span class="t">${ic?`<span class="lic">${ic}</span>`:""}${esc(it.t)}</span>${it.sub?`<span class="lsub">${esc(it.sub)}</span>`:""}</span>${it.ref?`<span class="ref">${esc(it.ref)}</span>`:""}</summary><div class="body">${it.img?`<button class="lhero" data-act="zoom" data-src="${it.img}" aria-label="Agrandir l’illustration"><img src="${it.img}" alt="" loading="lazy"></button>`:""}${it.h}${it.gal?`<div class="lgal">${it.gal.map(([src,c])=>`<button data-act="zoom" data-src="${src}" aria-label="Agrandir : ${esc(c)}"><img src="${src}" alt="" loading="lazy"><span>${esc(c)}</span></button>`).join("")}</div>`:""}</div></details>`;
+  const thumb=it.sym?`<img class="lsym" src="${it.sym}" alt="">`:"";
+  return `<details class="card lore${feat?" feat":""}"${dk(it)}${open?" open":""}><summary>${thumb}<span class="lt"><span class="t">${ic?`<span class="lic">${ic}</span>`:""}${esc(it.t)}</span>${it.sub?`<span class="lsub">${esc(it.sub)}</span>`:""}</span>${it.ref?`<span class="ref">${esc(it.ref)}</span>`:""}<span class="lchev" aria-hidden="true">${LORE_SV('<path d="M9 5l7 7-7 7"/>')}</span></summary><div class="body">${it.img?`<button class="lhero" data-act="zoom" data-src="${it.img}" aria-label="Agrandir l’illustration"><img src="${it.img}" alt="" loading="lazy"></button>`:""}${it.h}${it.gal?`<div class="lgal">${it.gal.map(([src,c])=>`<button data-act="zoom" data-src="${src}" aria-label="Agrandir : ${esc(c)}"><img src="${src}" alt="" loading="lazy"><span>${esc(c)}</span></button>`).join("")}</div>`:""}</div></details>`;
 }
 const tlList=l=>`<ol class="timeline">${l.map(r=>{const [y,x]=r;return `<li${dk(r)}><b>${esc(y)}</b><span>${esc(x)}</span></li>`}).join("")}</ol>`;
 const glList=l=>`<dl class="gloss">${l.map(r=>{const [k,x]=r;return `<div${dk(r)}><dt>${esc(k)}</dt><dd>${esc(x)}</dd></div>`}).join("")}</dl>`;
 function lore(){
   const q=norm(S.loreQ).trim();
-  const search=`<label class="search">${I.search}<input id="q" data-in="loreq" type="search" placeholder="Chercher : Brûlure, Juges, Pandora…" value="${esc(S.loreQ)}" autocomplete="off">${S.loreQ?`<button class="qclr" data-act="qclear" data-v="loreQ" aria-label="Effacer la recherche">×</button>`:""}</label>`;
+  const search=`<label class="search lsearch">${I.search}<input id="q" data-in="loreq" type="search" placeholder="Chercher : Brûlure, Juges, Pandora…" value="${esc(S.loreQ)}" autocomplete="off">${S.loreQ?`<button class="qclr" data-act="qclear" data-v="loreQ" aria-label="Effacer la recherche">×</button>`:""}</label>`;
   const foot=`<p class="note">Sources : PP <i>Primal Punk</i> · K <i>Katharsys</i> · A <i>Artefacts</i> · ETS <i>En Ton Sang</i> · JdM <i>Jeu de Massacre</i> · BA <i>Black Atlantic</i> · Apo <i>Apocrypha</i> (ouvrage de fans).</p>`;
   if(q){
     let cards=[],tl=[],gl=[];
@@ -166,14 +182,14 @@ function lore(){
       (tab.gloss||[]).forEach(r=>{if(norm(r.join(" ")).includes(q))gl.push(r)});
     });
     const n=cards.length+tl.length+gl.length;
-    return `<div class="stack">${search}<div class="count">${n} résultat${n>1?"s":""} dans tout le lore</div>${cards.join("")}${gl.length?`<div class="sec-title dg">GLOSSAIRE</div>`+glList(gl):""}${tl.length?`<div class="sec-title dg">CHRONOLOGIE</div>`+tlList(tl):""}${n?"":`<p class="empty">Rien trouvé.</p>`}</div>`;
+    return `<div class="stack lorep">${search}<div class="count">${n} résultat${n>1?"s":""} dans tout le lore</div>${cards.join("")}${gl.length?`<div class="sec-title dg">GLOSSAIRE</div>`+glList(gl):""}${tl.length?`<div class="sec-title dg">CHRONOLOGIE</div>`+tlList(tl):""}${n?"":`<p class="empty">Rien trouvé.</p>`}</div>`;
   }
   const tab=LORE.tabs.find(t=>t.id===S.loreTab)||LORE.tabs[0];
   let b="";
-  if(tab.items)b=tab.items.map((it,i)=>(it.sec?`<div class="sec-title dg">${esc(it.sec.toUpperCase())}</div>`:"")+loreCard(it,tab.id==="monde"&&it.t==="Primal Punk en bref")).join("");
+  if(tab.items)b=tab.items.map((it,i)=>(it.sec?`<div class="sec-title dg">${esc(it.sec.toUpperCase())}</div>`:"")+loreCard(it,false,tab.id==="monde"&&i===0)).join("");
   if(tab.timeline)b=tlList(tab.timeline);
   if(tab.gloss)b=glList(tab.gloss);
-  return `<div class="stack">${search}${b}${foot}</div>`;
+  return `<div class="stack lorep">${search}${b}${foot}</div>`;
 }
 
 /* ───────── II. RÈGLES ───────── */

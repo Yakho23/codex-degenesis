@@ -161,7 +161,7 @@ const LORE_IC={
  apocrypha:'<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/>',
  glossaire:'<path d="M3.5 5.5C6.5 4.5 9.5 4.7 12 6.5c2.5-1.8 5.5-2 8.5-1v13c-3-1-6-.8-8.5 1-2.5-1.8-5.5-2-8.5-1z"/><path d="M12 6.5v13"/>'};
 const LORE_SV=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
-function loreTabs(){return `<div class="tabs ltabs" role="toolbar" aria-label="Rubriques du lore">${LORE.tabs.map(t=>`<button class="chip lchip" data-act="loretab" data-v="${esc(t.id)}" aria-pressed="${t.id===S.loreTab}">${LORE_SV(LORE_IC[t.id]||"")}${esc(t.t)}</button>`).join("")}</div>`}
+function loreTabs(){return `<div class="tabs ltabs tall" role="toolbar" aria-label="Rubriques du lore">${LORE.tabs.map(t=>`<button class="chip lchip" data-act="loretab" data-v="${esc(t.id)}" aria-pressed="${t.id===S.loreTab}">${LORE_SV(LORE_IC[t.id]||"")}${esc(t.t)}</button>`).join("")}</div>`}
 const stripTags=h=>String(h).replace(/<[^>]+>/g," ");
 function loreCard(it,open){
   const ic=it.icon?icon(it.icon):"";
@@ -199,19 +199,42 @@ function potCard(p,cult,open,showCult){
   const f=(k,l)=>p[k]?`<p><span class="k">${l}</span>${esc(p[k])}</p>`:"";
   return `<details class="card pot"${dk(p)}${open?" open":""}><summary><span class="t"><span class="pn">${esc(p.n)}.</span> ${esc(p.t)}<span class="pc">Condition : ${esc(p.c||"—")}</span></span>${showCult?`<span class="cult">${icon(cult)}${esc(cult)}</span>`:""}</summary><div class="body">${f("e","Effet")}${f("r","Règles")}</div></details>`;
 }
-function regTabs(){return chips(REG_CATS,S.regCat,"regcat","Catégories de règles")}
+const REG_IC={
+ "Tous":'<rect x="4" y="4" width="6.5" height="6.5" rx="1"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1"/>',
+ "Bases":'<rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r=".9"/><circle cx="15" cy="9" r=".9"/><circle cx="12" cy="12" r=".9"/><circle cx="9" cy="15" r=".9"/><circle cx="15" cy="15" r=".9"/>',
+ "Combat":'<path d="M4 20L20 4M15 4h5v5M20 20L4 4M4 9V4h5"/>',
+ "Blessures & soins":'<path d="M9 4h6v5h5v6h-5v5H9v-5H4V9h5z"/>',
+ "Poisons":'<path d="M9 3h6M10 3v6l-5 9a2 2 0 002 3h10a2 2 0 002-3l-5-9V3"/><path d="M8 15h8"/>',
+ "Maladies":'<circle cx="12" cy="12" r="3"/><circle cx="12" cy="3.8" r="1.5"/><circle cx="12" cy="20.2" r="1.5"/><circle cx="4.9" cy="7.9" r="1.5"/><circle cx="19.1" cy="7.9" r="1.5"/><circle cx="4.9" cy="16.1" r="1.5"/><circle cx="19.1" cy="16.1" r="1.5"/><path d="M12 9V5.3M12 15v3.7M9.4 10.5L6.2 8.6M14.6 10.5l3.2-1.9M9.4 13.5l-3.2 1.9M14.6 13.5l3.2 1.9"/>',
+ "Troubles mentaux":'<path d="M12 3a8 8 0 00-5 14.2V20.5h10v-3.3A8 8 0 0012 3z"/><circle cx="9" cy="12" r="1.7"/><circle cx="15" cy="12" r="1.7"/><path d="M10 20.5v-2.2M14 20.5v-2.2"/>',
+ "Ego & dangers":'<path d="M13.5 2.5L5 13.5h6l-1 8 8.5-11h-6z"/>',
+ "Manœuvres":'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>',
+ "Progression":'<path d="M4 18l6-6 4 4 6-8"/><path d="M15 8h5v5"/>',
+ "Propriétés":'<path d="M4 6h16M4 12h16M4 18h10"/>',
+ "Héritages":'<path d="M8 3c0 6 8 6 8 12s-8 6-8 6M16 3c0 6-8 6-8 12M9 7h6M9 17h6"/>',
+ "Potentiels":'<path d="M12 3v6M12 15v6M3 12h6M15 12h6"/><circle cx="12" cy="12" r="1.8"/>'};
+const BZ_IC={
+ armes:'<circle cx="12" cy="12" r="7"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6"/>',
+ protection:'<path d="M12 3l7.5 3v5.5c0 4.5-3.2 8-7.5 9.5-4.3-1.5-7.5-5-7.5-9.5V6z"/>',
+ equipement:'<path d="M4 8l8-4 8 4v9l-8 4-8-4z"/><path d="M4 8l8 4 8-4M12 12v9"/>',
+ medical:'<path d="M9 4h6v5h5v6h-5v5H9v-5H4V9h5z"/>',
+ vehicules:'<circle cx="7" cy="17" r="2.5"/><circle cx="17" cy="17" r="2.5"/><path d="M3 17V8h11v9M14 11h4l3 3v3"/>',
+ artefacts:'<path d="M6 4h12l3 5-9 11L3 9z"/><path d="M3 9h18M9 4l-1 5 4 11M15 4l1 5-4 11"/>'};
+/* puces à icônes, à la ligne (jamais de défilement) ; tall = beaucoup de puces, l’en-tête défile avec la page */
+function ichips(list,cur,act,label,ics,tall){return `<div class="tabs ltabs${tall?" tall":""}" role="toolbar" aria-label="${esc(label)}">${list.map(x=>{const v=Array.isArray(x)?x[0]:x,l=Array.isArray(x)?x[1]:x;return `<button class="chip lchip" data-act="${act}" data-v="${esc(v)}" aria-pressed="${v===cur}">${ics&&ics[v]?LORE_SV(ics[v]):""}${esc(l)}</button>`}).join("")}</div>`}
+function regTabs(){return ichips(REG_CATS,S.regCat,"regcat","Catégories de règles",REG_IC,true)}
 function regles(){
   const q=norm(S.regQ).trim();
   const search=`<label class="search">${I.search}<input id="q" data-in="regq" type="search" placeholder="Chercher : initiative, feu, hémorragie…" value="${esc(S.regQ)}" autocomplete="off">${S.regQ?`<button class="qclr" data-act="qclear" data-v="regQ" aria-label="Effacer la recherche">×</button>`:""}</label>`;
   if(S.regCat==="Potentiels"&&!q){
     const L=POTENTIELS[S.potCult]||[];
-    return `<div class="stack">${search}${chips(POT_CULTS,S.potCult,"potcult","Cultes")}<div class="count">${L.length} Potentiels · ${esc(S.potCult)}</div>${L.map(p=>potCard(p,S.potCult,false,false)).join("")}</div>`;
+    return `<div class="stack lorep">${search}${chips(POT_CULTS,S.potCult,"potcult","Cultes")}<div class="count">${L.length} Potentiels · ${esc(S.potCult)}</div>${L.map(p=>potCard(p,S.potCult,false,false)).join("")}</div>`;
   }
   const list=S.regCat==="Potentiels"?[]:REGLES.filter(r=>(S.regCat==="Tous"||r.cat===S.regCat)&&(!q||norm(r.t+" "+r.tags+" "+r.h.replace(/<[^>]+>/g," ")).includes(q)));
   const pots=q&&(S.regCat==="Tous"||S.regCat==="Potentiels")?POT_CULTS.flatMap(c=>POTENTIELS[c].filter(p=>norm(p.t+" "+(p.c||"")+" "+(p.e||"")+" "+(p.r||"")).includes(q)).map(p=>[p,c])):[];
   if(q&&pots.length){const n=list.length+pots.length;
-    return `<div class="stack">${search}<div class="count">${n} résultat${n>1?"s":""}</div>${list.map(r=>`<details class="card"${dk(r)}><summary><span class="t">${esc(r.t)}</span><span class="ref">${esc(r.ref)}</span></summary><div class="body"><div class="catline">${esc(r.cat)}</div>${r.h}</div></details>`).join("")}<div class="sec-title dg">POTENTIELS</div>${pots.slice(0,60).map(([p,c])=>potCard(p,c,false,true)).join("")}</div>`;}
-  return `<div class="stack">
+    return `<div class="stack lorep">${search}<div class="count">${n} résultat${n>1?"s":""}</div>${list.map(r=>`<details class="card"${dk(r)}><summary><span class="t">${esc(r.t)}</span><span class="ref">${esc(r.ref)}</span></summary><div class="body"><div class="catline">${esc(r.cat)}</div>${r.h}</div></details>`).join("")}<div class="sec-title dg">POTENTIELS</div>${pots.slice(0,60).map(([p,c])=>potCard(p,c,false,true)).join("")}</div>`;}
+  return `<div class="stack lorep">
    ${search}
    <div class="count">${list.length} fiche${list.length>1?"s":""}</div>
    ${list.map(r=>`<details class="card"${dk(r)}${q&&list.length<=3?" open":""}><summary><span class="t">${esc(r.t)}</span><span class="ref">${esc(r.ref)}</span></summary><div class="body">${S.regCat==="Tous"?`<div class="catline">${esc(r.cat)}</div>`:""}${r.h}</div></details>`).join("")||`<p class="empty">Aucune fiche ne correspond. Essayez un autre mot.</p>`}</div>`;
@@ -219,16 +242,16 @@ function regles(){
 
 /* ───────── III. BAZAR ───────── */
 const BZ_GRP=[["armes","Armes"],["protection","Protection"],["equipement","Équipement"],["medical","Médical"],["vehicules","Véhicules"],["artefacts","Artefacts"]];
-function bzTabs(){return chips(BZ_GRP,S.bzGrp,"bzgrp","Familles d’objets")}
+function bzTabs(){return ichips(BZ_GRP,S.bzGrp,"bzgrp","Familles d’objets",BZ_IC,false)}
 function bazar(){
   const inGrp=BAZAR.filter(r=>r._grp===S.bzGrp);
   const cats=["Tout",...new Set(inGrp.map(r=>r._cat))];
   const cultes=[...new Set(BAZAR.map(r=>r.Culte).filter(Boolean))].sort();
   const q=norm(S.bzQ).trim();
   const list=(q?BAZAR:inGrp).filter(r=>(q||S.bzCat==="Tout"||r._cat===S.bzCat)&&(!S.bzCulte||r.Culte===S.bzCulte)&&(!q||norm(Object.values(r).join(" ")).includes(q)));
-  return `<div class="stack">
+  return `<div class="stack lorep">
    <label class="search">${I.search}<input id="q" data-in="bzq" type="search" placeholder="Chercher dans tout le Bazar…" value="${esc(S.bzQ)}" autocomplete="off">${S.bzQ?`<button class="qclr" data-act="qclear" data-v="bzQ" aria-label="Effacer la recherche">×</button>`:""}</label>
-   ${q?"":chips(cats,S.bzCat,"bzcat","Catégories")}
+   ${q?"":ichips(cats,S.bzCat,"bzcat","Catégories",null,false)}
    <div class="selrow"><select class="sel" id="bzculte" data-in="bzculte" aria-label="Filtrer par Culte"><option value="">Tous les Cultes</option>${cultes.map(c=>`<option ${c===S.bzCulte?"selected":""}>${esc(c)}</option>`).join("")}</select></div>
    <div class="count">${list.length} objet${list.length>1?"s":""}${q?" · recherche dans toutes les familles":""}</div>
    ${list.map(item).join("")||`<p class="empty">Rien dans le Bazar avec ces filtres.</p>`}

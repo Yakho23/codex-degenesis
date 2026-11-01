@@ -205,7 +205,7 @@ details.card.lore>summary{align-items:center;padding:10px 12px}
 .lorep details.card{position:relative}
 .lorep details.card[open]::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--red);z-index:2;pointer-events:none}
 .top:has(.ltabs.tall){position:relative}
-.appfoot{margin:-14px 0 0;padding-bottom:env(safe-area-inset-bottom,0px);pointer-events:none}
+.appfoot{margin:-14px 0 0;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 24px);pointer-events:none}
 .appfoot img{display:block;width:100%;max-width:640px;height:auto;margin:0 auto}
 @media (max-width:420px){.ltabs{gap:6px 5px}.lchip{padding:5px 9px;font-size:13.5px;gap:5px;min-height:32px}.lchip svg{width:15px;height:15px}}
 @media (max-width:340px){.lchip{padding:4px 8px;font-size:13px}.lchip svg{width:14px;height:14px}}
